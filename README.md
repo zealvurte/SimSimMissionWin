@@ -37,4 +37,4 @@ I won't be accepting pull requests for this project at this point in time, but m
 ## Ownership and license
 I explicitly don't plan to retain ownership of this addon once completed, as I'm unlikely to be able to maintain it myself and will eventually be taking my own hiatus from WoW. I would like to hand it over to someone else or a community team, so when that time comes, I will be looking for suitable volunteers to take it over; however, as this is released under GPLv3, there's nothing stopping someone else forking it themselves anyway, but be aware that the rights to the addon name are retained by me or whoever I later grant them to.
 
-Data required for simulation is taken from World of Warcraft via [WoW.tools](https://wow.tools/), and is therefore copyrighted and owned by Blizzard Entertainment, Inc.
+Data required for simulation is taken from World of Warcraft via [WoW.tools](https://wow.tools/), and is therefore owned by and copyright Blizzard Entertainment, Inc.
