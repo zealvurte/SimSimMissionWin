@@ -20,7 +20,7 @@ No code for Sim Sim Mission Win itself will appear in this repository until the 
 Additionally, **no code from Venture Plan will appear in this repository**, except for necessary reference point snippets in issues during development, so don't expect this to help you get a version of Venture Plan that simulates correctly without a lot of discovery and editing yourself.
 
 ## Simulation data
-Data required for simulation is taken from World of Warcraft via [WoW.tools](https://wow.tools/), and is therefore copyrighted and owned by Blizzard Entertainment, Inc.
+
 
 The data initially exists in the Google Sheet [SimData: Spells](https://docs.google.com/spreadsheets/d/1sDbpMaQUaHaJ-daScq4Qi1AQDoFnnYw_pU5G6qrkBKU), which also serves as the primary location for marking verification status and comments for each effect. From here, it is processed through [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), with the each output handled as follows:
 - First table: Copy & pasted to SimSimMissionWin/SimData.lua (for future addon use)
@@ -36,3 +36,5 @@ I won't be accepting pull requests for this project at this point in time, but m
 
 ## Ownership and license
 I explicitly don't plan to retain ownership of this addon once completed, as I'm unlikely to be able to maintain it myself and will eventually be taking my own hiatus from WoW. I would like to hand it over to someone else or a community team, so when that time comes, I will be looking for suitable volunteers to take it over; however, as this is released under GPLv3, there's nothing stopping someone else forking it themselves anyway, but be aware that the rights to the addon name are retained by me or whoever I later grant them to.
+
+Data required for simulation is taken from World of Warcraft via [WoW.tools](https://wow.tools/), and is therefore copyrighted and owned by Blizzard Entertainment, Inc.
