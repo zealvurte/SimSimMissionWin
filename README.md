@@ -20,14 +20,12 @@ No code for Sim Sim Mission Win itself will appear in this repository until the 
 Additionally, **no code from Venture Plan will appear in this repository**, except for necessary reference point snippets in issues during development, so don't expect this to help you get a version of Venture Plan that simulates correctly without a lot of discovery and editing yourself.
 
 ## Simulation data
-
-
 The data initially exists in the Google Sheet [SimData: Spells](https://docs.google.com/spreadsheets/d/1sDbpMaQUaHaJ-daScq4Qi1AQDoFnnYw_pU5G6qrkBKU), which also serves as the primary location for marking verification status and comments for each effect. From here, it is processed through [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), with the each output handled as follows:
 - First table: Copy & pasted to SimSimMissionWin/SimData.lua (for future addon use)
 - Second table: Copy & pasted to VenturePlan/vs-spells.lua (for verification), and back into SimData-Spells_tsv-to-lua.lua (for future comparison)
 - Comparison lines: Checked for unexpected results when compared with previous versions
 
-**Please note:** the second table is not fully compatible with unmodified versions of VenturePlan, as several of the optimisations it uses have been forgone in favour of improved accuracy and debugging requirements.
+**Please note:** the second table is not fully compatible with unmodified versions of Venture Plan by default, as several of the optimisations Venture Plan uses have been forgone in favour of improved accuracy and debugging requirements. If you want to use this process with an unmodified Venture Plan only, you will need to paste in your own values for vpData from VenturePlan/vs-spells.lua, comment out the second to last line, and uncomment the last line. This will then output the correct table for vs-spells.lua first, followed by the comparison lines against your old values.
 
 ## Contributing
 The best way you can contribute is through issues if you spot any mistakes or have suggestions for improvements. Where applicable, it would be helpful for you to provide logs of missions with issues, especially if you have any that are for unverified spells.
