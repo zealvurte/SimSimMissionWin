@@ -19,11 +19,11 @@ Development will be broken down into the following stages (some concurrent and p
 
 ## Simulation data
 The data initially exists in the Google Sheet [SimData: Spells](https://docs.google.com/spreadsheets/d/1sDbpMaQUaHaJ-daScq4Qi1AQDoFnnYw_pU5G6qrkBKU), which also serves as the primary location for marking verification status and comments for each effect. From here, it is processed through [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), with each output handled as follows:
-- First table: Copy & pasted to SimSimMissionWin/SimData.lua (for future addon use)
-- Second table: Copy & pasted to VenturePlan/vs-spells.lua (for verification), and back into SimData-Spells_tsv-to-lua.lua (for future comparison)
+- First table: Sabed to [SimSimMissionWin/SimData.lua](SimData.lua) (for future addon use)
+- Second table: Saved to VenturePlan/vs-spells.lua (for verification), and as `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua) (for future comparison)
 - Comparison lines: Checked for unexpected results when compared with previous versions
 
-**Please note:** the second table is not fully compatible with unmodified versions of Venture Plan by default, as several of the optimisations Venture Plan uses have been forgone in favour of improved accuracy and debugging requirements. If you want to use this process with an unmodified Venture Plan only, you will need to paste in your own values for vpData from VenturePlan/vs-spells.lua, comment out the second to last line, and uncomment the last line. This will then output the correct table for vs-spells.lua first, followed by the comparison lines against your old values.
+**Please note:** The first table is only compatible with my own modified versions of Venture Plan by default, as several of the optimisations and values Venture Plan uses have been forgone in favour of improved accuracy and debugging requirements. Instead you can be produced a table for Venture Plan by using your own values from VenturePlan/vs-spells.lua for `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), commenting out the second to last line, and uncommenting the last line. This will then output an appropriate table, followed by the comparison lines against your old values.
 
 ## Contributing
 The best way you can contribute is through issues if you spot any mistakes or have suggestions for improvements. Where applicable, it would be helpful for you to provide logs of missions with issues, especially if you have any that are for unverified spells.
