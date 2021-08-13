@@ -25,6 +25,12 @@ The data initially exists in the Google Sheet [SimData: Spells](https://docs.goo
 
 **Please note:** The first table is only compatible with my own modified versions of Venture Plan by default, as several of the optimisations and values Venture Plan uses have been forgone in favour of improved accuracy and debugging requirements. Instead you can be produced a table for Venture Plan by using your own values from VenturePlan/vs-spells.lua for `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), commenting out the second to last line, and uncommenting the last line. This will then output an appropriate table, followed by the comparison lines against your old values.
 
+### Spell effect verification
+
+| Accuracy | Correct | Incorrect | Unverified | N/A | Total |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 75.50% | 204 | 0 | 196 | 45 | 445 |
+
 ## Contributing
 The best way you can contribute is through issues if you spot any mistakes or have suggestions for improvements. Where applicable, it would be helpful for you to provide logs of missions with issues, especially if you have any that are for unverified spells.
 
