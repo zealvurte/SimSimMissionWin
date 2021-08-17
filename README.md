@@ -27,9 +27,9 @@ The data initially exists in the Google Sheet [SimData: Spells](https://docs.goo
 
 ### Spell effect verification
 
-| Accuracy | Correct | Incorrect | Unverified | N/A | Total |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| 75.50% | 204 | 0 | 196 | 45 | 445 |
+| Build | Accuracy | Correct | Incorrect | Unverified | N/A | Total |
+| :-- | :-: | :-: | :-: | :-: | :-: | :-: |
+| 9.1.0.39335 | 75.88% | 207 | 0 | 193 | 45 | 445 |
 
 ## Contributing
 The best way you can contribute is through issues if you spot any mistakes or have suggestions for improvements. Where applicable, it would be helpful for you to provide logs of missions with issues, especially if you have any that are for unverified spells.
