@@ -19,11 +19,11 @@ Development will be broken down into the following stages (some concurrent and p
 
 ## Simulation data
 The data initially exists in the Google Sheet [SimData: Spells](https://docs.google.com/spreadsheets/d/1sDbpMaQUaHaJ-daScq4Qi1AQDoFnnYw_pU5G6qrkBKU), which also serves as the primary location for marking verification status and comments for each effect. From here, it is processed through [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), with each output handled as follows:
-- First table: Sabed to [SimSimMissionWin/SimData.lua](SimData.lua) (for future addon use)
+- First table: Saved to [SimSimMissionWin/SimData.lua](SimData.lua) (for future addon use)
 - Second table: Saved to VenturePlan/vs-spells.lua (for verification), and as `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua) (for future comparison)
 - Comparison lines: Checked for unexpected results when compared with previous versions
 
-**Please note:** The first table is only compatible with my own modified versions of Venture Plan by default, as several of the optimisations and values Venture Plan uses have been forgone in favour of improved accuracy and debugging requirements. Instead you can be produced a table for Venture Plan by using your own values from VenturePlan/vs-spells.lua for `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), commenting out the second to last line, and uncommenting the last line. This will then output an appropriate table, followed by the comparison lines against your old values.
+**Please note:** The first table is only compatible with my own modified version of Venture Plan by default, as several of the optimisations and values Venture Plan uses have been forgone in favour of improved accuracy and debugging requirements. Instead you can produce a table for Venture Plan by using your own values from VenturePlan/vs-spells.lua for `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), commenting out the second to last line, and uncommenting the last line. This will then output an appropriate table, followed by the comparison lines against your old values.
 
 ### Spell effect verification
 
