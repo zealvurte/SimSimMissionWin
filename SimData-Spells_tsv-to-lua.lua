@@ -272,7 +272,7 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 	effect.type=nil
 	local p=effect.points
 	effect.points=nil
-	if not duration and not cooldown and t ~= 1 and t ~= 3 then effect.type="passive"
+	if not duration and not cooldown and t > 4 then effect.type="passive"
 	elseif t > 4 and t ~= 9 and t ~= 10 then effect.type="aura"
 	elseif t == 1 or t == 3 then effect.type="nuke"
 	elseif t == 2 or t == 4 then effect.type="heal"
@@ -437,13 +437,13 @@ local vpData = {
 	},
 	[11]={type="nuke", damageATK=100, target=0},	-- Auto Attack: Damage closest enemy for (1*attack) [VERIFIED]
 	[12]={type="heal", healATK=20, target="all-allies"},	-- Bone Reconstruction: Heal all allies for (0.2*attack) [UNVERFIED]
-	[13]={type="passive", heal=10, target=3},	-- Gentle Caress: Heal closest ally for 10 [UNUSED]
+	[13]={type="heal", heal=10, target=3},	-- Gentle Caress: Heal closest ally for 10 [UNUSED]
 	[14]={type="heal", healATK=10, target="all-allies"},	-- Spirit's Caress: Heal all allies for (0.1*attack) [UNUSED]
 	[15]={type="nuke", damageATK=100, target=1},	-- Auto Attack: Damage furthest enemy for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
 	[16]={type="nuke", damageATK=75, target=1},	-- Soulshatter: Damage furthest enemy for (0.75*attack) [UNVERFIED]
 	[17]={
 		[1]={type="nuke", damageATK=10, target="all-enemies"},	-- Gravedirt Special: Damage all enemies for (0.1*attack) [UNVERFIED]
-		[2]={type="passive", healATK=100, target=4},	-- Gravedirt Special: Heal self for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
+		[2]={type="heal", healATK=100, target=4},	-- Gravedirt Special: Heal self for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 		[3]={type="nop"},
 	},
 	[18]={
@@ -954,7 +954,7 @@ local vpData = {
 		[2]={type="aura", modMaxHPATK=40, target=3, duration=2},	-- Wings of Mending: Mod max health of closest ally by (0.4*attack) for 2 rounds [UNVERFIED]
 	},
 	[312]={type="nuke", damageATK=180, target="cone"},	-- Panoptic Beam: Damage closest cone of enemies for (1.8*attack) [UNVERFIED]
-	[313]={type="passive", healATK=70, target="all-allies"},	-- Spirit's Guidance: Heal all allies for (0.7*attack) [UNVERFIED]
+	[313]={type="heal", healATK=70, target="all-allies"},	-- Spirit's Guidance: Heal all allies for (0.7*attack) [UNVERFIED]
 	[314]={
 		[1]={type="heal", healATK=130, target=3},	-- Purifying Light: Heal closest ally for (1.3*attack) [UNVERFIED]
 		[2]={type="aura", plusDamageDealtATK=50, target=3, duration=2},	-- Purifying Light: Mod damage done of closest ally by (0.5*attack) for 2 rounds [UNVERFIED]
@@ -1878,5 +1878,5 @@ Ignored: ineffective Effect.Period"
 ]]
 
 -- [ Process ]
---compareToVP(convertToVP(parseTSV(data,true),environmentStats,true))
-compareToVP(convertToVP(parseTSV(data),environmentStats,true,true),true)
+compareToVP(convertToVP(parseTSV(data,true),environmentStats,true))
+--compareToVP(convertToVP(parseTSV(data),environmentStats,true,true),true)
