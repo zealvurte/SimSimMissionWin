@@ -427,7 +427,7 @@ local vpData = {
 	},
 	[5]={type="nuke", damageATK=10, target="all-enemies"},	-- Wing Sweep: Damage all enemies for (0.1*attack) [UNVERFIED]
 	[6]={type="nuke", damageATK=60, target="enemy-back"},	-- Blood Explosion: Damage backmost row of enemies for (0.6*attack) [UNVERFIED]
-	[7]={type="nuke", damageATK=10, target=0},	-- Skeleton Smash: Damage closest enemy for (0.1*attack) [UNVERFIED]
+	[7]={type="nuke", damageATK=10, target=0},	-- Skeleton Smash: Damage closest enemy for (0.1*attack) [VERIFIED]
 	[8]={type="nuke", damageATK=100, target=0},	-- Hawk Punch: Damage closest enemy for (1*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[9]={type="heal", healPerc=5, target="all-allies"},	-- Healing Howl: Heal all allies for 5% [UNVERFIED]
 	[10]={
@@ -442,8 +442,8 @@ local vpData = {
 	[15]={type="nuke", damageATK=100, target=1},	-- Auto Attack: Damage furthest enemy for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
 	[16]={type="nuke", damageATK=75, target=1},	-- Soulshatter: Damage furthest enemy for (0.75*attack) [UNVERFIED]
 	[17]={
-		[1]={type="nuke", damageATK=10, target="all-enemies"},	-- Gravedirt Special: Damage all enemies for (0.1*attack) [UNVERFIED]
-		[2]={type="heal", healATK=100, target=4},	-- Gravedirt Special: Heal self for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
+		[1]={type="nuke", damageATK=10, target="all-enemies"},	-- Gravedirt Special: Damage all enemies for (0.1*attack) [VERIFIED]
+		[2]={type="heal", healATK=100, target=4},	-- Gravedirt Special: Heal self for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 		[3]={type="nop"},
 	},
 	[18]={
@@ -471,8 +471,8 @@ local vpData = {
 		[2]={type="aura", modDamageDealt=20, target=4, duration=3},	-- Whirling Fists: Mod damage done of self by 20% for 3 rounds [UNVERFIED]
 	},
 	[26]={
-		[1]={type="heal", healATK=100, target=3},	-- Physiker's Potion: Heal closest ally for (1*attack) [UNVERFIED]
-		[2]={type="aura", modMaxHPATK=20, target=3, duration=2},	-- Physiker's Potion: Mod max health of closest ally by (0.2*attack) for 2 rounds [UNVERFIED]
+		[1]={type="heal", healATK=100, target=3},	-- Physiker's Potion: Heal closest ally for (1*attack) [VERIFIED]
+		[2]={type="aura", modMaxHPATK=20, target=3, duration=2},	-- Physiker's Potion: Mod max health of closest ally by (0.2*attack) for 2 rounds [VERIFIED]
 	},
 	[27]={type="nuke", damageATK=100, target=0},	-- XX - Test - Physical: Damage closest enemy for (1*attack) [UNUSED]
 	[28]={type="nuke", damageATK=100, target=0},	-- XX - Test - Melee - Holy: Damage closest enemy for (1*attack) [UNUSED]
@@ -495,16 +495,16 @@ local vpData = {
 		[2]={type="heal", healATK=20, target=4},	-- Leech Anima: Heal self for (0.2*attack) [UNVERFIED]
 	},
 	[44]={
-		[1]={type="nuke", damageATK=50, target=0},	-- Double Stab: Damage closest enemy for (0.5*attack) [UNVERFIED]
-		[2]={type="nuke", damageATK=25, target=0},	-- Double Stab: Damage closest enemy for (0.25*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=50, target=0},	-- Double Stab: Damage closest enemy for (0.5*attack) [VERIFIED]
+		[2]={type="nuke", damageATK=25, target=0},	-- Double Stab: Damage closest enemy for (0.25*attack) [VERIFIED]
 	},
 	[45]={
 		[1]={type="nuke", damageATK=75, target=1},	-- Siphon Soul: Damage furthest enemy for (0.75*attack) [UNVERFIED]
 		[2]={type="heal", healATK=25, target=4},	-- Siphon Soul: Heal self for (0.25*attack) [UNVERFIED]
 	},
 	[46]={
-		[1]={type="aura", modDamageTaken=-10, target=4, duration=1},	-- Shield of Tomorrow: Mod damage taken of self by -10% for 1 rounds [UNVERFIED]
-		[2]={type="aura", modDamageTaken=-10, target="friend-back-hard", duration=1},	-- Shield of Tomorrow: Mod damage taken of backmost row of allies by -10% for 1 rounds [UNVERFIED] To-do: test target=\"*-hard\" behaviour
+		[1]={type="aura", modDamageTaken=-10, target=4, duration=1},	-- Shield of Tomorrow: Mod damage taken of self by -10% for 1 rounds [VERIFIED]
+		[2]={type="aura", modDamageTaken=-10, target="friend-back-hard", duration=1},	-- Shield of Tomorrow: Mod damage taken of backmost row of allies by -10% for 1 rounds [VERIFIED] To-do: test target=\"*-hard\" behaviour
 	},
 	[47]={type="passive", modDamageTaken=-20, target="all-allies"},	-- Protective Aura: Mod damage taken of all allies by -20% indefinitely [UNVERFIED]
 	[48]={
@@ -526,7 +526,7 @@ local vpData = {
 	[55]={type="nuke", damageATK=150, target="enemy-front"},	-- Polite Greeting: Damage frontmost row of enemies for (1.5*attack) [UNVERFIED]
 	[56]={type="nuke", damageATK=125, target=1},	-- Mirror of Torment: Damage furthest enemy for (1.25*attack) [UNVERFIED]
 	[57]={type="aura", damageATK=100, target=0, duration=4, noFirstTick=true},	-- Etiquette Lesson: Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds [UNVERFIED]
-	[58]={type="nuke", damageATK=70, target="cleave"},	-- Headcrack: Damage closest enemies for (0.7*attack) [UNVERFIED]
+	[58]={type="nuke", damageATK=70, target="cleave"},	-- Headcrack: Damage closest enemies for (0.7*attack) [VERIFIED]
 	[59]={type="nuke", damageATK=50, target="enemy-back"},	-- Mirrors of Regret: Damage backmost row of enemies for (0.5*attack) [UNVERFIED]
 	[60]={type="nuke", damageATK=40, target=1},	-- Acid Spit: Damage furthest enemy for (0.4*attack) [UNVERFIED]
 	[61]={type="nuke", damageATK=75, target=0},	-- Mandible Smash: Damage closest enemy for (0.75*attack) [UNVERFIED]
@@ -617,12 +617,12 @@ local vpData = {
 	[105]={type="passive", modDamageTaken=-10, target="all-allies"},	-- Hold the Line: Mod damage taken of all allies by -10% indefinitely [VERIFIED]
 	[106]={type="nuke", damageATK=40, target="cleave"},	-- Face Your Foes: Damage closest enemies for (0.4*attack) [VERIFIED]
 	[107]={
-		[1]={type="aura", damageATK=150, target=0, duration=4, nore=true},	-- Volatile Solvent: Damage (tick) closest enemy for (1.5*attack) immediately and each subsequent round for 3 rounds [UNVERFIED] To-do: test Effect.Target, and Effect.Points
-		[2]={type="aura", plusDamageTakenATK=50, target=0, duration=3},	-- Volatile Solvent: Mod damage taken of closest enemy by (0.5*attack) for 3 rounds [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.flags EXTRA_INITIAL_PERIOD
+		[1]={type="aura", damageATK=150, target=0, duration=4, nore=true},	-- Volatile Solvent: Damage (tick) closest enemy for (1.5*attack) immediately and each subsequent round for 3 rounds [VERIFIED]
+		[2]={type="aura", plusDamageTakenATK=50, target=0, duration=3},	-- Volatile Solvent: Mod damage taken of closest enemy by (0.5*attack) for 3 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.flags EXTRA_INITIAL_PERIOD
 	},
 	[108]={
-		[1]={type="heal", healATK=40, target=3},	-- Ooz's Frictionless Coating: Heal closest ally for (0.4*attack) [UNVERFIED]
-		[2]={type="aura", modMaxHP=10, target=3, duration=2},	-- Ooz's Frictionless Coating: Mod max health of closest ally by 10% for 2 rounds [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.flags EXTRA_INITIAL_PERIOD
+		[1]={type="heal", healATK=40, target=3},	-- Ooz's Frictionless Coating: Heal closest ally for (0.4*attack) [VERIFIED]
+		[2]={type="aura", modMaxHP=10, target=3, duration=2},	-- Ooz's Frictionless Coating: Mod max health of closest ally by 10% for 2 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.flags EXTRA_INITIAL_PERIOD
 	},
 	[109]={type="passive", thornsATK=60, target=4},	-- Serrated Shoulder Blades: Damage attacker of self for (0.6*attack) indefinitely [UNVERFIED]
 	[110]={type="heal", healATK=40, target=4},	-- Ravenous Brooch: Heal self for (0.4*attack) [UNVERFIED]
@@ -810,9 +810,9 @@ local vpData = {
 		[1]={type="nuke", damageATK=30, target=0},	-- Poisonous Bite: Damage closest enemy for (0.3*attack) [UNVERFIED]
 		[2]={type="aura", damageATK=30, target=0, duration=3, period=2, nore=true},	-- Poisonous Bite: Damage (tick) closest enemy for (0.3*attack) immediately and each subsequent 2nd round for 2 rounds [UNVERFIED]
 	},
-	[223]={type="aura", damageATK=10, cATKa=60, cATKb=2, target="all-enemies", duration=11, noFirstTick=true},	-- Wave of Eternal Death: Damage (tick) all followers for (0.1*attack) each subsequent round for 10 rounds [UNVERFIED]
-	[224]={type="nuke", damageATK=50, target="enemy-front"},	-- Maw Wrought Slash: Damage frontmost row of enemies for (0.5*attack) [UNVERFIED]
-	[225]={type="nuke", damageATK=50, target="cone"},	-- Stream of Anguish: Damage closest cone of enemies for (0.5*attack) [UNVERFIED]
+	[223]={type="aura", damageATK=10, cATKa=60, cATKb=2, target="all-enemies", duration=11, noFirstTick=true},	-- Wave of Eternal Death: Damage (tick) all followers for (0.1*attack) each subsequent round for 10 rounds [VERIFIED]
+	[224]={type="nuke", damageATK=50, target="enemy-front"},	-- Maw Wrought Slash: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
+	[225]={type="nuke", damageATK=50, target="cone"},	-- Stream of Anguish: Damage closest cone of enemies for (0.5*attack) [VERIFIED]
 	[226]={type="nuke", damageATK=50, target="cone"},	-- Thrust of the Maw: Damage closest cone of enemies for (0.5*attack) [VERIFIED]
 	[227]={type="nuke", damagePerc=30, target="random-enemy"},	-- Bombardment of Dread: Damage random follower for 30% [VERIFIED]
 	[228]={type="nuke", damageATK=1000, cATKa=500, cATKb=2, target="all-enemies", firstTurn=10},	-- Destruction: Damage all followers for (10*attack) [VERIFIED]
@@ -826,8 +826,8 @@ local vpData = {
 	[236]={type="aura", modDamageTaken=-50, target="all-allies", duration=2},	-- Empowered Minions: Mod damage taken of all allies by -50% for 2 rounds [VERIFIED]
 	[237]={type="nuke", damageATK=50, target="enemy-front"},	-- Maw Swoop: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
 	[238]={type="taunt", target="all-enemies", duration=2},	-- Death Shield: Taunt all enemies for 2 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Points and Effect.Flags
-	[239]={type="nuke", damageATK=50, target="enemy-back"},	-- Beam of Doom: Damage backmost row of enemies for (0.5*attack) [UNVERFIED]
-	[240]={type="nuke", damageATK=25, target=0},	-- Spear of Dread: Damage closest column of enemies for (0.25*attack) [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.Target
+	[239]={type="nuke", damageATK=50, target="enemy-back"},	-- Beam of Doom: Damage backmost row of enemies for (0.5*attack) [VERIFIED]
+	[240]={type="nuke", damageATK=25, target=0},	-- Spear of Dread: Damage closest column of enemies for (0.25*attack) [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target
 	[241]={
 		[1]={type="nuke", damageATK=75, target=1},	-- Pain Spike: Damage furthest enemy for (0.75*attack) [UNVERFIED]
 		[2]={type="aura", modDamageDealt=-50, target=1, duration=2},	-- Pain Spike: Mod damage done of furthest enemy by -50% for 2 rounds [UNVERFIED]
@@ -977,7 +977,7 @@ local vpData = {
 		[2]={type="aura", damageATK=50, target="enemy-front", duration=4, noFirstTick=true},	-- Shattering Blows: Damage (tick) frontmost row of enemies for (0.5*attack) each subsequent round for 3 rounds [UNVERFIED]
 	},
 	[320]={type="nuke", damageATK=100, target="enemy-back"},	-- Hailstorm: Damage backmost row of enemies for (1*attack) [UNVERFIED]
-	[321]={type="heal", healATK=200, target=3},	-- Adjustment: Heal closest ally for (2*attack) [UNVERFIED]
+	[321]={type="heal", healATK=200, target=3},	-- Adjustment: Heal closest ally for (2*attack) [VERIFIED]
 	[322]={
 		[1]={type="nuke", damageATK=80, target=0},	-- Balance In All Things: Damage closest enemy for (0.8*attack) [UNVERFIED]
 		[2]={type="heal", healATK=80, target=4},	-- Balance In All Things: Heal self for (0.8*attack) [UNVERFIED]
@@ -996,7 +996,7 @@ local vpData = {
 	[330]={type="aura", plusDamageDealtATK=20, target="all-allies", duration=2},	-- Oversight: Mod damage done of all allies by (0.2*attack) for 2 rounds [VERIFIED]
 	[331]={type="aura", plusDamageDealtATK=20, target="all-other-allies", duration=3},	-- Supporting Fire: Mod damage done of all-other allies by (0.2*attack) for 3 rounds [VERIFIED]
 	[332]={type="nuke", damageATK=150, target=1},	-- Emptied Mug: Damage furthest enemy for (1.5*attack) [VERIFIED]
-	[333]={type="aura", plusDamageDealtATK=40, target=4, duration=3},	-- Overload: Mod damage done of self by (0.4*attack) for 3 rounds [VERIFIED] To-do: test Effect.Points
+	[333]={type="aura", plusDamageDealtATK=40, target=4, duration=3},	-- Overload: Mod damage done of self by (0.4*attack) for 3 rounds [VERIFIED]
 	[334]={type="nuke", damageATK=90, target=0},	-- Hefty Package: Damage closest enemy for (0.9*attack) [VERIFIED]
 	[335]={type="nuke", damageATK=40, target="enemy-back"},	-- Errant Package: Damage backmost row of enemies for (0.4*attack) [VERIFIED]
 	[336]={type="heal", healATK=80, target=3},	-- Evidence of Wrongdoing: Heal closest ally for (0.8*attack) [VERIFIED]
@@ -1430,7 +1430,7 @@ Ignored: ineffective Effect.Period"
 4	Double Strike	3	0	0	1	1	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 		
 5	Wing Sweep	1	0	0	1	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 		
 6	Blood Explosion	2	0	0	32	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
-7	Skeleton Smash	2	1	0	32	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 		
+7	Skeleton Smash	2	1	0	32	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
 8	Hawk Punch	1	0	0	8	0	1	10	3	1	0	Damage closest enemy for (1*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 9	Healing Howl	4	0	0	64	0	4	0.05	6	0	0	Heal all allies for 5% 		
@@ -1443,9 +1443,9 @@ Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 14	Spirit's Caress	3	0	0	32	0	4	0.1	6	1	0	Heal all allies for (0.1*attack) 	#N/A	Unused
 15	Auto Attack	0	0	0	1	0	1	0.5	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
 16	Soulshatter	1	0	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
-17	Gravedirt Special	0	0	0	16	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 		
-17	Gravedirt Special	0	0	0	16	1	2	100	1	1	0	Heal self for (1*attack) 		Ignored: incorrect Effect.Type, or ineffective Effect.Points
-17	Gravedirt Special	0	0	0	16	2	0	0	7	1	0	Do nothing to all enemies for (0*attack) 		Ignored: incorrect Effect
+17	Gravedirt Special	0	0	0	16	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
+17	Gravedirt Special	0	0	0	16	1	2	100	1	1	0	Heal self for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
+17	Gravedirt Special	0	0	0	16	2	0	0	7	1	0	Do nothing to all enemies for (0*attack) 	TRUE	Ignored: incorrect Effect
 18	Wings of Fury	4	0	0	32	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
 18	Wings of Fury	4	0	0	32	1	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
 18	Wings of Fury	4	0	0	32	2	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
@@ -1461,8 +1461,8 @@ Ignored: ineffective Effect.Points"
 24	Shining Spear	2	0	0	2	1	4	0.2	2	1	0	Heal closest ally for (0.2*attack) 		
 25	Whirling Fists	2	3	0	2	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
 25	Whirling Fists	2	3	0	2	1	12	0.2	1	1	0	Mod damage done of self by 20% for 3 rounds		
-26	Physiker's Potion	3	2	0	8	0	4	1	2	1	0	Heal closest ally for (1*attack) 		
-26	Physiker's Potion	3	2	0	8	1	18	0.2	2	1	0	Mod max health of closest ally by (0.2*attack) for 2 rounds		
+26	Physiker's Potion	3	2	0	8	0	4	1	2	1	0	Heal closest ally for (1*attack) 	TRUE	
+26	Physiker's Potion	3	2	0	8	1	18	0.2	2	1	0	Mod max health of closest ally by (0.2*attack) for 2 rounds	TRUE	
 27	XX - Test - Physical	0	0	0	1	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
 28	XX - Test - Melee - Holy	0	0	0	2	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
 29	XX - Test - Melee - Fire	0	0	0	4	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
@@ -1481,12 +1481,12 @@ Ignored: ineffective Effect.Points"
 42	JasonTest Passive	0	0	0	0	0	16	0.1	1	0	0	Damage attacker of self for 10% indefinitely	#N/A	Unused
 43	Leech Anima	1	0	0	32	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 		
 43	Leech Anima	1	0	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
-44	Double Stab	3	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 		
-44	Double Stab	3	0	0	1	1	3	0.25	3	1	0	Damage closest enemy for (0.25*attack) 		
+44	Double Stab	3	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
+44	Double Stab	3	0	0	1	1	3	0.25	3	1	0	Damage closest enemy for (0.25*attack) 	TRUE	
 45	Siphon Soul	2	0	0	64	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
 45	Siphon Soul	2	0	0	64	1	4	0.25	1	1	0	Heal self for (0.25*attack) 		
-46	Shield of Tomorrow	2	1	0	2	0	14	-0.1	1	0	0	Mod damage taken of self by -10% for 1 rounds		
-46	Shield of Tomorrow	2	1	0	2	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds		To-do: test target="*-hard" behaviour
+46	Shield of Tomorrow	2	1	0	2	0	14	-0.1	1	0	0	Mod damage taken of self by -10% for 1 rounds	TRUE	
+46	Shield of Tomorrow	2	1	0	2	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds	TRUE	To-do: test target="*-hard" behaviour
 47	Protective Aura	0	0	0	32	0	14	-0.2	6	0	0	Mod damage taken of all allies by -20% indefinitely		
 48	Shadow Walk	4	1	0	32	0	10	0	1	1	0	Detaunt self for 1 rounds		
 48	Shadow Walk	4	1	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
@@ -1503,7 +1503,7 @@ Ignored: ineffective Effect.Period"
 55	Polite Greeting	4	0	0	1	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
 56	Mirror of Torment	1	0	0	64	0	3	1.25	5	1	0	Damage furthest enemy for (1.25*attack) 		
 57	Etiquette Lesson	5	3	0	32	0	7	1	3	1	0	Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds		
-58	Headcrack	2	0	0	1	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 		
+58	Headcrack	2	0	0	1	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 	TRUE	
 59	Mirrors of Regret	3	0	0	64	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 		
 60	Acid Spit	2	0	0	8	0	3	0.4	5	1	0	Damage furthest enemy for (0.4*attack) 		
 61	Mandible Smash	4	0	0	8	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 		
@@ -1570,10 +1570,10 @@ Ignored: ineffective Effect.Target"
 104	Podtender	1	1	0	8	1	12	-0.1	2	0	0	Mod damage done of closest ally by -10% for 1 rounds	TRUE	
 105	Hold the Line	0	0	0	1	0	14	-0.1	6	0	0	Mod damage taken of all allies by -10% indefinitely	TRUE	
 106	Face Your Foes	2	0	0	1	0	3	0.4	9	1	0	Damage closest enemies for (0.4*attack) 	TRUE	
-107	Volatile Solvent	5	3	0	32	0	7	1.5	3	11	0	Damage (tick) closest enemy for (1.5*attack) immediately and each subsequent round for 3 rounds		To-do: test Effect.Target, and Effect.Points
-107	Volatile Solvent	5	3	0	32	1	20	0.5	3	11	0	Mod damage taken of closest enemy by (0.5*attack) for 3 rounds		Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
-108	Ooz's Frictionless Coating	4	2	0	32	0	4	0.4	2	1	0	Heal closest ally for (0.4*attack) 		
-108	Ooz's Frictionless Coating	4	2	0	32	1	18	0.1	2	10	0	Mod max health of closest ally by 10% for 2 rounds		Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
+107	Volatile Solvent	5	3	0	32	0	7	1.5	3	11	0	Damage (tick) closest enemy for (1.5*attack) immediately and each subsequent round for 3 rounds	TRUE	
+107	Volatile Solvent	5	3	0	32	1	20	0.5	3	11	0	Mod damage taken of closest enemy by (0.5*attack) for 3 rounds	TRUE	Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
+108	Ooz's Frictionless Coating	4	2	0	32	0	4	0.4	2	1	0	Heal closest ally for (0.4*attack) 	TRUE	
+108	Ooz's Frictionless Coating	4	2	0	32	1	18	0.1	2	10	0	Mod max health of closest ally by 10% for 2 rounds	TRUE	Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
 109	Serrated Shoulder Blades	0	0	0	1	0	16	0.6	1	1	0	Damage attacker of self for (0.6*attack) indefinitely		
 110	Ravenous Brooch	1	0	0	32	0	4	0.4	1	1	0	Heal self for (0.4*attack) 		
 111	Sulfuric Emission	3	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 		
@@ -1715,9 +1715,9 @@ Ignored: ineffective Effect.Period"
 221	Burrow	5	2	0	8	0	10	1.5	1	1	0	Detaunt self for 2 rounds		
 222	Poisonous Bite	4	2	0	8	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 		
 222	Poisonous Bite	4	2	0	8	1	7	0.3	3	11	2	Damage (tick) closest enemy for (0.3*attack) immediately and each subsequent 2nd round for 2 rounds		
-223	Wave of Eternal Death	1	10	0	32	0	7	0.1	23	1	1	Damage (tick) all followers for (0.1*attack) each subsequent round for 10 rounds		
-224	Maw Wrought Slash	3	0	0	1	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
-225	Stream of Anguish	2	0	0	32	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 		
+223	Wave of Eternal Death	1	10	0	32	0	7	0.1	23	1	1	Damage (tick) all followers for (0.1*attack) each subsequent round for 10 rounds	TRUE	
+224	Maw Wrought Slash	3	0	0	1	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+225	Stream of Anguish	2	0	0	32	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
 226	Thrust of the Maw	3	0	0	32	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
 227	Bombardment of Dread	1	0	0	32	0	3	0.3	20	0	0	Damage random follower for 30% 	TRUE	
 228	Destruction	10	0	1	32	0	3	10	23	1	0	Damage all followers for (10*attack) 	TRUE	
@@ -1731,8 +1731,8 @@ Ignored: ineffective Effect.Period"
 236	Empowered Minions	4	2	0	32	0	14	-0.5	6	0	2	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
 237	Maw Swoop	4	0	0	32	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
 238	Death Shield	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	Ignored: ineffective Effect.Points and Effect.Flags
-239	Beam of Doom	5	0	0	32	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 		
-240	Spear of Dread	3	0	0	32	0	3	0.25	13	1	0	Damage closest column of enemies for (0.25*attack) 		Ignored: ineffective Effect.Target
+239	Beam of Doom	5	0	0	32	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
+240	Spear of Dread	3	0	0	32	0	3	0.25	13	1	0	Damage closest column of enemies for (0.25*attack) 	TRUE	Ignored: ineffective Effect.Target
 241	Pain Spike	4	2	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
 241	Pain Spike	4	2	0	32	1	12	-0.5	5	0	0	Mod damage done of furthest enemy by -50% for 2 rounds		
 242	Dark Healing	4	2	0	32	0	4	0.5	2	1	0	Heal closest ally for (0.5*attack) 		
@@ -1837,7 +1837,7 @@ Ignored: ineffective Effect.Period"
 319	Shattering Blows	4	3	0	32	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 		
 319	Shattering Blows	4	3	0	32	1	7	0.5	15	1	0	Damage (tick) frontmost row of enemies for (0.5*attack) each subsequent round for 3 rounds		
 320	Hailstorm	0	0	0	16	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 		
-321	Adjustment	1	0	0	16	0	4	2	2	1	0	Heal closest ally for (2*attack) 		
+321	Adjustment	1	0	0	16	0	4	2	2	1	0	Heal closest ally for (2*attack) 	TRUE	
 322	Balance In All Things	2	1	0	16	0	3	0.8	3	1	0	Damage closest enemy for (0.8*attack) 		
 322	Balance In All Things	2	1	0	16	1	4	0.8	1	1	0	Heal self for (0.8*attack) 		
 322	Balance In All Things	2	1	0	16	2	18	0.8	1	1	0	Mod max health of self by (0.8*attack) for 1 rounds		
@@ -1852,7 +1852,7 @@ Ignored: ineffective Effect.Period"
 330	Oversight	5	2	0	4	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 2 rounds	TRUE	
 331	Supporting Fire	3	3	0	4	0	19	0.2	22	1	0	Mod damage done of all-other allies by (0.2*attack) for 3 rounds	TRUE	
 332	Emptied Mug	2	0	0	32	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-333	Overload	5	3	0	64	0	19	0.4	1	1	0	Mod damage done of self by (0.4*attack) for 3 rounds	TRUE	To-do: test Effect.Points
+333	Overload	5	3	0	64	0	19	0.4	1	1	0	Mod damage done of self by (0.4*attack) for 3 rounds	TRUE	
 334	Hefty Package	2	0	0	32	0	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 	TRUE	
 335	Errant Package	2	0	0	64	0	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
 336	Evidence of Wrongdoing	3	0	0	4	0	4	0.8	2	1	0	Heal closest ally for (0.8*attack) 	TRUE	
