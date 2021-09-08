@@ -463,12 +463,12 @@ local vpData = {
 		[2]={type="aura", damagePerc=10, target="cone", duration=3, noFirstTick=true},	-- DNT JasonTest Taunt Spell: Damage (tick) closest cone of enemies for 10% each subsequent round for 2 rounds [UNUSED]
 	},
 	[24]={
-		[1]={type="nuke", damageATK=180, target=1},	-- Shining Spear: Damage furthest enemy for (1.8*attack) [UNVERFIED]
-		[2]={type="heal", healATK=20, target=3},	-- Shining Spear: Heal closest ally for (0.2*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=180, target=1},	-- Shining Spear: Damage furthest enemy for (1.8*attack) [VERIFIED]
+		[2]={type="heal", healATK=20, target=3},	-- Shining Spear: Heal closest ally for (0.2*attack) [VERIFIED]
 	},
 	[25]={
-		[1]={type="nuke", damageATK=50, target="enemy-front"},	-- Whirling Fists: Damage frontmost row of enemies for (0.5*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=20, target=4, duration=3},	-- Whirling Fists: Mod damage done of self by 20% for 3 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=50, target="enemy-front"},	-- Whirling Fists: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
+		[2]={type="aura", modDamageDealt=20, target=4, duration=3},	-- Whirling Fists: Mod damage done of self by 20% for 3 rounds [VERIFIED]
 	},
 	[26]={
 		[1]={type="heal", healATK=100, target=3},	-- Physiker's Potion: Heal closest ally for (1*attack) [VERIFIED]
@@ -552,36 +552,36 @@ local vpData = {
 	[70]={type="nop"},
 	[71]={type="heal", healATK=100, target=3},	-- Revitalizing Vines: Heal closest ally for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
 	[72]={
-		[1]={type="nuke", damageATK=200, target=0},	-- Resonating Strike: Damage closest enemy for (2*attack) [UNVERFIED]
-		[2]={type="nuke", damageATK=40, target="enemy-back"},	-- Resonating Strike: Damage backmost row of enemies for (0.4*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=200, target=0},	-- Resonating Strike: Damage closest enemy for (2*attack) [VERIFIED]
+		[2]={type="nuke", damageATK=40, target="enemy-back"},	-- Resonating Strike: Damage backmost row of enemies for (0.4*attack) [VERIFIED]
 	},
 	[73]={type="nuke", damageATK=100, target="col"},	-- Purification Ray: Damage closest column of enemies for (1*attack) [UNVERFIED]
 	[74]={
-		[1]={type="aura", modDamageTaken=-40, target=4, duration=3},	-- Reconfiguration: Defense: Mod damage taken of self by -40% for 3 rounds [UNVERFIED]
-		[2]={type="aura", modDamageDealt=-40, target=4, duration=3},	-- Reconfiguration: Defense: Mod damage done of self by -40% for 3 rounds [UNVERFIED]
+		[1]={type="aura", modDamageTaken=-40, target=4, duration=3},	-- Reconfiguration: Defense: Mod damage taken of self by -40% for 3 rounds [VERIFIED]
+		[2]={type="aura", modDamageDealt=-40, target=4, duration=3},	-- Reconfiguration: Defense: Mod damage done of self by -40% for 3 rounds [VERIFIED]
 	},
-	[75]={type="nuke", damageATK=150, target=1},	-- Larion Leap: Damage furthest enemy for (1.5*attack) [UNVERFIED]
+	[75]={type="nuke", damageATK=150, target=1},	-- Larion Leap: Damage furthest enemy for (1.5*attack) [VERIFIED]
 	[76]={type="nuke", damageATK=225, target=1},	-- Phalynx Flash: Damage furthest enemy for (2.25*attack) [UNVERFIED]
 	[77]={type="aura", plusDamageDealtATK=20, target="all-allies", duration=3},	-- Potions of Penultimate Power: Mod damage done of all allies by (0.2*attack) for 3 rounds [UNVERFIED]
 	[78]={type="nuke", damageATK=30, target="enemy-front"},	-- Cleave: Damage frontmost row of enemies for (0.3*attack) [UNVERFIED]
 	[79]={
-		[1]={type="nuke", damageATK=20, target="all-enemies"},	-- Holy Nova: Damage all enemies for (0.2*attack) [UNVERFIED]
-		[2]={type="heal", healATK=20, target="all-allies"},	-- Holy Nova: Heal all allies for (0.2*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=20, target="all-enemies"},	-- Holy Nova: Damage all enemies for (0.2*attack) [VERIFIED]
+		[2]={type="heal", healATK=20, target="all-allies"},	-- Holy Nova: Heal all allies for (0.2*attack) [VERIFIED]
 	},
 	[80]={
-		[1]={type="nuke", damageATK=120, target=1},	-- Dawnshock: Damage furthest enemy for (1.2*attack) [UNVERFIED]
-		[2]={type="aura", damageATK=40, target=1, duration=3, noFirstTick=true},	-- Dawnshock: Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=120, target=1},	-- Dawnshock: Damage furthest enemy for (1.2*attack) [VERIFIED]
+		[2]={type="aura", damageATK=40, target=1, duration=3, noFirstTick=true},	-- Dawnshock: Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds [VERIFIED]
 	},
 	[81]={type="aura", thornsATK=100, target=4, duration=3},	-- Reconfiguration: Reflect: Damage attacker of self for (1*attack) for 3 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type
-	[82]={type="passive", thornsATK=25, target=4},	-- Mace to Hand: Damage attacker of self for (0.25*attack) indefinitely [UNVERFIED]
-	[83]={type="nuke", damageATK=120, target="cleave"},	-- Lead the Charge: Damage closest enemies for (1.2*attack) [UNVERFIED]
+	[82]={type="passive", thornsATK=25, target=4},	-- Mace to Hand: Damage attacker of self for (0.25*attack) indefinitely [VERIFIED]
+	[83]={type="nuke", damageATK=120, target="cleave"},	-- Lead the Charge: Damage closest enemies for (1.2*attack) [VERIFIED]
 	[84]={type="aura", modDamageDealt=-100, target="all-enemies", duration=2, firstTurn=4},	-- Sparkling Driftglobe Core: Mod damage done of all enemies by -100% for 2 rounds [UNVERFIED]
 	[85]={type="aura", modDamageTaken=-5000, target=3, duration=2, firstTurn=3},	-- Resilient Plumage: Mod damage taken of closest ally by -5000% for 2 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Points
 	[86]={type="nuke", damageATK=50, target=0},	-- [PH]Placeholder Punch: Damage closest enemy for (0.5*attack) [UNUSED]
-	[87]={type="nuke", damageATK=60, target="enemy-back"},	-- Doubt Defied: Damage backmost row of enemies for (0.6*attack) [UNVERFIED]
+	[87]={type="nuke", damageATK=60, target="enemy-back"},	-- Doubt Defied: Damage backmost row of enemies for (0.6*attack) [VERIFIED]
 	[88]={
-		[1]={type="aura", modDamageDealt=30, target=4, duration=3},	-- Combat Meditation: Mod damage done of self by 30% for 3 rounds [UNVERFIED]
-		[2]={type="nuke", damageATK=40, target="all-enemies"},	-- Combat Meditation: Damage all enemies for (0.4*attack) [UNVERFIED]
+		[1]={type="aura", modDamageDealt=30, target=4, duration=3},	-- Combat Meditation: Mod damage done of self by 30% for 3 rounds [VERIFIED]
+		[2]={type="nuke", damageATK=40, target="all-enemies"},	-- Combat Meditation: Damage all enemies for (0.4*attack) [VERIFIED]
 	},
 	[89]={type="aura", damageATK=40, target=1, duration=3, nore=true},	-- Spiked Burr Trap: Damage (tick) furthest enemy for (0.4*attack) immediately and each subsequent round for 2 rounds [VERIFIED]
 	[90]={type="passive", modDamageDealt=20, target="friend-surround"},	-- Invigorating Herbs: Mod damage done of closest allies by 20% indefinitely [VERIFIED]
@@ -846,14 +846,14 @@ local vpData = {
 		[3]={type="nuke", damageATK=30, target=0},	-- Meatball Mad!: Damage closest enemy for (0.3*attack) [VERIFIED]
 	},
 	[245]={type="nuke", damageATK=120, target=0},	-- Crusader Strike: Damage closest enemy for (1.2*attack) [VERIFIED]
-	[246]={type="nuke", damageATK=150, target=0},	-- Snarling Bite: Damage closest enemy for (1.5*attack) [UNVERFIED]
+	[246]={type="nuke", damageATK=150, target=0},	-- Snarling Bite: Damage closest enemy for (1.5*attack) [VERIFIED]
 	[247]={firstTurn=4,
-		[1]={type="nuke", damageATK=10, target=0},	-- Skymane Strike: Damage closest enemy for (0.1*attack) [UNVERFIED]
-		[2]={type="heal", healATK=20, target=4},	-- Skymane Strike: Heal self for (0.2*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=10, target=0},	-- Skymane Strike: Damage closest enemy for (0.1*attack) [VERIFIED]
+		[2]={type="heal", healATK=20, target=4},	-- Skymane Strike: Heal self for (0.2*attack) [VERIFIED]
 	},
 	[248]={
-		[1]={type="nuke", damageATK=30, target=0},	-- Infectious Soulbite: Damage closest enemy for (0.3*attack) [UNVERFIED]
-		[2]={type="aura", damageATK=15, target=0, duration=5, noFirstTick=true},	-- Infectious Soulbite: Damage (tick) closest enemy for (0.15*attack) each subsequent round for 4 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=30, target=0},	-- Infectious Soulbite: Damage closest enemy for (0.3*attack) [VERIFIED]
+		[2]={type="aura", damageATK=15, target=0, duration=5, noFirstTick=true},	-- Infectious Soulbite: Damage (tick) closest enemy for (0.15*attack) each subsequent round for 4 rounds [VERIFIED]
 	},
 	[249]={
 		[1]={type="nuke", damageATK=60, target=0},	-- Shield Bash: Damage closest enemy for (0.6*attack) [VERIFIED]
@@ -1457,10 +1457,10 @@ Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 23	DNT JasonTest Taunt Spell	0	2	0	0	0	10	11	1	0	0	Detaunt self for 2 rounds	#N/A	"Unused
 Ignored: ineffective Effect.Points"
 23	DNT JasonTest Taunt Spell	0	2	0	0	1	7	0.1	11	0	0	Damage (tick) closest cone of enemies for 10% each subsequent round for 2 rounds	#N/A	Unused
-24	Shining Spear	2	0	0	2	0	3	1.8	5	1	0	Damage furthest enemy for (1.8*attack) 		
-24	Shining Spear	2	0	0	2	1	4	0.2	2	1	0	Heal closest ally for (0.2*attack) 		
-25	Whirling Fists	2	3	0	2	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
-25	Whirling Fists	2	3	0	2	1	12	0.2	1	1	0	Mod damage done of self by 20% for 3 rounds		
+24	Shining Spear	2	0	0	2	0	3	1.8	5	1	0	Damage furthest enemy for (1.8*attack) 	TRUE	
+24	Shining Spear	2	0	0	2	1	4	0.2	2	1	0	Heal closest ally for (0.2*attack) 	TRUE	
+25	Whirling Fists	2	3	0	2	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+25	Whirling Fists	2	3	0	2	1	12	0.2	1	1	0	Mod damage done of self by 20% for 3 rounds	TRUE	
 26	Physiker's Potion	3	2	0	8	0	4	1	2	1	0	Heal closest ally for (1*attack) 	TRUE	
 26	Physiker's Potion	3	2	0	8	1	18	0.2	2	1	0	Mod max health of closest ally by (0.2*attack) for 2 rounds	TRUE	
 27	XX - Test - Physical	0	0	0	1	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
@@ -1525,28 +1525,28 @@ Ignored: incorrect Effect.Type, and ineffective Effect.Period"
 Ignored: ineffective Effect.Target"
 70	DNT JasonTest Spell Tooltip	0	0	0	0								#N/A	Unused
 71	Revitalizing Vines	2	0	0	8	0	2	0.3	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
-72	Resonating Strike	4	0	0	2	0	3	2	3	1	0	Damage closest enemy for (2*attack) 		
-72	Resonating Strike	4	0	0	2	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 		
+72	Resonating Strike	4	0	0	2	0	3	2	3	1	0	Damage closest enemy for (2*attack) 	TRUE	
+72	Resonating Strike	4	0	0	2	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
 73	Purification Ray	2	0	0	2	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 		
-74	Reconfiguration: Defense	5	3	0	2	0	14	-0.4	1	0	0	Mod damage taken of self by -40% for 3 rounds		
-74	Reconfiguration: Defense	5	3	0	2	1	12	-0.4	1	0	0	Mod damage done of self by -40% for 3 rounds		
-75	Larion Leap	2	0	0	1	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 		
+74	Reconfiguration: Defense	5	3	0	2	0	14	-0.4	1	0	0	Mod damage taken of self by -40% for 3 rounds	TRUE	
+74	Reconfiguration: Defense	5	3	0	2	1	12	-0.4	1	0	0	Mod damage done of self by -40% for 3 rounds	TRUE	
+75	Larion Leap	2	0	0	1	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
 76	Phalynx Flash	3	0	0	2	0	3	2.25	5	1	0	Damage furthest enemy for (2.25*attack) 		
 77	Potions of Penultimate Power	5	3	0	2	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 3 rounds		
 78	Cleave	1	0	0	2	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 		
-79	Holy Nova	2	0	0	2	0	3	0.2	7	1	0	Damage all enemies for (0.2*attack) 		
-79	Holy Nova	2	0	0	2	1	4	0.2	6	1	0	Heal all allies for (0.2*attack) 		
-80	Dawnshock	3	2	0	4	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 		
-80	Dawnshock	3	2	0	4	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds		
+79	Holy Nova	2	0	0	2	0	3	0.2	7	1	0	Damage all enemies for (0.2*attack) 	TRUE	
+79	Holy Nova	2	0	0	2	1	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
+80	Dawnshock	3	2	0	4	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
+80	Dawnshock	3	2	0	4	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds	TRUE	
 81	Reconfiguration: Reflect	5	3	0	2	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds		Ignored: incorrect Effect.Type
-82	Mace to Hand	0	0	0	1	0	16	0.25	1	1	0	Damage attacker of self for (0.25*attack) indefinitely		
-83	Lead the Charge	3	0	0	1	0	3	1.2	9	1	0	Damage closest enemies for (1.2*attack) 		
+82	Mace to Hand	0	0	0	1	0	16	0.25	1	1	0	Damage attacker of self for (0.25*attack) indefinitely	TRUE	
+83	Lead the Charge	3	0	0	1	0	3	1.2	9	1	0	Damage closest enemies for (1.2*attack) 	TRUE	
 84	Sparkling Driftglobe Core	4	2	1	64	0	12	-1	7	0	0	Mod damage done of all enemies by -100% for 2 rounds		
 85	Resilient Plumage	3	2	1	2	0	14	-50	2	0	0	Mod damage taken of closest ally by -5000% for 2 rounds		Ignored: incorrect Effect.Points
 86	[PH]Placeholder Punch	2	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	#N/A	Unused
-87	Doubt Defied	2	0	0	2	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
-88	Combat Meditation	3	3	0	2	0	12	0.3	1	0	0	Mod damage done of self by 30% for 3 rounds		
-88	Combat Meditation	3	3	0	2	1	3	0.4	7	1	0	Damage all enemies for (0.4*attack) 		
+87	Doubt Defied	2	0	0	2	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 	TRUE	
+88	Combat Meditation	3	3	0	2	0	12	0.3	1	0	0	Mod damage done of self by 30% for 3 rounds	TRUE	
+88	Combat Meditation	3	3	0	2	1	3	0.4	7	1	0	Damage all enemies for (0.4*attack) 	TRUE	
 89	Spiked Burr Trap	4	2	0	8	0	7	0.4	5	11	1	Damage (tick) furthest enemy for (0.4*attack) immediately and each subsequent round for 2 rounds	TRUE	
 90	Invigorating Herbs	0	0	0	8	0	12	0.2	8	0	0	Mod damage done of closest allies by 20% indefinitely	TRUE	
 91	Dazzledust	4	3	0	8	0	19	-0.6	5	1	0	Mod damage done of furthest enemy by (-0.6*attack) for 3 rounds	TRUE	
@@ -1743,11 +1743,11 @@ Ignored: ineffective Effect.Period"
 244	Meatball Mad!	2	2	1	1	1	20	0.3	1	1	0	Mod damage taken of self by (0.3*attack) for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	2	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
 245	Crusader Strike	3	0	0	2	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
-246	Snarling Bite	2	0	0	1	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 		
-247	Skymane Strike	4	1	1	2	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 		
-247	Skymane Strike	4	1	1	2	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
-248	Infectious Soulbite	5	4	0	32	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 		
-248	Infectious Soulbite	5	4	0	32	1	7	0.15	3	1	1	Damage (tick) closest enemy for (0.15*attack) each subsequent round for 4 rounds		
+246	Snarling Bite	2	0	0	1	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
+247	Skymane Strike	4	1	1	2	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
+247	Skymane Strike	4	1	1	2	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
+248	Infectious Soulbite	5	4	0	32	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
+248	Infectious Soulbite	5	4	0	32	1	7	0.15	3	1	1	Damage (tick) closest enemy for (0.15*attack) each subsequent round for 4 rounds	TRUE	
 249	Shield Bash	3	1	0	1	0	3	0.6	3	1	0	Damage closest enemy for (0.6*attack) 	TRUE	
 249	Shield Bash	3	1	0	1	1	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds	TRUE	
 250	Thorned Slingshot	4	0	1	8	0	3	0.8	5	1	0	Damage furthest enemy for (0.8*attack) 	TRUE	
