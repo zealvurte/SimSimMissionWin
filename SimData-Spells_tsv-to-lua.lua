@@ -429,14 +429,14 @@ local vpData = {
 	[6]={type="nuke", damageATK=60, target="enemy-back"},	-- Blood Explosion: Damage backmost row of enemies for (0.6*attack) [UNVERFIED]
 	[7]={type="nuke", damageATK=10, target=0},	-- Skeleton Smash: Damage closest enemy for (0.1*attack) [VERIFIED]
 	[8]={type="nuke", damageATK=100, target=0},	-- Hawk Punch: Damage closest enemy for (1*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
-	[9]={type="heal", healPerc=5, target="all-allies"},	-- Healing Howl: Heal all allies for 5% [UNVERFIED]
+	[9]={type="heal", healPerc=5, target="all-allies"},	-- Healing Howl: Heal all allies for 5% [VERIFIED]
 	[10]={
 		[1]={type="nuke", damagePerc=20, target=0},	-- Starbranch Crush: Damage closest enemy for 20% [UNVERFIED]
 		[2]={type="aura", damagePerc=3, target="all-enemies", duration=4, noFirstTick=true, dne=true},	-- Starbranch Crush: Damage (tick) all enemies for 3% each subsequent round for 3 rounds [UNVERFIED] To-do: test dne=true behaviour
 		[3]={type="aura", healPerc=1, target=4, duration=4, noFirstTick=true},	-- Starbranch Crush: Heal (tick) self for 1% each subsequent round for 3 rounds [UNVERFIED]
 	},
 	[11]={type="nuke", damageATK=100, target=0},	-- Auto Attack: Damage closest enemy for (1*attack) [VERIFIED]
-	[12]={type="heal", healATK=20, target="all-allies"},	-- Bone Reconstruction: Heal all allies for (0.2*attack) [UNVERFIED]
+	[12]={type="heal", healATK=20, target="all-allies"},	-- Bone Reconstruction: Heal all allies for (0.2*attack) [VERIFIED]
 	[13]={type="heal", heal=10, target=3},	-- Gentle Caress: Heal closest ally for 10 [UNUSED]
 	[14]={type="heal", healATK=10, target="all-allies"},	-- Spirit's Caress: Heal all allies for (0.1*attack) [UNUSED]
 	[15]={type="nuke", damageATK=100, target=1},	-- Auto Attack: Damage furthest enemy for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
@@ -491,8 +491,8 @@ local vpData = {
 	[41]={type="aura", damageATK=25, target="cleave", duration=1, noFirstTick=true},	-- Bag Smash: Damage (tick) closest enemies for (0.25*attack) each subsequent round for 0 rounds [UNUSED]
 	[42]={type="passive", thornsPerc=10, target=4},	-- JasonTest Passive: Damage attacker of self for 10% indefinitely [UNUSED]
 	[43]={
-		[1]={type="nuke", damageATK=25, target=1},	-- Leech Anima: Damage furthest enemy for (0.25*attack) [UNVERFIED]
-		[2]={type="heal", healATK=20, target=4},	-- Leech Anima: Heal self for (0.2*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=25, target=1},	-- Leech Anima: Damage furthest enemy for (0.25*attack) [VERIFIED]
+		[2]={type="heal", healATK=20, target=4},	-- Leech Anima: Heal self for (0.2*attack) [VERIFIED]
 	},
 	[44]={
 		[1]={type="nuke", damageATK=50, target=0},	-- Double Stab: Damage closest enemy for (0.5*attack) [VERIFIED]
@@ -512,7 +512,7 @@ local vpData = {
 		[2]={type="heal", healATK=20, target=4},	-- Shadow Walk: Heal self for (0.2*attack) [UNVERFIED]
 	},
 	[49]={type="aura", modDamageTaken=33, target="enemy-back", duration=4},	-- Exsanguination: Mod damage taken of backmost row of enemies by 33% for 4 rounds [UNVERFIED]
-	[50]={type="nuke", damageATK=120, target=1},	-- Halberd Strike: Damage furthest enemy for (1.2*attack) [UNVERFIED]
+	[50]={type="nuke", damageATK=120, target=1},	-- Halberd Strike: Damage furthest enemy for (1.2*attack) [VERIFIED]
 	[51]={type="nuke", damageATK=75, target="enemy-front"},	-- Bonestorm: Damage frontmost row of enemies for (0.75*attack) [UNVERFIED]
 	[52]={type="nuke", damageATK=30, target="enemy-back"},	-- Plague Song: Damage backmost row of enemies for (0.3*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type
 	[53]={
@@ -528,8 +528,8 @@ local vpData = {
 	[57]={type="aura", damageATK=100, target=0, duration=4, noFirstTick=true},	-- Etiquette Lesson: Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds [UNVERFIED]
 	[58]={type="nuke", damageATK=70, target="cleave"},	-- Headcrack: Damage closest enemies for (0.7*attack) [VERIFIED]
 	[59]={type="nuke", damageATK=50, target="enemy-back"},	-- Mirrors of Regret: Damage backmost row of enemies for (0.5*attack) [UNVERFIED]
-	[60]={type="nuke", damageATK=40, target=1},	-- Acid Spit: Damage furthest enemy for (0.4*attack) [UNVERFIED]
-	[61]={type="nuke", damageATK=75, target=0},	-- Mandible Smash: Damage closest enemy for (0.75*attack) [UNVERFIED]
+	[60]={type="nuke", damageATK=40, target=1},	-- Acid Spit: Damage furthest enemy for (0.4*attack) [VERIFIED]
+	[61]={type="nuke", damageATK=75, target=0},	-- Mandible Smash: Damage closest enemy for (0.75*attack) [VERIFIED]
 	[62]={type="nuke", damageATK=30, target="enemy-front"},	-- Gore: Damage frontmost row of enemies for (0.3*attack) [VERIFIED]
 	[63]={
 		[1]={type="nuke", damageATK=60, target="all-enemies"},	-- Sonic Shriek: Damage all enemies for (0.6*attack) [UNVERFIED]
@@ -537,7 +537,7 @@ local vpData = {
 	},
 	[64]={type="nuke", damageATK=150, target="all-enemies"},	-- Massive Rumble: Damage all enemies for (1.5*attack) [VERIFIED]
 	[65]={type="nuke", damageATK=65, target=0},	-- Nagging Doubt: Damage closest enemy for (0.65*attack) [UNUSED]
-	[66]={type="nuke", damageATK=150, target=0},	-- Goliath Slam: Damage closest column of enemies for (1.5*attack) [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.Target
+	[66]={type="nuke", damageATK=150, target=0},	-- Goliath Slam: Damage closest column of enemies for (1.5*attack) [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target
 	[67]={type="nuke", damageATK=120, target=1},	-- Vault Strike: Damage furthest enemy for (1.2*attack) [UNUSED]
 	[68]={firstTurn=3,
 		[1]={type="nuke", damageATK=20, target="enemy-front"},	-- Glowhoof Trample: Damage frontmost row of enemies for (0.2*attack) [UNUSED]
@@ -555,15 +555,15 @@ local vpData = {
 		[1]={type="nuke", damageATK=200, target=0},	-- Resonating Strike: Damage closest enemy for (2*attack) [VERIFIED]
 		[2]={type="nuke", damageATK=40, target="enemy-back"},	-- Resonating Strike: Damage backmost row of enemies for (0.4*attack) [VERIFIED]
 	},
-	[73]={type="nuke", damageATK=100, target="col"},	-- Purification Ray: Damage closest column of enemies for (1*attack) [UNVERFIED]
+	[73]={type="nuke", damageATK=100, target="col"},	-- Purification Ray: Damage closest column of enemies for (1*attack) [VERIFIED]
 	[74]={
 		[1]={type="aura", modDamageTaken=-40, target=4, duration=3},	-- Reconfiguration: Defense: Mod damage taken of self by -40% for 3 rounds [VERIFIED]
 		[2]={type="aura", modDamageDealt=-40, target=4, duration=3},	-- Reconfiguration: Defense: Mod damage done of self by -40% for 3 rounds [VERIFIED]
 	},
 	[75]={type="nuke", damageATK=150, target=1},	-- Larion Leap: Damage furthest enemy for (1.5*attack) [VERIFIED]
 	[76]={type="nuke", damageATK=225, target=1},	-- Phalynx Flash: Damage furthest enemy for (2.25*attack) [UNVERFIED]
-	[77]={type="aura", plusDamageDealtATK=20, target="all-allies", duration=3},	-- Potions of Penultimate Power: Mod damage done of all allies by (0.2*attack) for 3 rounds [UNVERFIED]
-	[78]={type="nuke", damageATK=30, target="enemy-front"},	-- Cleave: Damage frontmost row of enemies for (0.3*attack) [UNVERFIED]
+	[77]={type="aura", plusDamageDealtATK=20, target="all-allies", duration=3},	-- Potions of Penultimate Power: Mod damage done of all allies by (0.2*attack) for 3 rounds [VERIFIED]
+	[78]={type="nuke", damageATK=30, target="enemy-front"},	-- Cleave: Damage frontmost row of enemies for (0.3*attack) [VERIFIED]
 	[79]={
 		[1]={type="nuke", damageATK=20, target="all-enemies"},	-- Holy Nova: Damage all enemies for (0.2*attack) [VERIFIED]
 		[2]={type="heal", healATK=20, target="all-allies"},	-- Holy Nova: Heal all allies for (0.2*attack) [VERIFIED]
@@ -572,11 +572,11 @@ local vpData = {
 		[1]={type="nuke", damageATK=120, target=1},	-- Dawnshock: Damage furthest enemy for (1.2*attack) [VERIFIED]
 		[2]={type="aura", damageATK=40, target=1, duration=3, noFirstTick=true},	-- Dawnshock: Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds [VERIFIED]
 	},
-	[81]={type="aura", thornsATK=100, target=4, duration=3},	-- Reconfiguration: Reflect: Damage attacker of self for (1*attack) for 3 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+	[81]={type="aura", thornsATK=100, target=4, duration=3},	-- Reconfiguration: Reflect: Damage attacker of self for (1*attack) for 3 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
 	[82]={type="passive", thornsATK=25, target=4},	-- Mace to Hand: Damage attacker of self for (0.25*attack) indefinitely [VERIFIED]
 	[83]={type="nuke", damageATK=120, target="cleave"},	-- Lead the Charge: Damage closest enemies for (1.2*attack) [VERIFIED]
-	[84]={type="aura", modDamageDealt=-100, target="all-enemies", duration=2, firstTurn=4},	-- Sparkling Driftglobe Core: Mod damage done of all enemies by -100% for 2 rounds [UNVERFIED]
-	[85]={type="aura", modDamageTaken=-5000, target=3, duration=2, firstTurn=3},	-- Resilient Plumage: Mod damage taken of closest ally by -5000% for 2 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Points
+	[84]={type="aura", modDamageDealt=-100, target="all-enemies", duration=2, firstTurn=4},	-- Sparkling Driftglobe Core: Mod damage done of all enemies by -100% for 2 rounds [VERIFIED]
+	[85]={type="aura", modDamageTaken=-5000, target=3, duration=2, firstTurn=3},	-- Resilient Plumage: Mod damage taken of closest ally by -5000% for 2 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Points
 	[86]={type="nuke", damageATK=50, target=0},	-- [PH]Placeholder Punch: Damage closest enemy for (0.5*attack) [UNUSED]
 	[87]={type="nuke", damageATK=60, target="enemy-back"},	-- Doubt Defied: Damage backmost row of enemies for (0.6*attack) [VERIFIED]
 	[88]={
@@ -956,12 +956,12 @@ local vpData = {
 	[312]={type="nuke", damageATK=180, target="cone"},	-- Panoptic Beam: Damage closest cone of enemies for (1.8*attack) [UNVERFIED]
 	[313]={type="heal", healATK=70, target="all-allies"},	-- Spirit's Guidance: Heal all allies for (0.7*attack) [UNVERFIED]
 	[314]={
-		[1]={type="heal", healATK=130, target=3},	-- Purifying Light: Heal closest ally for (1.3*attack) [UNVERFIED]
-		[2]={type="aura", plusDamageDealtATK=50, target=3, duration=2},	-- Purifying Light: Mod damage done of closest ally by (0.5*attack) for 2 rounds [UNVERFIED]
+		[1]={type="heal", healATK=130, target=3},	-- Purifying Light: Heal closest ally for (1.3*attack) [VERIFIED]
+		[2]={type="aura", plusDamageDealtATK=50, target=3, duration=2},	-- Purifying Light: Mod damage done of closest ally by (0.5*attack) for 2 rounds [VERIFIED]
 	},
 	[315]={
-		[1]={type="nuke", damageATK=150, target=1},	-- Resounding Message: Damage furthest enemy for (1.5*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=-30, target=1, duration=2},	-- Resounding Message: Mod damage done of furthest enemy by -30% for 2 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=150, target=1},	-- Resounding Message: Damage furthest enemy for (1.5*attack) [VERIFIED]
+		[2]={type="aura", modDamageDealt=-30, target=1, duration=2},	-- Resounding Message: Mod damage done of furthest enemy by -30% for 2 rounds [VERIFIED]
 	},
 	[316]={
 		[1]={type="nuke", damageATK=100, target=0},	-- Self Replication: Damage closest enemy for (1*attack) [UNVERFIED]
@@ -1433,12 +1433,12 @@ Ignored: ineffective Effect.Period"
 7	Skeleton Smash	2	1	0	32	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
 8	Hawk Punch	1	0	0	8	0	1	10	3	1	0	Damage closest enemy for (1*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type, or ineffective Effect.Points"
-9	Healing Howl	4	0	0	64	0	4	0.05	6	0	0	Heal all allies for 5% 		
+9	Healing Howl	4	0	0	64	0	4	0.05	6	0	0	Heal all allies for 5% 	TRUE	
 10	Starbranch Crush	3	3	0	16	0	3	0.2	3	0	0	Damage closest enemy for 20% 		
 10	Starbranch Crush	3	3	0	16	1	7	0.03	7	0	0	Damage (tick) all enemies for 3% each subsequent round for 3 rounds		To-do: test dne=true behaviour
 10	Starbranch Crush	3	3	0	16	2	8	0.01	1	0	0	Heal (tick) self for 1% each subsequent round for 3 rounds		
 11	Auto Attack	0	0	0	1	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
-12	Bone Reconstruction	1	1	0	32	0	4	0.2	6	1	0	Heal all allies for (0.2*attack) 		
+12	Bone Reconstruction	1	1	0	32	0	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
 13	Gentle Caress	0	0	0	8	0	2	10	2	0	0	Heal closest ally for 10 	#N/A	Unused
 14	Spirit's Caress	3	0	0	32	0	4	0.1	6	1	0	Heal all allies for (0.1*attack) 	#N/A	Unused
 15	Auto Attack	0	0	0	1	0	1	0.5	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
@@ -1479,8 +1479,8 @@ Ignored: ineffective Effect.Points"
 40	XX - Test - Ranged - Arcane	0	0	0	64	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
 41	Bag Smash	3	0	0	1	0	7	0.25	9	1	0	Damage (tick) closest enemies for (0.25*attack) each subsequent round for 0 rounds	#N/A	Unused
 42	JasonTest Passive	0	0	0	0	0	16	0.1	1	0	0	Damage attacker of self for 10% indefinitely	#N/A	Unused
-43	Leech Anima	1	0	0	32	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 		
-43	Leech Anima	1	0	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
+43	Leech Anima	1	0	0	32	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 	TRUE	
+43	Leech Anima	1	0	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
 44	Double Stab	3	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
 44	Double Stab	3	0	0	1	1	3	0.25	3	1	0	Damage closest enemy for (0.25*attack) 	TRUE	
 45	Siphon Soul	2	0	0	64	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
@@ -1491,7 +1491,7 @@ Ignored: ineffective Effect.Points"
 48	Shadow Walk	4	1	0	32	0	10	0	1	1	0	Detaunt self for 1 rounds		
 48	Shadow Walk	4	1	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
 49	Exsanguination	4	4	0	32	0	14	0.33	17	0	0	Mod damage taken of backmost row of enemies by 33% for 4 rounds		
-50	Halberd Strike	3	0	0	1	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 		
+50	Halberd Strike	3	0	0	1	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
 51	Bonestorm	5	0	0	32	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 		
 52	Plague Song	5	4	0	8	0	3	0.3	17	1	0	Damage backmost row of enemies for (0.3*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type"
@@ -1505,14 +1505,14 @@ Ignored: ineffective Effect.Period"
 57	Etiquette Lesson	5	3	0	32	0	7	1	3	1	0	Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds		
 58	Headcrack	2	0	0	1	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 	TRUE	
 59	Mirrors of Regret	3	0	0	64	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 		
-60	Acid Spit	2	0	0	8	0	3	0.4	5	1	0	Damage furthest enemy for (0.4*attack) 		
-61	Mandible Smash	4	0	0	8	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 		
+60	Acid Spit	2	0	0	8	0	3	0.4	5	1	0	Damage furthest enemy for (0.4*attack) 	TRUE	
+61	Mandible Smash	4	0	0	8	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
 62	Gore	3	0	0	8	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
 63	Sonic Shriek	5	2	0	8	0	3	0.6	7	1	0	Damage all enemies for (0.6*attack) 		
 63	Sonic Shriek	5	2	0	8	1	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds		
 64	Massive Rumble	2	0	0	8	0	3	1.5	7	1	0	Damage all enemies for (1.5*attack) 	TRUE	
 65	Nagging Doubt	2	0	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	#N/A	Unused
-66	Goliath Slam	1	0	0	32	0	3	1.5	13	1	0	Damage closest column of enemies for (1.5*attack) 		Ignored: ineffective Effect.Target
+66	Goliath Slam	1	0	0	32	0	3	1.5	13	1	0	Damage closest column of enemies for (1.5*attack) 	TRUE	Ignored: ineffective Effect.Target
 67	Vault Strike	3	0	0	32	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	#N/A	Unused
 68	Glowhoof Trample	3	1	1	2	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 	#N/A	Unused
 68	Glowhoof Trample	3	1	1	2	1	12	-0.8	15	0	0	Mod damage done of frontmost row of enemies by -80% for 1 rounds	#N/A	"Unused
@@ -1527,22 +1527,22 @@ Ignored: ineffective Effect.Target"
 71	Revitalizing Vines	2	0	0	8	0	2	0.3	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
 72	Resonating Strike	4	0	0	2	0	3	2	3	1	0	Damage closest enemy for (2*attack) 	TRUE	
 72	Resonating Strike	4	0	0	2	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
-73	Purification Ray	2	0	0	2	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 		
+73	Purification Ray	2	0	0	2	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	
 74	Reconfiguration: Defense	5	3	0	2	0	14	-0.4	1	0	0	Mod damage taken of self by -40% for 3 rounds	TRUE	
 74	Reconfiguration: Defense	5	3	0	2	1	12	-0.4	1	0	0	Mod damage done of self by -40% for 3 rounds	TRUE	
 75	Larion Leap	2	0	0	1	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
 76	Phalynx Flash	3	0	0	2	0	3	2.25	5	1	0	Damage furthest enemy for (2.25*attack) 		
-77	Potions of Penultimate Power	5	3	0	2	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 3 rounds		
-78	Cleave	1	0	0	2	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 		
+77	Potions of Penultimate Power	5	3	0	2	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 3 rounds	TRUE	
+78	Cleave	1	0	0	2	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
 79	Holy Nova	2	0	0	2	0	3	0.2	7	1	0	Damage all enemies for (0.2*attack) 	TRUE	
 79	Holy Nova	2	0	0	2	1	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
 80	Dawnshock	3	2	0	4	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
 80	Dawnshock	3	2	0	4	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds	TRUE	
-81	Reconfiguration: Reflect	5	3	0	2	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds		Ignored: incorrect Effect.Type
+81	Reconfiguration: Reflect	5	3	0	2	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	Ignored: incorrect Effect.Type
 82	Mace to Hand	0	0	0	1	0	16	0.25	1	1	0	Damage attacker of self for (0.25*attack) indefinitely	TRUE	
 83	Lead the Charge	3	0	0	1	0	3	1.2	9	1	0	Damage closest enemies for (1.2*attack) 	TRUE	
-84	Sparkling Driftglobe Core	4	2	1	64	0	12	-1	7	0	0	Mod damage done of all enemies by -100% for 2 rounds		
-85	Resilient Plumage	3	2	1	2	0	14	-50	2	0	0	Mod damage taken of closest ally by -5000% for 2 rounds		Ignored: incorrect Effect.Points
+84	Sparkling Driftglobe Core	4	2	1	64	0	12	-1	7	0	0	Mod damage done of all enemies by -100% for 2 rounds	TRUE	
+85	Resilient Plumage	3	2	1	2	0	14	-50	2	0	0	Mod damage taken of closest ally by -5000% for 2 rounds	TRUE	Ignored: incorrect Effect.Points
 86	[PH]Placeholder Punch	2	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	#N/A	Unused
 87	Doubt Defied	2	0	0	2	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 	TRUE	
 88	Combat Meditation	3	3	0	2	0	12	0.3	1	0	0	Mod damage done of self by 30% for 3 rounds	TRUE	
@@ -1825,10 +1825,10 @@ Ignored: ineffective Effect.Period"
 311	Wings of Mending	2	2	0	2	1	18	0.4	2	1	0	Mod max health of closest ally by (0.4*attack) for 2 rounds		
 312	Panoptic Beam	3	0	0	2	0	3	1.8	11	1	0	Damage closest cone of enemies for (1.8*attack) 		
 313	Spirit's Guidance	0	0	0	2	0	4	0.7	6	1	0	Heal all allies for (0.7*attack) 		
-314	Purifying Light	3	2	0	2	0	4	1.3	2	1	0	Heal closest ally for (1.3*attack) 		
-314	Purifying Light	3	2	0	2	1	19	0.5	2	1	0	Mod damage done of closest ally by (0.5*attack) for 2 rounds		
-315	Resounding Message	3	2	0	4	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 		
-315	Resounding Message	3	2	0	4	1	12	-0.3	5	1	0	Mod damage done of furthest enemy by -30% for 2 rounds		
+314	Purifying Light	3	2	0	2	0	4	1.3	2	1	0	Heal closest ally for (1.3*attack) 	TRUE	
+314	Purifying Light	3	2	0	2	1	19	0.5	2	1	0	Mod damage done of closest ally by (0.5*attack) for 2 rounds	TRUE	
+315	Resounding Message	3	2	0	4	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+315	Resounding Message	3	2	0	4	1	12	-0.3	5	1	0	Mod damage done of furthest enemy by -30% for 2 rounds	TRUE	
 316	Self Replication	1	0	0	32	0	3	1	3	1	0	Damage closest enemy for (1*attack) 		
 316	Self Replication	1	0	0	32	1	4	0.3	1	1	0	Heal self for (0.3*attack) 		
 317	Shocking Fist	3	1	0	32	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
