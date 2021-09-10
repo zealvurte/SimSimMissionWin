@@ -822,7 +822,7 @@ local vpData = {
 	[232]={type="aura", modDamageDealt=-50, target="random-enemy", duration=3},	-- Aura of Death: Mod damage done of random follower by -50% for 3 rounds [VERIFIED]
 	[233]={type="nuke", damageATK=150, target=0},	-- Teeth of the Maw: Damage closest enemy for (1.5*attack) [VERIFIED]
 	[234]={type="aura", modDamageDealt=50, target="random-ally", duration=2},	-- Power of Anguish: Mod damage done of random encounter by 50% for 2 rounds [VERIFIED]
-	[235]={type="nuke", damageATK=50, target=1},	-- Vengence of the Mawsworn: Damage furthest enemy for (0.5*attack) [UNVERFIED]
+	[235]={type="nuke", damageATK=50, target=1},	-- Vengence of the Mawsworn: Damage furthest enemy for (0.5*attack) [VERIFIED]
 	[236]={type="aura", modDamageTaken=-50, target="all-allies", duration=2},	-- Empowered Minions: Mod damage taken of all allies by -50% for 2 rounds [VERIFIED]
 	[237]={type="nuke", damageATK=50, target="enemy-front"},	-- Maw Swoop: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
 	[238]={type="taunt", target="all-enemies", duration=2},	-- Death Shield: Taunt all enemies for 2 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Points and Effect.Flags
@@ -1727,7 +1727,7 @@ Ignored: ineffective Effect.Period"
 232	Aura of Death	4	3	0	32	0	12	-0.5	20	0	3	Mod damage done of random follower by -50% for 3 rounds	TRUE	
 233	Teeth of the Maw	3	0	0	32	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
 234	Power of Anguish	4	2	0	32	0	12	0.5	21	0	0	Mod damage done of random encounter by 50% for 2 rounds	TRUE	
-235	Vengence of the Mawsworn	3	0	0	32	0	3	0.5	5	1	0	Damage furthest enemy for (0.5*attack) 		
+235	Vengence of the Mawsworn	3	0	0	32	0	3	0.5	5	1	0	Damage furthest enemy for (0.5*attack) 	TRUE	
 236	Empowered Minions	4	2	0	32	0	14	-0.5	6	0	2	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
 237	Maw Swoop	4	0	0	32	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
 238	Death Shield	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	Ignored: ineffective Effect.Points and Effect.Flags
