@@ -936,10 +936,10 @@ local vpData = {
 		[2]={type="aura", modDamageDealt=-20, target="all-enemies", duration=1},	-- Bramble Trap: Mod damage done of all enemies by -20% for 1 rounds [VERIFIED]
 	},
 	[303]={type="nuke", damageATK=25, target="enemy-back"},	-- Plague Song: Damage backmost row of enemies for (0.25*attack) [UNVERFIED]
-	[305]={type="nuke", damageATK=120, target="enemy-back"},	-- Roots of Submission: Damage backmost row of enemies for (1.2*attack) [UNVERFIED]
+	[305]={type="nuke", damageATK=120, target="enemy-back"},	-- Roots of Submission: Damage backmost row of enemies for (1.2*attack) [VERIFIED]
 	[306]={
-		[1]={type="aura", plusDamageDealtATK=40, target=3, duration=3},	-- Arcane Empowerment: Mod damage done of closest ally by (0.4*attack) for 3 rounds [UNVERFIED]
-		[2]={type="aura", modMaxHPATK=60, target=3, duration=3},	-- Arcane Empowerment: Mod max health of closest ally by (0.6*attack) for 3 rounds [UNVERFIED]
+		[1]={type="aura", plusDamageDealtATK=40, target=3, duration=3},	-- Arcane Empowerment: Mod damage done of closest ally by (0.4*attack) for 3 rounds [VERIFIED]
+		[2]={type="aura", modMaxHPATK=60, target=3, duration=3},	-- Arcane Empowerment: Mod max health of closest ally by (0.6*attack) for 3 rounds [VERIFIED]
 	},
 	[307]={type="nuke", damageATK=160, target="cone"},	-- Fist of Nature: Damage closest cone of enemies for (1.6*attack) [UNVERFIED]
 	[308]={type="nuke", damageATK=350, target=1, firstTurn=3},	-- Spore of Doom: Damage furthest enemy for (3.5*attack) [VERIFIED]
@@ -1794,9 +1794,9 @@ Ignored: ineffective Effect.Period"
 302	Bramble Trap	1	1	0	8	0	3	0.2	7	1	2	Damage all enemies for (0.2*attack) 	TRUE	
 302	Bramble Trap	1	1	0	8	1	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 1 rounds	TRUE	
 303	Plague Song	0	0	0	8	0	3	0.25	17	1	0	Damage backmost row of enemies for (0.25*attack) 		
-305	Roots of Submission	1	0	0	8	0	3	1.2	17	1	0	Damage backmost row of enemies for (1.2*attack) 		
-306	Arcane Empowerment	3	3	0	64	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 3 rounds		
-306	Arcane Empowerment	3	3	0	64	1	18	0.6	2	1	0	Mod max health of closest ally by (0.6*attack) for 3 rounds		
+305	Roots of Submission	1	0	0	8	0	3	1.2	17	1	0	Damage backmost row of enemies for (1.2*attack) 	TRUE	
+306	Arcane Empowerment	3	3	0	64	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 3 rounds	TRUE	
+306	Arcane Empowerment	3	3	0	64	1	18	0.6	2	1	0	Mod max health of closest ally by (0.6*attack) for 3 rounds	TRUE	
 307	Fist of Nature	3	0	0	8	0	3	1.6	11	1	0	Damage closest cone of enemies for (1.6*attack) 		
 308	Spore of Doom	3	0	1	8	0	3	3.5	5	1	0	Damage furthest enemy for (3.5*attack) 	TRUE	
 309	Threads of Fate	4	1	0	8	0	4	2	6	1	0	Heal all allies for (2*attack) 	TRUE	
