@@ -240,6 +240,7 @@ local VPKeys = {
 	heal=2,
 	healATK=2,
 	healPerc=2,
+	healPercent=2,
 	plusDamageDealt=2,
 	plusDamageDealtATK=2,
 	modDamageDealt=2,
@@ -293,6 +294,7 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 		if t == 1 or t == 5 then effect.damage=p	-- VP has not implemented it
 		elseif t == 3 or t == 7 then effect.damagePerc=p
 		elseif t == 2 or t == 6 then effect.heal=p	-- VP has not implemented it
+		elseif t == 4 and useOriginalVP then effect.healPercent=p	-- VP used to use a different key just for direct heals
 		elseif t == 4 or t == 8 then effect.healPerc=p
 		elseif t == 11 then effect.plusDamageDealt=p
 		elseif t == 12 or t == 19 then effect.modDamageDealt=p	-- 12 is always %
@@ -366,7 +368,7 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 		effect.cATKa = environmentStats[1]
 		effect.cATKb = environmentStats[2]
 	end
-	if previousEffect and previousEffect.type == "aura" and effect.type == "aura" and (previousEffect.damageATK or previousEffect.damagePerc or previousEffect.healATK or previousEffect.healPerc) and (effect.damageATK or effect.damagePerc or effect.healATK or effect.healPerc) then previousEffect.dne=true end	-- Still not sure on this, but seemingly prevents a death from the previous effect from ending the sim immediately, as this effect still needs to happen
+	if previousEffect and previousEffect.type == "aura" and effect.type == "aura" and (previousEffect.damageATK or previousEffect.damagePerc or previousEffect.healATK or previousEffect.healPerc or previousEffect.healPercent) and (effect.damageATK or effect.damagePerc or effect.healATK or effect.healPerc or effect.healPercent) then previousEffect.dne=true end	-- Still not sure on this, but seemingly prevents a death from the previous effect from ending the sim immediately, as this effect still needs to happen
 	effect.flags=nil
 	effect.notes=effect.notes and effect.notes:gsub('Corrections:',"#Bug/#Fix: corrected to"):gsub('Ignored:',"#Bug/#Workaround: ignored"):gsub('To-do:',"#ToDo:")
 	local c=string.format("	-- %s: %s [%s]%s",name,effect.description,effect.status,effect.notes and " "..effect.notes or "")
@@ -431,9 +433,9 @@ local vpData = {
 	[8]={type="nuke", damageATK=100, target=0},	-- Hawk Punch: Damage closest enemy for (1*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[9]={type="heal", healPerc=5, target="all-allies"},	-- Healing Howl: Heal all allies for 5% [VERIFIED]
 	[10]={
-		[1]={type="nuke", damagePerc=20, target=0},	-- Starbranch Crush: Damage closest enemy for 20% [UNVERFIED]
-		[2]={type="aura", damagePerc=3, target="all-enemies", duration=4, noFirstTick=true, dne=true},	-- Starbranch Crush: Damage (tick) all enemies for 3% each subsequent round for 3 rounds [UNVERFIED] To-do: test dne=true behaviour
-		[3]={type="aura", healPerc=1, target=4, duration=4, noFirstTick=true},	-- Starbranch Crush: Heal (tick) self for 1% each subsequent round for 3 rounds [UNVERFIED]
+		[1]={type="nuke", damagePerc=20, target=0},	-- Starbranch Crush: Damage closest enemy for 20% [VERIFIED]
+		[2]={type="aura", damagePerc=3, target="all-enemies", duration=4, noFirstTick=true, dne=true},	-- Starbranch Crush: Damage (tick) all enemies for 3% each subsequent round for 3 rounds [VERIFIED] To-do: test dne=true behaviour
+		[3]={type="aura", healPerc=1, target=4, duration=4, noFirstTick=true},	-- Starbranch Crush: Heal (tick) self for 1% each subsequent round for 3 rounds [VERIFIED]
 	},
 	[11]={type="nuke", damageATK=100, target=0},	-- Auto Attack: Damage closest enemy for (1*attack) [VERIFIED]
 	[12]={type="heal", healATK=20, target="all-allies"},	-- Bone Reconstruction: Heal all allies for (0.2*attack) [VERIFIED]
@@ -451,7 +453,7 @@ local vpData = {
 		[2]={type="nuke", damageATK=20, target="enemy-front"},	-- Wings of Fury: Damage frontmost row of enemies for (0.2*attack) [UNVERFIED]
 		[3]={type="nuke", damageATK=20, target="enemy-front"},	-- Wings of Fury: Damage frontmost row of enemies for (0.2*attack) [UNVERFIED]
 	},
-	[19]={type="nuke", damageATK=150, target=0},	-- Searing Bite: Damage closest enemy for (1.5*attack) [UNVERFIED]
+	[19]={type="nuke", damageATK=150, target=0},	-- Searing Bite: Damage closest enemy for (1.5*attack) [VERIFIED]
 	[20]={type="nuke", damageATK=70, target="enemy-back"},	-- Huck Stone: Damage backmost row of enemies for (0.7*attack) [UNVERFIED]
 	[21]={type="aura", healATK=25, target="all-allies", duration=5, noFirstTick=true},	-- Spirits of Rejuvenation: Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds [UNVERFIED]
 	[22]={
@@ -662,7 +664,7 @@ local vpData = {
 		[2]={type="heal", healATK=75, target=4},	-- Hidden Power: Heal self for (0.75*attack) [VERIFIED]
 	},
 	[134]={type="aura", modDamageTaken=25, target="all-enemies", duration=2},	-- Curse of the Dark Forest: Mod damage taken of all enemies by 25% for 2 rounds [VERIFIED]
-	[135]={type="nuke", damageATK=300, target="enemy-back"},	-- Fires of Domination: Damage backmost row of enemies for (3*attack) [UNVERFIED]
+	[135]={type="nuke", damageATK=300, target="enemy-back"},	-- Fires of Domination: Damage backmost row of enemies for (3*attack) [VERIFIED]
 	[136]={type="aura", damageATK=150, target=0, duration=4, period=3, noFirstTick=true},	-- Searing Jaws: Damage (tick) closest enemy for (1.5*attack) each subsequent 3rd round for 3 rounds [UNVERFIED]
 	[137]={type="aura", modDamageDealt=25, target=4, duration=2},	-- Hearty Shout: Mod damage done of self by 25% for 2 rounds [UNVERFIED]
 	[138]={type="nuke", damageATK=30, target="cleave"},	-- Tail lash: Damage closest enemies for (0.3*attack) [VERIFIED]
@@ -673,8 +675,8 @@ local vpData = {
 	},
 	[141]={type="aura", modDamageTaken=-50, target="all-allies", duration=2},	-- Herd Immunity: Mod damage taken of all allies by -50% for 2 rounds [VERIFIED]
 	[142]={type="heal", healATK=70, target=3},	-- Arcane Restoration: Heal closest cone of allies for (0.7*attack) [UNUSED]
-	[143]={type="aura", modDamageDealt=25, target=4, duration=2},	-- Arrogant Boast: Mod damage done of self by 25% for 2 rounds [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.Period
-	[144]={type="aura", modDamageTaken=-75, target="all-other-allies", duration=2, firstTurn=4},	-- Ardent Defense: Mod damage taken of all-other allies by -75% for 2 rounds [UNVERFIED]
+	[143]={type="aura", modDamageDealt=25, target=4, duration=2},	-- Arrogant Boast: Mod damage done of self by 25% for 2 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Period
+	[144]={type="aura", modDamageTaken=-75, target="all-other-allies", duration=2, firstTurn=4},	-- Ardent Defense: Mod damage taken of all-other allies by -75% for 2 rounds [VERIFIED]
 	[145]={type="nuke", damageATK=75, target=0},	-- Shield Bash: Damage closest enemy for (0.75*attack) [VERIFIED]
 	[146]={type="nuke", damageATK=75, target=1},	-- Dark Javelin: Damage furthest enemy for (0.75*attack) [VERIFIED]
 	[147]={type="aura", modDamageTaken=-50, target="all-other-allies", duration=2},	-- Close Ranks: Mod damage taken of all-other allies by -50% for 2 rounds [VERIFIED]
@@ -692,7 +694,7 @@ local vpData = {
 	[156]={type="aura", modDamageTaken=40, target="all-enemies", duration=2},	-- Cursed Knowledge: Mod damage taken of all enemies by 40% for 2 rounds [VERIFIED]
 	[157]={type="nuke", damageATK=80, target="cleave"},	-- Frantic Flap: Damage closest enemies for (0.8*attack) [VERIFIED]
 	[158]={type="nuke", damageATK=300, target="enemy-back", firstTurn=3},	-- Explosion of Dark Knowledge: Damage backmost row of enemies for (3*attack) [VERIFIED]
-	[159]={type="aura", modDamageDealt=-25, target="all-enemies", duration=2},	-- Proclamation of Doubt: Mod damage done of all enemies by -25% for 2 rounds [UNVERFIED]
+	[159]={type="aura", modDamageDealt=-25, target="all-enemies", duration=2},	-- Proclamation of Doubt: Mod damage done of all enemies by -25% for 2 rounds [VERIFIED]
 	[160]={type="nuke", damageATK=200, target="all-enemies"},	-- Seismic Slam: Damage all enemies for (2*attack) [UNVERFIED]
 	[161]={
 		[1]={type="heal", healATK=100, target="all-allies"},	-- Dark Command: Heal all allies for (1*attack) [UNVERFIED]
@@ -707,7 +709,7 @@ local vpData = {
 		[2]={type="heal", healATK=50, target=4},	-- Leeching Bite: Heal self for (0.5*attack) [VERIFIED]
 	},
 	[167]={type="nuke", damageATK=150, target=1},	-- Razor Shards: Damage furthest enemy for (1.5*attack) [VERIFIED]
-	[168]={type="aura", modDamageDealt=-50, target=0, duration=2},	-- Howl from Beyond: Mod damage done of closest enemy by -50% for 2 rounds [UNVERFIED]
+	[168]={type="aura", modDamageDealt=-50, target=0, duration=2},	-- Howl from Beyond: Mod damage done of closest enemy by -50% for 2 rounds [VERIFIED]
 	[169]={
 		[1]={type="nuke", damageATK=65, target=0},	-- Consuming Strike: Damage closest enemy for (0.65*attack) [UNVERFIED]
 		[2]={type="aura", damageATK=50, target=0, duration=4, period=3, nore=true},	-- Consuming Strike: Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds [UNVERFIED] To-do: test nore=true
@@ -780,11 +782,11 @@ local vpData = {
 		[2]={type="aura", modDamageDealt=-50, target="enemy-front", duration=1},	-- Stunning Swipe: Mod damage done of frontmost row of enemies by -50% for 1 rounds [VERIFIED]
 	},
 	[201]={type="nuke", damageATK=200, target="enemy-back"},	-- Monstrous Rage: Damage backmost row of enemies for (2*attack) [VERIFIED]
-	[202]={type="taunt", target="all-enemies", duration=2},	-- Whirling Wall: Taunt all enemies for 2 rounds [UNVERFIED]
+	[202]={type="taunt", target="all-enemies", duration=2},	-- Whirling Wall: Taunt all enemies for 2 rounds [VERIFIED]
 	[203]={type="nuke", damageATK=100, target="enemy-front"},	-- Bitting Winds: Damage frontmost row of enemies for (1*attack) [VERIFIED]
 	[204]={
-		[1]={type="nuke", damageATK=150, target=0},	-- Death Blast: Damage closest enemy for (1.5*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=-50, target=0, duration=2},	-- Death Blast: Mod damage done of closest enemy by -50% for 2 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=150, target=0},	-- Death Blast: Damage closest enemy for (1.5*attack) [VERIFIED]
+		[2]={type="aura", modDamageDealt=-50, target=0, duration=2},	-- Death Blast: Mod damage done of closest enemy by -50% for 2 rounds [VERIFIED]
 	},
 	[205]={type="heal", healATK=75, target="friend-front-soft"},	-- Bone Dust: Heal frontmost row of allies for (0.75*attack) [VERIFIED]
 	[206]={type="nuke", damageATK=150, target=0},	-- Abominable Kick: Damage closest enemy for (1.5*attack) [VERIFIED]
@@ -889,7 +891,7 @@ local vpData = {
 	[271]={type="aura", damageATK=100, target=1, duration=4, noFirstTick=true},	-- Ambush: Damage (tick) furthest enemy for (1*attack) each subsequent round for 3 rounds [VERIFIED]
 	[272]={type="nuke", damageATK=150, target=1},	-- Soulfrost Shard: Damage furthest enemy for (1.5*attack) [VERIFIED]
 	[273]={type="aura", modDamageDealt=-50, target=0, duration=1},	-- Ritual Curse: Mod damage done of closest enemy by -50% for 1 rounds [UNUSED]
-	[274]={type="nuke", damageATK=120, target="enemy-front"},	-- Stomp Flesh: Damage frontmost row of enemies for (1.2*attack) [UNVERFIED]
+	[274]={type="nuke", damageATK=120, target="enemy-front"},	-- Stomp Flesh: Damage frontmost row of enemies for (1.2*attack) [VERIFIED]
 	[275]={type="aura", modDamageDealt=75, target=3, duration=2},	-- Necromantic Infusion: Mod damage done of closest ally by 75% for 2 rounds [VERIFIED]
 	[276]={
 		[1]={type="nuke", damageATK=25, target=1},	-- Rot Volley: Damage furthest enemy for (0.25*attack) [VERIFIED]
@@ -899,7 +901,7 @@ local vpData = {
 	[278]={type="aura", modDamageTaken=50, target=1, duration=2},	-- Memory Displacement: Mod damage taken of furthest enemy by 50% for 2 rounds [VERIFIED]
 	[279]={type="nuke", damageATK=50, target="enemy-back"},	-- Painful Recollection: Damage backmost row of enemies for (0.5*attack) [VERIFIED]
 	[280]={type="nuke", damageATK=250, target="enemy-front"},	-- Quills: Damage frontmost row of enemies for (2.5*attack) [VERIFIED]
-	[281]={type="nuke", damageATK=150, target=1},	-- Anima Spit: Damage furthest enemy for (1.5*attack) [UNVERFIED]
+	[281]={type="nuke", damageATK=150, target=1},	-- Anima Spit: Damage furthest enemy for (1.5*attack) [VERIFIED]
 	[282]={type="nuke", damageATK=1000, target=0, firstTurn=5},	-- Charged Javelin: Damage closest enemy for (10*attack) [VERIFIED]
 	[283]={type="nuke", damageATK=75, target=0},	-- Anima Claws: Damage closest column of enemies for (0.75*attack) [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target
 	[284]={type="aura", modDamageTaken=-50, target="all-other-allies", duration=1},	-- Empyreal Reflexes: Mod damage taken of all-other allies by -50% for 1 rounds [VERIFIED]
@@ -927,7 +929,7 @@ local vpData = {
 		[2]={type="heal", healATK=30, target=4},	-- Anima Leech: Heal self for (0.3*attack) [VERIFIED]
 	},
 	[299]={type="nuke", damageATK=200, target=1},	-- Plague Blast: Damage furthest enemy for (2*attack) [UNVERFIED]
-	[300]={type="aura", damageATK=5, cATKa=10, cATKb=2, target="all-enemies", duration=4, noFirstTick=true},	-- Wave of Eternal Death: Damage (tick) all followers for (0.05*attack) each subsequent round for 3 rounds [UNVERFIED] To-do: test stacking ticks from the same spell behaviour
+	[300]={type="aura", damageATK=5, cATKa=10, cATKb=2, target="all-enemies", duration=4, noFirstTick=true},	-- Wave of Eternal Death: Damage (tick) all followers for (0.05*attack) each subsequent round for 3 rounds [VERIFIED] To-do: test stacking ticks from the same spell behaviour
 	[301]={type="nuke", damagePerc=10, target="random-enemy"},	-- Bombardment of Dread: Damage random follower for 10% [VERIFIED]
 	[302]={
 		[1]={type="nuke", damageATK=20, target="all-enemies"},	-- Bramble Trap: Damage all enemies for (0.2*attack) [VERIFIED]
@@ -1044,37 +1046,22 @@ local function checkForMultiKeys(e,nk)
 			end
 		end
 		if not nk or k ~= nk then
-			if k == "damageATK1" then
-				return k
-			elseif k == "selfhealATK" then
-				return k
-			elseif k == "damageATK" then
-				return k
-			elseif k == "damagePerc" then
-				return k
-			elseif k == "healATK" then
-				return k
-			elseif k == "healPerc" then
-				return k
-			elseif k == "shroudTurns" then
-				return k
-			elseif k == "plusDamageDealtATK" then
-				return k
-			elseif k == "modDamageDealt" then
-				return k
-			elseif k == "plusDamageTakenATK" then
-				return k
-			elseif k == "modDamageTaken" then
-				return k
-			elseif k == "thornsATK" then
-				return k
-			elseif k == "thornsPerc" then
-				return k
-			elseif k == "modMaxHPATK" then
-				return k
-			elseif k == "modMaxHP" then
-				return k
-			end
+			if k == "damageATK1" or
+			k == "selfhealATK" or
+			k == "damageATK" or
+			k == "damagePerc" or
+			k == "healATK" or
+			k == "healPerc" or
+			k == "healPercent" or
+			k == "shroudTurns" or
+			k == "plusDamageDealtATK" or
+			k == "modDamageDealt" or
+			k == "plusDamageTakenATK" or
+			k == "modDamageTaken" or
+			k == "thornsATK" or
+			k == "thornsPerc" or
+			k == "modMaxHPATK" or
+			k == "modMaxHP" then return k end
 		end
 	end
 end
@@ -1091,37 +1078,22 @@ local function countMultiKeys(e,nk)
 			end
 		end
 		if not nk or k ~= nk then
-			if k == "damageATK1" then
-				c=c+1
-			elseif k == "selfhealATK" then
-				c=c+1
-			elseif k == "damageATK" then
-				c=c+1
-			elseif k == "damagePerc" then
-				c=c+1
-			elseif k == "healATK" then
-				c=c+1
-			elseif k == "healPerc" then
-				c=c+1
-			elseif k == "shroudTurns" then
-				c=c+1
-			elseif k == "plusDamageDealtATK" then
-				c=c+1
-			elseif k == "modDamageDealt" then
-				c=c+1
-			elseif k == "plusDamageTakenATK" then
-				c=c+1
-			elseif k == "modDamageTaken" then
-				c=c+1
-			elseif k == "thornsATK" then
-				c=c+1
-			elseif k == "thornsPerc" then
-				c=c+1
-			elseif k == "modMaxHPATK" then
-				c=c+1
-			elseif k == "modMaxHP" then
-				c=c+1
-			end
+			if k == "damageATK1" or
+			k == "selfhealATK" or
+			k == "damageATK" or
+			k == "damagePerc" or
+			k == "healATK" or
+			k == "healPerc" or
+			k == "healPercent" or
+			k == "shroudTurns" or
+			k == "plusDamageDealtATK" or
+			k == "modDamageDealt" or
+			k == "plusDamageTakenATK" or
+			k == "modDamageTaken" or
+			k == "thornsATK" or
+			k == "thornsPerc" or
+			k == "modMaxHPATK" or
+			k == "modMaxHP" then c=c+1 end
 		end
 	end
 	return c-1
@@ -1178,11 +1150,15 @@ local function compareToVP(b,useOriginalVP)
 					v.selfhealATK=nil
 					n=true
 				end
-				if v.healATK or v.healPerc then
-					local ntd = checkForMultiKeys(v,{"damageATK","damagePerc","healATK","healPerc","selfhealATK","damageATK1"})
+				if v.healATK or v.healPerc or v.healPercent then
+					local ntd = checkForMultiKeys(v,{"damageATK","damagePerc","healATK","healPerc","healPercent","selfhealATK","damageATK1"})
 					cba = cba and (not ntd or v.period) and (v.period or v.echo or v.duration)
 					if not cba then
-						v[#v+1]={type="heal",healATK=v.healATK,healPerc=v.healPerc,target=v.target,dne=v.dne}
+						v[#v+1]={type="heal",healATK=v.healATK,healPerc=v.healPerc or v.healPercent,target=v.target,dne=v.dne}
+						if useOriginalVP and v.healPercent then
+							v[#v].healPercent=v.healPercent
+							v[#v].healPerc=nil
+						end
 						n=true
 					else
 						local d = v.duration
@@ -1200,6 +1176,7 @@ local function compareToVP(b,useOriginalVP)
 					end
 					v.healATK=nil
 					v.healPerc=nil
+					v.healPercent=nil
 				end
 				if v.shroudTurns then
 					if useOriginalVP then
@@ -1315,18 +1292,23 @@ local function compareToVP(b,useOriginalVP)
 								vv.selfhealATK=nil
 								n=n-1
 							end
-							if n > 0 and (vv.healATK or vv.healPerc) then
-								if not vv.period and checkForMultiKeys(vv,{"healATK","healPerc","damageATK","damagePerc","damageATK1","selfhealATK"}) then
-									table.insert(v,kk+1,{type="heal",healATK=vv.healATK,healPerc=vv.healPerc,target=vv.target,dne=vv.dne})
+							if n > 0 and (vv.healATK or vv.healPerc or vv.healPecent) then
+								if not vv.period and checkForMultiKeys(vv,{"healATK","healPerc","healPercent","damageATK","damagePerc","damageATK1","selfhealATK"}) then
+									table.insert(v,kk+1,{type="heal",healATK=vv.healATK,healPerc=vv.healPerc or vv.healPercent,target=vv.target,dne=vv.dne})
+									if useOriginalVP and vv.healPercent then
+										v[kk+1].healPercent=v.healPercent
+										v[kk+1].healPerc=nil
+									end
 								else
 									table.insert(v,kk+1,{type=vv.type,healATK=vv.healATK,healPerc=vv.healPerc,target=vv.target,period=vv.period,duration=vv.duration+1,noFirstTick=vv.noFirstTick,nore=vv.nore,dne=vv.dne})
 								end
 								vv.healATK=nil
 								vv.healPerc=nil
+								vv.healPercent=nil
 								n=n-1
 							end
 							if n > 0 and (vv.damageATK or vv.damagePerc) then
-								if not vv.period and checkForMultiKeys(vv,{"healATK","healPerc","damageATK","damagePerc","damageATK1","selfhealATK"}) then
+								if not vv.period and checkForMultiKeys(vv,{"healATK","healPerc","healPercent","damageATK","damagePerc","damageATK1","selfhealATK"}) then
 									table.insert(v,kk+1,{type="nuke",damageATK=vv.damageATK,damagePerc=vv.damagePerc,target=vv.target,dne=vv.dne})
 								else
 									table.insert(v,kk+1,{type=vv.type,damageATK=vv.damageATK,damagePerc=vv.damagePerc,target=vv.target,period=vv.period,duration=vv.duration+1,noFirstTick=vv.noFirstTick,nore=vv.nore,dne=vv.dne})
@@ -1434,9 +1416,9 @@ Ignored: ineffective Effect.Period"
 8	Hawk Punch	1	0	0	8	0	1	10	3	1	0	Damage closest enemy for (1*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 9	Healing Howl	4	0	0	64	0	4	0.05	6	0	0	Heal all allies for 5% 	TRUE	
-10	Starbranch Crush	3	3	0	16	0	3	0.2	3	0	0	Damage closest enemy for 20% 		
-10	Starbranch Crush	3	3	0	16	1	7	0.03	7	0	0	Damage (tick) all enemies for 3% each subsequent round for 3 rounds		To-do: test dne=true behaviour
-10	Starbranch Crush	3	3	0	16	2	8	0.01	1	0	0	Heal (tick) self for 1% each subsequent round for 3 rounds		
+10	Starbranch Crush	3	3	0	16	0	3	0.2	3	0	0	Damage closest enemy for 20% 	TRUE	
+10	Starbranch Crush	3	3	0	16	1	7	0.03	7	0	0	Damage (tick) all enemies for 3% each subsequent round for 3 rounds	TRUE	To-do: test dne=true behaviour
+10	Starbranch Crush	3	3	0	16	2	8	0.01	1	0	0	Heal (tick) self for 1% each subsequent round for 3 rounds	TRUE	
 11	Auto Attack	0	0	0	1	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
 12	Bone Reconstruction	1	1	0	32	0	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
 13	Gentle Caress	0	0	0	8	0	2	10	2	0	0	Heal closest ally for 10 	#N/A	Unused
@@ -1449,7 +1431,7 @@ Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 18	Wings of Fury	4	0	0	32	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
 18	Wings of Fury	4	0	0	32	1	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
 18	Wings of Fury	4	0	0	32	2	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
-19	Searing Bite	4	0	0	4	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 		
+19	Searing Bite	4	0	0	4	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
 20	Huck Stone	1	0	0	1	0	3	0.7	17	1	0	Damage backmost row of enemies for (0.7*attack) 		
 21	Spirits of Rejuvenation	4	4	0	1	0	8	0.25	6	1	0	Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds		
 22	Unrelenting Hunger	3	2	0	32	0	3	0.9	9	1	0	Damage closest enemies for (0.9*attack) 		
@@ -1605,7 +1587,7 @@ Ignored: ineffective Effect.Period"
 133	Hidden Power	4	0	0	64	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 	TRUE	
 133	Hidden Power	4	0	0	64	1	4	0.75	1	1	0	Heal self for (0.75*attack) 	TRUE	
 134	Curse of the Dark Forest	4	2	0	32	0	14	0.25	7	1	0	Mod damage taken of all enemies by 25% for 2 rounds	TRUE	
-135	Fires of Domination	3	0	0	4	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 		
+135	Fires of Domination	3	0	0	4	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 	TRUE	
 136	Searing Jaws	4	3	0	4	0	7	1.5	3	1	3	Damage (tick) closest enemy for (1.5*attack) each subsequent 3rd round for 3 rounds		
 137	Hearty Shout	4	2	0	8	0	12	0.25	1	0	0	Mod damage done of self by 25% for 2 rounds		
 138	Tail lash	2	0	0	64	0	3	0.3	9	1	0	Damage closest enemies for (0.3*attack) 	TRUE	
@@ -1614,8 +1596,8 @@ Ignored: ineffective Effect.Period"
 140	Fan of Knives	4	2	0	32	1	12	-0.1	17	0	0	Mod damage done of backmost row of enemies by -10% for 2 rounds		
 141	Herd Immunity	4	2	0	64	0	14	-0.5	6	0	0	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
 142	Arcane Restoration	3	0	0	64	0	4	0.7	10	1	0	Heal closest cone of allies for (0.7*attack) 	#N/A	Unused
-143	Arrogant Boast	4	2	0	32	0	12	0.25	1	0	2	Mod damage done of self by 25% for 2 rounds		Ignored: ineffective Effect.Period
-144	Ardent Defense	4	2	1	32	0	14	-0.75	22	0	0	Mod damage taken of all-other allies by -75% for 2 rounds		
+143	Arrogant Boast	4	2	0	32	0	12	0.25	1	0	2	Mod damage done of self by 25% for 2 rounds	TRUE	Ignored: ineffective Effect.Period
+144	Ardent Defense	4	2	1	32	0	14	-0.75	22	0	0	Mod damage taken of all-other allies by -75% for 2 rounds	TRUE	
 145	Shield Bash	4	0	0	32	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
 146	Dark Javelin	4	0	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
 147	Close Ranks	5	2	0	32	0	14	-0.5	22	0	0	Mod damage taken of all-other allies by -50% for 2 rounds	TRUE	
@@ -1631,7 +1613,7 @@ Ignored: ineffective Effect.Period"
 156	Cursed Knowledge	5	2	0	32	0	14	0.4	7	0	0	Mod damage taken of all enemies by 40% for 2 rounds	TRUE	
 157	Frantic Flap	4	0	0	1	0	3	0.8	9	1	0	Damage closest enemies for (0.8*attack) 	TRUE	
 158	Explosion of Dark Knowledge	3	0	1	32	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 	TRUE	
-159	Proclamation of Doubt	4	2	0	32	0	12	-0.25	7	0	2	Mod damage done of all enemies by -25% for 2 rounds		
+159	Proclamation of Doubt	4	2	0	32	0	12	-0.25	7	0	2	Mod damage done of all enemies by -25% for 2 rounds	TRUE	
 160	Seismic Slam	3	0	0	8	0	3	2	7	1	0	Damage all enemies for (2*attack) 		
 161	Dark Command	4	1	0	8	0	4	1	6	1	0	Heal all allies for (1*attack) 		
 161	Dark Command	4	1	0	8	1	12	0.25	6	0	0	Mod damage done of all allies by 25% for 1 rounds		
@@ -1642,7 +1624,7 @@ Ignored: ineffective Effect.Period"
 166	Leeching Bite	2	0	0	32	0	3	1	21	1	0	Damage random encounter for (1*attack) 	TRUE	
 166	Leeching Bite	2	0	0	32	1	4	0.5	1	1	0	Heal self for (0.5*attack) 	TRUE	
 167	Razor Shards	4	0	0	8	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-168	Howl from Beyond	4	2	0	32	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 2 rounds		
+168	Howl from Beyond	4	2	0	32	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
 169	Consuming Strike	5	3	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 		
 169	Consuming Strike	5	3	0	32	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds		To-do: test nore=true
 170	Stone Bash	4	1	0	8	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
@@ -1691,10 +1673,10 @@ Ignored: ineffective Effect.Period"
 200	Stunning Swipe	4	1	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
 200	Stunning Swipe	4	1	0	8	1	12	-0.5	15	0	1	Mod damage done of frontmost row of enemies by -50% for 1 rounds	TRUE	
 201	Monstrous Rage	4	0	0	8	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 	TRUE	
-202	Whirling Wall	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds		
+202	Whirling Wall	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	
 203	Bitting Winds	4	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
-204	Death Blast	5	2	0	32	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 		
-204	Death Blast	5	2	0	32	1	12	-0.5	3	0	2	Mod damage done of closest enemy by -50% for 2 rounds		
+204	Death Blast	5	2	0	32	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
+204	Death Blast	5	2	0	32	1	12	-0.5	3	0	2	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
 205	Bone Dust	3	0	0	8	0	4	0.75	14	1	0	Heal frontmost row of allies for (0.75*attack) 	TRUE	
 206	Abominable Kick	3	0	0	1	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
 207	Feral Lunge	2	0	0	1	0	3	0.3	13	1	0	Damage closest column of enemies for (0.3*attack) 	TRUE	Ignored: ineffective Effect.Target
@@ -1776,7 +1758,7 @@ Ignored: ineffective Effect.Period"
 271	Ambush	4	3	0	8	0	7	1	5	1	0	Damage (tick) furthest enemy for (1*attack) each subsequent round for 3 rounds	TRUE	
 272	Soulfrost Shard	3	0	0	8	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
 273	Ritual Curse	2	1	0	32	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds	#N/A	Unused
-274	Stomp Flesh	4	0	0	8	0	3	1.2	15	1	0	Damage frontmost row of enemies for (1.2*attack) 		
+274	Stomp Flesh	4	0	0	8	0	3	1.2	15	1	0	Damage frontmost row of enemies for (1.2*attack) 	TRUE	
 275	Necromantic Infusion	4	2	0	32	0	12	0.75	2	0	0	Mod damage done of closest ally by 75% for 2 rounds	TRUE	
 276	Rot Volley	3	3	0	32	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 	TRUE	
 276	Rot Volley	3	3	0	32	1	7	0.5	5	11	3	Damage (tick) furthest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	"To-do: test nore=true
@@ -1785,7 +1767,7 @@ Ignored: ineffective Effect.Period"
 278	Memory Displacement	3	2	0	64	0	14	0.5	5	0	0	Mod damage taken of furthest enemy by 50% for 2 rounds	TRUE	
 279	Painful Recollection	4	0	0	64	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
 280	Quills	6	0	0	1	0	3	2.5	15	1	0	Damage frontmost row of enemies for (2.5*attack) 	TRUE	
-281	Anima Spit	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 		
+281	Anima Spit	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
 282	Charged Javelin	5	0	1	1	0	3	10	3	1	0	Damage closest enemy for (10*attack) 	TRUE	
 283	Anima Claws	4	0	0	64	0	3	0.75	13	1	0	Damage closest column of enemies for (0.75*attack) 	TRUE	Ignored: ineffective Effect.Target
 284	Empyreal Reflexes	4	1	0	64	0	14	-0.5	22	0	0	Mod damage taken of all-other allies by -50% for 1 rounds	TRUE	
@@ -1807,7 +1789,7 @@ Ignored: ineffective Effect.Period"
 298	Anima Leech	4	0	0	32	0	3	1	21	1	0	Damage random encounter for (1*attack) 	TRUE	
 298	Anima Leech	4	0	0	32	1	4	0.3	1	1	0	Heal self for (0.3*attack) 	TRUE	
 299	Plague Blast	2	0	0	32	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 		
-300	Wave of Eternal Death	1	3	0	32	0	7	0.05	23	1	1	Damage (tick) all followers for (0.05*attack) each subsequent round for 3 rounds		To-do: test stacking ticks from the same spell behaviour
+300	Wave of Eternal Death	1	3	0	32	0	7	0.05	23	1	1	Damage (tick) all followers for (0.05*attack) each subsequent round for 3 rounds	TRUE	To-do: test stacking ticks from the same spell behaviour
 301	Bombardment of Dread	1	0	0	32	0	3	0.1	20	0	0	Damage random follower for 10% 	TRUE	
 302	Bramble Trap	1	1	0	8	0	3	0.2	7	1	2	Damage all enemies for (0.2*attack) 	TRUE	
 302	Bramble Trap	1	1	0	8	1	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 1 rounds	TRUE	
