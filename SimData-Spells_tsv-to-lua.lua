@@ -455,7 +455,7 @@ local vpData = {
 	},
 	[19]={type="nuke", damageATK=150, target=0},	-- Searing Bite: Damage closest enemy for (1.5*attack) [VERIFIED]
 	[20]={type="nuke", damageATK=70, target="enemy-back"},	-- Huck Stone: Damage backmost row of enemies for (0.7*attack) [UNVERFIED]
-	[21]={type="aura", healATK=25, target="all-allies", duration=5, noFirstTick=true},	-- Spirits of Rejuvenation: Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds [UNVERFIED]
+	[21]={type="aura", healATK=25, target="all-allies", duration=5, noFirstTick=true},	-- Spirits of Rejuvenation: Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds [VERIFIED]
 	[22]={
 		[1]={type="nuke", damageATK=90, target="cleave"},	-- Unrelenting Hunger: Damage closest enemies for (0.9*attack) [UNVERFIED]
 		[2]={type="aura", damageATK=10, target="cleave", duration=3, noFirstTick=true},	-- Unrelenting Hunger: Damage (tick) closest enemies for (0.1*attack) each subsequent round for 2 rounds [UNVERFIED]
@@ -501,8 +501,8 @@ local vpData = {
 		[2]={type="nuke", damageATK=25, target=0},	-- Double Stab: Damage closest enemy for (0.25*attack) [VERIFIED]
 	},
 	[45]={
-		[1]={type="nuke", damageATK=75, target=1},	-- Siphon Soul: Damage furthest enemy for (0.75*attack) [UNVERFIED]
-		[2]={type="heal", healATK=25, target=4},	-- Siphon Soul: Heal self for (0.25*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=75, target=1},	-- Siphon Soul: Damage furthest enemy for (0.75*attack) [VERIFIED]
+		[2]={type="heal", healATK=25, target=4},	-- Siphon Soul: Heal self for (0.25*attack) [VERIFIED]
 	},
 	[46]={
 		[1]={type="aura", modDamageTaken=-10, target=4, duration=1},	-- Shield of Tomorrow: Mod damage taken of self by -10% for 1 rounds [VERIFIED]
@@ -1433,7 +1433,7 @@ Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 18	Wings of Fury	4	0	0	32	2	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
 19	Searing Bite	4	0	0	4	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
 20	Huck Stone	1	0	0	1	0	3	0.7	17	1	0	Damage backmost row of enemies for (0.7*attack) 		
-21	Spirits of Rejuvenation	4	4	0	1	0	8	0.25	6	1	0	Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds		
+21	Spirits of Rejuvenation	4	4	0	1	0	8	0.25	6	1	0	Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds	TRUE	
 22	Unrelenting Hunger	3	2	0	32	0	3	0.9	9	1	0	Damage closest enemies for (0.9*attack) 		
 22	Unrelenting Hunger	3	2	0	32	1	7	0.1	9	1	0	Damage (tick) closest enemies for (0.1*attack) each subsequent round for 2 rounds		
 23	DNT JasonTest Taunt Spell	0	2	0	0	0	10	11	1	0	0	Detaunt self for 2 rounds	#N/A	"Unused
@@ -1465,8 +1465,8 @@ Ignored: ineffective Effect.Points"
 43	Leech Anima	1	0	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
 44	Double Stab	3	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
 44	Double Stab	3	0	0	1	1	3	0.25	3	1	0	Damage closest enemy for (0.25*attack) 	TRUE	
-45	Siphon Soul	2	0	0	64	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
-45	Siphon Soul	2	0	0	64	1	4	0.25	1	1	0	Heal self for (0.25*attack) 		
+45	Siphon Soul	2	0	0	64	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+45	Siphon Soul	2	0	0	64	1	4	0.25	1	1	0	Heal self for (0.25*attack) 	TRUE	
 46	Shield of Tomorrow	2	1	0	2	0	14	-0.1	1	0	0	Mod damage taken of self by -10% for 1 rounds	TRUE	
 46	Shield of Tomorrow	2	1	0	2	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds	TRUE	To-do: test target="*-hard" behaviour
 47	Protective Aura	0	0	0	32	0	14	-0.2	6	0	0	Mod damage taken of all allies by -20% indefinitely		
