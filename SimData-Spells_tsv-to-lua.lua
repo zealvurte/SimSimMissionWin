@@ -534,8 +534,8 @@ local vpData = {
 	[61]={type="nuke", damageATK=75, target=0},	-- Mandible Smash: Damage closest enemy for (0.75*attack) [VERIFIED]
 	[62]={type="nuke", damageATK=30, target="enemy-front"},	-- Gore: Damage frontmost row of enemies for (0.3*attack) [VERIFIED]
 	[63]={
-		[1]={type="nuke", damageATK=60, target="all-enemies"},	-- Sonic Shriek: Damage all enemies for (0.6*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=-20, target="all-enemies", duration=2},	-- Sonic Shriek: Mod damage done of all enemies by -20% for 2 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=60, target="all-enemies"},	-- Sonic Shriek: Damage all enemies for (0.6*attack) [VERIFIED]
+		[2]={type="aura", modDamageDealt=-20, target="all-enemies", duration=2},	-- Sonic Shriek: Mod damage done of all enemies by -20% for 2 rounds [VERIFIED]
 	},
 	[64]={type="nuke", damageATK=150, target="all-enemies"},	-- Massive Rumble: Damage all enemies for (1.5*attack) [VERIFIED]
 	[65]={type="nuke", damageATK=65, target=0},	-- Nagging Doubt: Damage closest enemy for (0.65*attack) [UNUSED]
@@ -635,8 +635,8 @@ local vpData = {
 	[115]={type="nuke", damageATK=70, target="cleave"},	-- Dynamic Fist: Damage closest enemies for (0.7*attack) [UNVERFIED]
 	[116]={type="nuke", damageATK=120, target=0},	-- Dreaming Charge: Damage closest enemy for (1.2*attack) [VERIFIED]
 	[117]={type="nuke", damageATK=40, target="enemy-front"},	-- Swift Slash: Damage frontmost row of enemies for (0.4*attack) [VERIFIED]
-	[118]={type="nuke", damageATK=200, target=1, firstTurn=4},	-- Mischievous Blast: Damage furthest enemy for (2*attack) [UNVERFIED]
-	[119]={type="nuke", damageATK=100, target="cone"},	-- Corrosive Thrust: Damage closest cone of enemies for (1*attack) [UNVERFIED]
+	[118]={type="nuke", damageATK=200, target=1, firstTurn=4},	-- Mischievous Blast: Damage furthest enemy for (2*attack) [VERIFIED]
+	[119]={type="nuke", damageATK=100, target="cone"},	-- Corrosive Thrust: Damage closest cone of enemies for (1*attack) [VERIFIED]
 	[120]={type="aura", modDamageDealt=50, target="random-enemy", duration=2},	-- Goading Motivation: Mod damage done of random follower by 50% for 2 rounds [VERIFIED]
 	[121]={type="aura", modDamageDealt=-50, target="all-enemies", duration=1},	-- Mesmeric Dust: Mod damage done of all enemies by -50% for 1 rounds [VERIFIED]
 	[122]={type="aura", damageATK=30, target="random-enemy", duration=1, period=3, noFirstTick=true},	-- Humorous Flame: Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Spell.Duration and Effect.Period
@@ -711,8 +711,8 @@ local vpData = {
 	[167]={type="nuke", damageATK=150, target=1},	-- Razor Shards: Damage furthest enemy for (1.5*attack) [VERIFIED]
 	[168]={type="aura", modDamageDealt=-50, target=0, duration=2},	-- Howl from Beyond: Mod damage done of closest enemy by -50% for 2 rounds [VERIFIED]
 	[169]={
-		[1]={type="nuke", damageATK=65, target=0},	-- Consuming Strike: Damage closest enemy for (0.65*attack) [UNVERFIED]
-		[2]={type="aura", damageATK=50, target=0, duration=4, period=3, nore=true},	-- Consuming Strike: Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds [UNVERFIED] To-do: test nore=true
+		[1]={type="nuke", damageATK=65, target=0},	-- Consuming Strike: Damage closest enemy for (0.65*attack) [VERIFIED]
+		[2]={type="aura", damageATK=50, target=0, duration=4, period=3, nore=true},	-- Consuming Strike: Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds [VERIFIED] To-do: test nore=true
 	},
 	[170]={type="nuke", damageATK=60, target="enemy-front"},	-- Stone Bash: Damage frontmost row of enemies for (0.6*attack) [VERIFIED]
 	[171]={type="nuke", damageATK=100, target=1},	-- Pitched Boulder: Damage furthest enemy for (1*attack) [VERIFIED]
@@ -742,7 +742,7 @@ local vpData = {
 	[183]={type="nuke", damageATK=50, target="enemy-front"},	-- Shadow Swipe: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
 	[184]={type="nuke", damageATK=75, target="cone"},	-- Anima Lash: Damage closest cone of enemies for (0.75*attack) [VERIFIED]
 	[185]={type="nuke", damageATK=100, target="all-enemies"},	-- Temper Tantrum: Damage all enemies for (1*attack) [UNVERFIED]
-	[186]={type="nuke", damageATK=200, target="enemy-front", firstTurn=5},	-- Feral Rage: Damage frontmost row of enemies for (2*attack) [UNVERFIED]
+	[186]={type="nuke", damageATK=200, target="enemy-front", firstTurn=5},	-- Feral Rage: Damage frontmost row of enemies for (2*attack) [VERIFIED]
 	[187]={type="aura", damageATK=50, target="all-enemies", duration=3, period=2, nore=true},	-- Toxic Miasma: Damage (tick) all enemies for (0.5*attack) immediately and each subsequent 2nd round for 2 rounds [UNVERFIED]
 	[188]={
 		[1]={type="nuke", damageATK=50, target=0},	-- Angry Smash: Damage closest enemy for (0.5*attack) [UNVERFIED]
@@ -800,7 +800,7 @@ local vpData = {
 	[214]={type="nuke", damageATK=100, target="cone"},	-- Necrotic Lash: Damage closest cone of enemies for (1*attack) [VERIFIED]
 	[215]={type="nuke", damageATK=300, target=0},	-- Slime Fist: Damage closest enemy for (3*attack) [VERIFIED]
 	[216]={type="shroud", target=4, duration=2},	-- Threatening Hiss: Detaunt self for 2 rounds [VERIFIED]
-	[217]={type="nuke", damageATK=200, target="enemy-back"},	-- Massacre: Damage backmost row of enemies for (2*attack) [UNVERFIED]
+	[217]={type="nuke", damageATK=200, target="enemy-back"},	-- Massacre: Damage backmost row of enemies for (2*attack) [VERIFIED]
 	[218]={type="aura", modDamageTaken=-50, target=4, duration=2},	-- Ritual of Bone: Mod damage taken of self by -50% for 2 rounds [UNVERFIED]
 	[219]={
 		[1]={type="heal", healATK=200, target=3},	-- Necrotic Healing: Heal closest ally for (2*attack) [UNVERFIED]
@@ -819,7 +819,7 @@ local vpData = {
 	[227]={type="nuke", damagePerc=30, target="random-enemy"},	-- Bombardment of Dread: Damage random follower for 30% [VERIFIED]
 	[228]={type="nuke", damageATK=1000, cATKa=500, cATKb=2, target="all-enemies", firstTurn=10},	-- Destruction: Damage all followers for (10*attack) [VERIFIED]
 	[229]={type="aura", modDamageTaken=-50, target="random-ally", duration=2},	-- Mawsworn Ritual: Mod damage taken of random encounter by -50% for 2 rounds [VERIFIED]
-	[230]={type="heal", healATK=50, cATKa=50, cATKb=2, target="all-allies"},	-- Faith in Domination: Heal all encounters for (0.5*attack) [UNVERFIED]
+	[230]={type="heal", healATK=50, cATKa=50, cATKb=2, target="all-allies"},	-- Faith in Domination: Heal all encounters for (0.5*attack) [VERIFIED]
 	[231]={type="aura", modDamageTaken=100, target="random-enemy", duration=2},	-- Mawsworn Strength: Mod damage taken of random follower by 100% for 2 rounds [VERIFIED]
 	[232]={type="aura", modDamageDealt=-50, target="random-enemy", duration=3},	-- Aura of Death: Mod damage done of random follower by -50% for 3 rounds [VERIFIED]
 	[233]={type="nuke", damageATK=150, target=0},	-- Teeth of the Maw: Damage closest enemy for (1.5*attack) [VERIFIED]
@@ -831,16 +831,16 @@ local vpData = {
 	[239]={type="nuke", damageATK=50, target="enemy-back"},	-- Beam of Doom: Damage backmost row of enemies for (0.5*attack) [VERIFIED]
 	[240]={type="nuke", damageATK=25, target=0},	-- Spear of Dread: Damage closest column of enemies for (0.25*attack) [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target
 	[241]={
-		[1]={type="nuke", damageATK=75, target=1},	-- Pain Spike: Damage furthest enemy for (0.75*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=-50, target=1, duration=2},	-- Pain Spike: Mod damage done of furthest enemy by -50% for 2 rounds [UNVERFIED]
+		[1]={type="nuke", damageATK=75, target=1},	-- Pain Spike: Damage furthest enemy for (0.75*attack) [VERIFIED]
+		[2]={type="aura", modDamageDealt=-50, target=1, duration=2},	-- Pain Spike: Mod damage done of furthest enemy by -50% for 2 rounds [VERIFIED]
 	},
 	[242]={
-		[1]={type="heal", healATK=50, target=3},	-- Dark Healing: Heal closest ally for (0.5*attack) [UNVERFIED]
-		[2]={type="aura", modDamageTaken=75, target=3, duration=2},	-- Dark Healing: Mod damage taken of closest ally by 75% for 2 rounds [UNVERFIED]
+		[1]={type="heal", healATK=50, target=3},	-- Dark Healing: Heal closest ally for (0.5*attack) [VERIFIED]
+		[2]={type="aura", modDamageTaken=75, target=3, duration=2},	-- Dark Healing: Mod damage taken of closest ally by 75% for 2 rounds [VERIFIED]
 	},
 	[243]={
-		[1]={type="taunt", target="all-enemies", duration=2},	-- Baleful Stare: Taunt all enemies for 2 rounds [UNVERFIED]
-		[2]={type="aura", modDamageTaken=-50, target=4, duration=2},	-- Baleful Stare: Mod damage taken of self by -50% for 2 rounds [UNVERFIED]
+		[1]={type="taunt", target="all-enemies", duration=2},	-- Baleful Stare: Taunt all enemies for 2 rounds [VERIFIED]
+		[2]={type="aura", modDamageTaken=-50, target=4, duration=2},	-- Baleful Stare: Mod damage taken of self by -50% for 2 rounds [VERIFIED]
 	},
 	[244]={firstTurn=2,
 		[1]={type="aura", plusDamageDealtATK=200, target=4, duration=2},	-- Meatball Mad!: Mod damage done of self by (2*attack) for 2 rounds [VERIFIED]
@@ -878,9 +878,9 @@ local vpData = {
 	},
 	[259]={type="aura", damageATK=30, target=0, duration=4, period=3, noFirstTick=true},	-- Anima Flame: Damage (tick) closest enemy for (0.3*attack) each subsequent 3rd round for 3 rounds [VERIFIED]
 	[260]={type="nuke", damageATK=150, target=1},	-- Anima Burst: Damage furthest enemy for (1.5*attack) [VERIFIED]
-	[261]={type="aura", modDamageDealt=50, target=3, duration=2},	-- Surgical Advances: Mod damage done of closest ally by 50% for 2 rounds [UNVERFIED]
-	[262]={type="nuke", damageATK=100, target="enemy-front"},	-- Putrid Stomp: Damage frontmost row of enemies for (1*attack) [UNVERFIED]
-	[263]={type="nuke", damageATK=100, target="cone"},	-- Acidic Vomit: Damage closest cone of enemies for (1*attack) [UNVERFIED]
+	[261]={type="aura", modDamageDealt=50, target=3, duration=2},	-- Surgical Advances: Mod damage done of closest ally by 50% for 2 rounds [VERIFIED]
+	[262]={type="nuke", damageATK=100, target="enemy-front"},	-- Putrid Stomp: Damage frontmost row of enemies for (1*attack) [VERIFIED]
+	[263]={type="nuke", damageATK=100, target="cone"},	-- Acidic Vomit: Damage closest cone of enemies for (1*attack) [VERIFIED]
 	[264]={type="nuke", damageATK=300, target=1},	-- Meat Hook: Damage furthest enemy for (3*attack) [VERIFIED]
 	[265]={type="nuke", damageATK=100, target=0},	-- Toxic Claws: Damage closest column of enemies for (1*attack) [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target
 	[266]={type="nuke", damageATK=1000, target=0},	-- Colossal Strike: Damage closest enemy for (10*attack) [VERIFIED]
@@ -910,8 +910,8 @@ local vpData = {
 	[287]={type="aura", modDamageTaken=-50, target=4, duration=1},	-- Elusive Duelist: Mod damage taken of self by -50% for 1 rounds [VERIFIED]
 	[288]={type="nuke", damageATK=60, target="enemy-back"},	-- Stone Swipe: Damage backmost row of enemies for (0.6*attack) [VERIFIED]
 	[289]={type="aura", damageATK=100, target=1, duration=4, period=3, nore=true},	-- Toxic Bolt: Damage (tick) furthest enemy for (1*attack) immediately and each subsequent 3rd round for 3 rounds [VERIFIED]
-	[290]={type="nuke", damageATK=150, target=1},	-- Ashen Bolt: Damage furthest enemy for (1.5*attack) [UNVERFIED]
-	[291]={type="nuke", damageATK=100, target="enemy-front"},	-- Ashen Blast: Damage frontmost row of enemies for (1*attack) [UNVERFIED]
+	[290]={type="nuke", damageATK=150, target=1},	-- Ashen Bolt: Damage furthest enemy for (1.5*attack) [VERIFIED]
+	[291]={type="nuke", damageATK=100, target="enemy-front"},	-- Ashen Blast: Damage frontmost row of enemies for (1*attack) [VERIFIED]
 	[292]={
 		[1]={type="aura", modDamageTaken=50, target=0, duration=2},	-- Master's Surprise: Mod damage taken of closest enemy by 50% for 2 rounds [VERIFIED]
 		[2]={type="nuke", damageATK=75, target=0},	-- Master's Surprise: Damage closest enemy for (0.75*attack) [VERIFIED]
@@ -1490,8 +1490,8 @@ Ignored: ineffective Effect.Period"
 60	Acid Spit	2	0	0	8	0	3	0.4	5	1	0	Damage furthest enemy for (0.4*attack) 	TRUE	
 61	Mandible Smash	4	0	0	8	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
 62	Gore	3	0	0	8	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
-63	Sonic Shriek	5	2	0	8	0	3	0.6	7	1	0	Damage all enemies for (0.6*attack) 		
-63	Sonic Shriek	5	2	0	8	1	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds		
+63	Sonic Shriek	5	2	0	8	0	3	0.6	7	1	0	Damage all enemies for (0.6*attack) 	TRUE	
+63	Sonic Shriek	5	2	0	8	1	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
 64	Massive Rumble	2	0	0	8	0	3	1.5	7	1	0	Damage all enemies for (1.5*attack) 	TRUE	
 65	Nagging Doubt	2	0	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	#N/A	Unused
 66	Goliath Slam	1	0	0	32	0	3	1.5	13	1	0	Damage closest column of enemies for (1.5*attack) 	TRUE	Ignored: ineffective Effect.Target
@@ -1565,8 +1565,8 @@ Ignored: ineffective Effect.Target"
 115	Dynamic Fist	2	0	0	32	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 		
 116	Dreaming Charge	3	0	0	8	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
 117	Swift Slash	2	0	0	8	0	3	0.4	15	1	0	Damage frontmost row of enemies for (0.4*attack) 	TRUE	
-118	Mischievous Blast	4	0	1	8	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 		
-119	Corrosive Thrust	2	0	0	8	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 		
+118	Mischievous Blast	4	0	1	8	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 	TRUE	
+119	Corrosive Thrust	2	0	0	8	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
 120	Goading Motivation	2	2	0	8	0	12	0.5	20	1	0	Mod damage done of random follower by 50% for 2 rounds	TRUE	
 121	Mesmeric Dust	3	1	0	64	0	12	-0.5	7	1	0	Mod damage done of all enemies by -50% for 1 rounds	TRUE	
 122	Humorous Flame	2	0	0	4	0	7	0.3	21	1	3	Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds	TRUE	Ignored: ineffective Spell.Duration and Effect.Period
@@ -1625,8 +1625,8 @@ Ignored: ineffective Effect.Period"
 166	Leeching Bite	2	0	0	32	1	4	0.5	1	1	0	Heal self for (0.5*attack) 	TRUE	
 167	Razor Shards	4	0	0	8	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
 168	Howl from Beyond	4	2	0	32	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
-169	Consuming Strike	5	3	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 		
-169	Consuming Strike	5	3	0	32	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds		To-do: test nore=true
+169	Consuming Strike	5	3	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	TRUE	
+169	Consuming Strike	5	3	0	32	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	To-do: test nore=true
 170	Stone Bash	4	1	0	8	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
 171	Pitched Boulder	3	1	0	8	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
 172	Viscous Slash	3	1	1	32	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 	TRUE	
@@ -1647,7 +1647,7 @@ Ignored: ineffective Effect.Period"
 183	Shadow Swipe	3	0	0	32	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
 184	Anima Lash	4	0	0	32	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
 185	Temper Tantrum	4	0	0	32	0	3	1	7	1	0	Damage all enemies for (1*attack) 		
-186	Feral Rage	5	0	1	32	0	3	2	15	1	0	Damage frontmost row of enemies for (2*attack) 		
+186	Feral Rage	5	0	1	32	0	3	2	15	1	0	Damage frontmost row of enemies for (2*attack) 	TRUE	
 187	Toxic Miasma	5	2	0	32	0	7	0.5	7	11	2	Damage (tick) all enemies for (0.5*attack) immediately and each subsequent 2nd round for 2 rounds		
 188	Angry Smash	3	1	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 		
 188	Angry Smash	3	1	0	1	1	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds		
@@ -1689,7 +1689,7 @@ Ignored: ineffective Effect.Period"
 214	Necrotic Lash	2	0	0	32	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
 215	Slime Fist	5	0	0	8	0	3	3	3	1	0	Damage closest enemy for (3*attack) 	TRUE	
 216	Threatening Hiss	5	2	0	32	0	10	3	1	1	0	Detaunt self for 2 rounds	TRUE	
-217	Massacre	4	0	0	32	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 		
+217	Massacre	4	0	0	32	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 	TRUE	
 218	Ritual of Bone	5	2	0	32	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds		
 219	Necrotic Healing	6	2	0	32	0	4	2	2	1	0	Heal closest ally for (2*attack) 		
 219	Necrotic Healing	6	2	0	32	1	14	-0.5	2	0	0	Mod damage taken of closest ally by -50% for 2 rounds		
@@ -1704,7 +1704,7 @@ Ignored: ineffective Effect.Period"
 227	Bombardment of Dread	1	0	0	32	0	3	0.3	20	0	0	Damage random follower for 30% 	TRUE	
 228	Destruction	10	0	1	32	0	3	10	23	1	0	Damage all followers for (10*attack) 	TRUE	
 229	Mawsworn Ritual	4	2	0	32	0	14	-0.5	21	0	0	Mod damage taken of random encounter by -50% for 2 rounds	TRUE	
-230	Faith in Domination	3	1	0	32	0	4	0.5	24	1	0	Heal all encounters for (0.5*attack) 		
+230	Faith in Domination	3	1	0	32	0	4	0.5	24	1	0	Heal all encounters for (0.5*attack) 	TRUE	
 231	Mawsworn Strength	4	2	0	32	0	14	1	20	0	0	Mod damage taken of random follower by 100% for 2 rounds	TRUE	
 232	Aura of Death	4	3	0	32	0	12	-0.5	20	0	3	Mod damage done of random follower by -50% for 3 rounds	TRUE	
 233	Teeth of the Maw	3	0	0	32	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
@@ -1715,12 +1715,12 @@ Ignored: ineffective Effect.Period"
 238	Death Shield	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	Ignored: ineffective Effect.Points and Effect.Flags
 239	Beam of Doom	5	0	0	32	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
 240	Spear of Dread	3	0	0	32	0	3	0.25	13	1	0	Damage closest column of enemies for (0.25*attack) 	TRUE	Ignored: ineffective Effect.Target
-241	Pain Spike	4	2	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
-241	Pain Spike	4	2	0	32	1	12	-0.5	5	0	0	Mod damage done of furthest enemy by -50% for 2 rounds		
-242	Dark Healing	4	2	0	32	0	4	0.5	2	1	0	Heal closest ally for (0.5*attack) 		
-242	Dark Healing	4	2	0	32	1	14	0.75	2	0	0	Mod damage taken of closest ally by 75% for 2 rounds		
-243	Baleful Stare	5	2	0	32	0	9	0	7	1	0	Taunt all enemies for 2 rounds		
-243	Baleful Stare	5	2	0	32	1	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds		
+241	Pain Spike	4	2	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+241	Pain Spike	4	2	0	32	1	12	-0.5	5	0	0	Mod damage done of furthest enemy by -50% for 2 rounds	TRUE	
+242	Dark Healing	4	2	0	32	0	4	0.5	2	1	0	Heal closest ally for (0.5*attack) 	TRUE	
+242	Dark Healing	4	2	0	32	1	14	0.75	2	0	0	Mod damage taken of closest ally by 75% for 2 rounds	TRUE	
+243	Baleful Stare	5	2	0	32	0	9	0	7	1	0	Taunt all enemies for 2 rounds	TRUE	
+243	Baleful Stare	5	2	0	32	1	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	0	19	2	1	1	0	Mod damage done of self by (2*attack) for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	1	20	0.3	1	1	0	Mod damage taken of self by (0.3*attack) for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	2	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
@@ -1745,9 +1745,9 @@ Ignored: ineffective Effect.Period"
 258	Dark Gouge	5	3	0	32	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	To-do: test nore=true
 259	Anima Flame	2	3	0	64	0	7	0.3	3	1	3	Damage (tick) closest enemy for (0.3*attack) each subsequent 3rd round for 3 rounds	TRUE	
 260	Anima Burst	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
-261	Surgical Advances	4	2	0	32	0	12	0.5	2	0	0	Mod damage done of closest ally by 50% for 2 rounds		
-262	Putrid Stomp	3	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 		
-263	Acidic Vomit	4	0	0	8	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 		
+261	Surgical Advances	4	2	0	32	0	12	0.5	2	0	0	Mod damage done of closest ally by 50% for 2 rounds	TRUE	
+262	Putrid Stomp	3	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
+263	Acidic Vomit	4	0	0	8	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
 264	Meat Hook	4	0	0	1	0	3	3	5	1	0	Damage furthest enemy for (3*attack) 	TRUE	
 265	Toxic Claws	4	0	0	8	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	Ignored: ineffective Effect.Target
 266	Colossal Strike	3	0	0	1	0	3	10	3	1	0	Damage closest enemy for (10*attack) 	TRUE	
@@ -1776,8 +1776,8 @@ Ignored: ineffective Effect.Period"
 287	Elusive Duelist	3	1	0	1	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 1 rounds	TRUE	
 288	Stone Swipe	4	0	0	1	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 	TRUE	
 289	Toxic Bolt	2	3	0	32	0	7	1	5	11	3	Damage (tick) furthest enemy for (1*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	
-290	Ashen Bolt	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 		
-291	Ashen Blast	3	0	0	64	0	3	1	15	1	3	Damage frontmost row of enemies for (1*attack) 		
+290	Ashen Bolt	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
+291	Ashen Blast	3	0	0	64	0	3	1	15	1	3	Damage frontmost row of enemies for (1*attack) 	TRUE	
 292	Master's Surprise	2	2	0	1	0	14	0.5	3	0	0	Mod damage taken of closest enemy by 50% for 2 rounds	TRUE	
 292	Master's Surprise	2	2	0	1	1	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
 293	Stone Crush	3	0	0	1	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	#N/A	Unused
