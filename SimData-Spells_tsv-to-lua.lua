@@ -643,8 +643,8 @@ local vpData = {
 	[123]={type="heal", healATK=30, target="friend-front-soft"},	-- Healing Winds: Heal frontmost row of allies for (0.3*attack) [VERIFIED]
 	[124]={type="nuke", damageATK=60, target="cleave"},	-- Kick: Damage closest enemies for (0.6*attack) [VERIFIED]
 	[125]={
-		[1]={type="nuke", damageATK=60, target="random-enemy"},	-- Deranged Gouge: Damage random follower for (0.6*attack) [VERIFIED]
-		[2]={type="nop"},
+		[1]={type="nuke", damageATK=60, target="random-enemy"},	-- Deranged Gouge: Damage random follower for (0.6*attack) [UNVERFIED]
+		[2]={type="aura", modDamageDealt=-50, target="random-enemy", duration=1},	-- Deranged Gouge: Mod damage done of random follower by -50% for 1 rounds [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.Target and Effect.Period
 	},
 	[126]={type="heal", healATK=20, target="friend-front-soft"},	-- Possessive Healing: Heal frontmost row of allies for (0.2*attack) [VERIFIED]
 	[127]={type="nuke", damageATK=60, target="enemy-front"},	-- Nibble: Damage frontmost row of enemies for (0.6*attack) [VERIFIED]
@@ -949,7 +949,7 @@ local vpData = {
 	},
 	[310]={
 		[1]={type="nuke", damageATK=140, target=0},	-- Axe of Determination: Damage closest enemy for (1.4*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=20, target=4, duration=1},	-- Axe of Determination: Mod damage done of self by 20% for 1 rounds [UNVERFIED]
+		[2]={type="aura", modDamageDealt=20, target=4, duration=2},	-- Axe of Determination: Mod damage done of self by 20% for 2 rounds [UNVERFIED]
 	},
 	[311]={
 		[1]={type="heal", healATK=120, target=3},	-- Wings of Mending: Heal closest ally for (1.2*attack) [UNVERFIED]
@@ -1033,6 +1033,7 @@ local vpData = {
 		[2]={type="aura", plusDamageTakenATK=20, target=1, duration=3},	-- Tainted Bite: Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds [VERIFIED]
 	},
 	[349]={type="nuke", damageATK=10, target="all-enemies"},	-- Anima Swell: Damage all enemies for (0.1*attack) [VERIFIED]
+	[356]={type="nuke", damageATK=100, target=1},	-- Bone Ambush: Damage furthest enemy for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Target
 }
 local function checkForMultiKeys(e,nk)
 	for k in pairs(e) do
@@ -1411,93 +1412,93 @@ Ignored: ineffective Effect.Period"
 4	Double Strike	3	0	0	1	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 		
 4	Double Strike	3	0	0	1	1	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 		
 5	Wing Sweep	1	0	0	1	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 		
-6	Blood Explosion	2	0	0	32	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
-7	Skeleton Smash	2	1	0	32	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
-8	Hawk Punch	1	0	0	8	0	1	10	3	1	0	Damage closest enemy for (1*attack) 	#N/A	"Unused
+6	Blood Explosion	2	0	0	100000	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
+7	Skeleton Smash	2	1	0	100000	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
+8	Hawk Punch	1	0	0	1000	0	1	10	3	1	0	Damage closest enemy for (1*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type, or ineffective Effect.Points"
-9	Healing Howl	4	0	0	64	0	4	0.05	6	0	0	Heal all allies for 5% 	TRUE	
-10	Starbranch Crush	3	3	0	16	0	3	0.2	3	0	0	Damage closest enemy for 20% 	TRUE	
-10	Starbranch Crush	3	3	0	16	1	7	0.03	7	0	0	Damage (tick) all enemies for 3% each subsequent round for 3 rounds	TRUE	To-do: test dne=true behaviour
-10	Starbranch Crush	3	3	0	16	2	8	0.01	1	0	0	Heal (tick) self for 1% each subsequent round for 3 rounds	TRUE	
+9	Healing Howl	4	0	0	1000000	0	4	0.05	6	0	0	Heal all allies for 5% 	TRUE	
+10	Starbranch Crush	3	3	0	10000	0	3	0.2	3	0	0	Damage closest enemy for 20% 	TRUE	
+10	Starbranch Crush	3	3	0	10000	1	7	0.03	7	0	0	Damage (tick) all enemies for 3% each subsequent round for 3 rounds	TRUE	To-do: test dne=true behaviour
+10	Starbranch Crush	3	3	0	10000	2	8	0.01	1	0	0	Heal (tick) self for 1% each subsequent round for 3 rounds	TRUE	
 11	Auto Attack	0	0	0	1	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
-12	Bone Reconstruction	1	1	0	32	0	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
-13	Gentle Caress	0	0	0	8	0	2	10	2	0	0	Heal closest ally for 10 	#N/A	Unused
-14	Spirit's Caress	3	0	0	32	0	4	0.1	6	1	0	Heal all allies for (0.1*attack) 	#N/A	Unused
+12	Bone Reconstruction	1	1	0	100000	0	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
+13	Gentle Caress	0	0	0	1000	0	2	10	2	0	0	Heal closest ally for 10 	#N/A	Unused
+14	Spirit's Caress	3	0	0	100000	0	4	0.1	6	1	0	Heal all allies for (0.1*attack) 	#N/A	Unused
 15	Auto Attack	0	0	0	1	0	1	0.5	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
-16	Soulshatter	1	0	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
-17	Gravedirt Special	0	0	0	16	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
-17	Gravedirt Special	0	0	0	16	1	2	100	1	1	0	Heal self for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
-17	Gravedirt Special	0	0	0	16	2	0	0	7	1	0	Do nothing to all enemies for (0*attack) 	TRUE	Ignored: incorrect Effect
-18	Wings of Fury	4	0	0	32	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
-18	Wings of Fury	4	0	0	32	1	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
-18	Wings of Fury	4	0	0	32	2	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
-19	Searing Bite	4	0	0	4	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
+16	Soulshatter	1	0	0	100000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
+17	Gravedirt Special	0	0	0	10000	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
+17	Gravedirt Special	0	0	0	10000	1	2	100	1	1	0	Heal self for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
+17	Gravedirt Special	0	0	0	10000	2	0	0	7	1	0	Do nothing to all enemies for (0*attack) 	TRUE	Ignored: incorrect Effect
+18	Wings of Fury	4	0	0	100000	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
+18	Wings of Fury	4	0	0	100000	1	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
+18	Wings of Fury	4	0	0	100000	2	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 		
+19	Searing Bite	4	0	0	100	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
 20	Huck Stone	1	0	0	1	0	3	0.7	17	1	0	Damage backmost row of enemies for (0.7*attack) 		
 21	Spirits of Rejuvenation	4	4	0	1	0	8	0.25	6	1	0	Heal (tick) all allies for (0.25*attack) each subsequent round for 4 rounds	TRUE	
-22	Unrelenting Hunger	3	2	0	32	0	3	0.9	9	1	0	Damage closest enemies for (0.9*attack) 		
-22	Unrelenting Hunger	3	2	0	32	1	7	0.1	9	1	0	Damage (tick) closest enemies for (0.1*attack) each subsequent round for 2 rounds		
+22	Unrelenting Hunger	3	2	0	100000	0	3	0.9	9	1	0	Damage closest enemies for (0.9*attack) 		
+22	Unrelenting Hunger	3	2	0	100000	1	7	0.1	9	1	0	Damage (tick) closest enemies for (0.1*attack) each subsequent round for 2 rounds		
 23	DNT JasonTest Taunt Spell	0	2	0	0	0	10	11	1	0	0	Detaunt self for 2 rounds	#N/A	"Unused
 Ignored: ineffective Effect.Points"
 23	DNT JasonTest Taunt Spell	0	2	0	0	1	7	0.1	11	0	0	Damage (tick) closest cone of enemies for 10% each subsequent round for 2 rounds	#N/A	Unused
-24	Shining Spear	2	0	0	2	0	3	1.8	5	1	0	Damage furthest enemy for (1.8*attack) 	TRUE	
-24	Shining Spear	2	0	0	2	1	4	0.2	2	1	0	Heal closest ally for (0.2*attack) 	TRUE	
-25	Whirling Fists	2	3	0	2	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
-25	Whirling Fists	2	3	0	2	1	12	0.2	1	1	0	Mod damage done of self by 20% for 3 rounds	TRUE	
-26	Physiker's Potion	3	2	0	8	0	4	1	2	1	0	Heal closest ally for (1*attack) 	TRUE	
-26	Physiker's Potion	3	2	0	8	1	18	0.2	2	1	0	Mod max health of closest ally by (0.2*attack) for 2 rounds	TRUE	
+24	Shining Spear	2	0	0	10	0	3	1.8	5	1	0	Damage furthest enemy for (1.8*attack) 	TRUE	
+24	Shining Spear	2	0	0	10	1	4	0.2	2	1	0	Heal closest ally for (0.2*attack) 	TRUE	
+25	Whirling Fists	2	3	0	10	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+25	Whirling Fists	2	3	0	10	1	12	0.2	1	1	0	Mod damage done of self by 20% for 3 rounds	TRUE	
+26	Physiker's Potion	3	2	0	1000	0	4	1	2	1	0	Heal closest ally for (1*attack) 	TRUE	
+26	Physiker's Potion	3	2	0	1000	1	18	0.2	2	1	0	Mod max health of closest ally by (0.2*attack) for 2 rounds	TRUE	
 27	XX - Test - Physical	0	0	0	1	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
-28	XX - Test - Melee - Holy	0	0	0	2	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
-29	XX - Test - Melee - Fire	0	0	0	4	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
-30	XX - Test - Melee - Nature	0	0	0	8	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
-31	XX - Test - Melee - Frost	0	0	0	16	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
-32	XX - Test - Melee - Shadow	0	0	0	32	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
-33	XX - Test - Melee - Arcane	0	0	0	64	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
+28	XX - Test - Melee - Holy	0	0	0	10	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
+29	XX - Test - Melee - Fire	0	0	0	100	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
+30	XX - Test - Melee - Nature	0	0	0	1000	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
+31	XX - Test - Melee - Frost	0	0	0	10000	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
+32	XX - Test - Melee - Shadow	0	0	0	100000	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
+33	XX - Test - Melee - Arcane	0	0	0	1000000	0	1	1	3	1	0	Damage closest enemy for (1*attack) 	#N/A	Unused
 34	XX - Test - Ranged - Physical	0	0	0	1	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
-35	XX - Test - Ranged - Holy	0	0	0	2	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
-36	XX - Test - Ranged - Fire	0	0	0	4	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
-37	XX - Test - Ranged - Nature	0	0	0	8	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
-38	XX - Test - Ranged - Frost	0	0	0	16	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
-39	XX - Test - Ranged - Shadow	0	0	0	32	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
-40	XX - Test - Ranged - Arcane	0	0	0	64	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
+35	XX - Test - Ranged - Holy	0	0	0	10	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
+36	XX - Test - Ranged - Fire	0	0	0	100	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
+37	XX - Test - Ranged - Nature	0	0	0	1000	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
+38	XX - Test - Ranged - Frost	0	0	0	10000	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
+39	XX - Test - Ranged - Shadow	0	0	0	100000	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
+40	XX - Test - Ranged - Arcane	0	0	0	1000000	0	1	1	7	1	0	Damage all enemies for (1*attack) 	#N/A	Unused
 41	Bag Smash	3	0	0	1	0	7	0.25	9	1	0	Damage (tick) closest enemies for (0.25*attack) each subsequent round for 0 rounds	#N/A	Unused
 42	JasonTest Passive	0	0	0	0	0	16	0.1	1	0	0	Damage attacker of self for 10% indefinitely	#N/A	Unused
-43	Leech Anima	1	0	0	32	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 	TRUE	
-43	Leech Anima	1	0	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
+43	Leech Anima	1	0	0	100000	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 	TRUE	
+43	Leech Anima	1	0	0	100000	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
 44	Double Stab	3	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
 44	Double Stab	3	0	0	1	1	3	0.25	3	1	0	Damage closest enemy for (0.25*attack) 	TRUE	
-45	Siphon Soul	2	0	0	64	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
-45	Siphon Soul	2	0	0	64	1	4	0.25	1	1	0	Heal self for (0.25*attack) 	TRUE	
-46	Shield of Tomorrow	2	1	0	2	0	14	-0.1	1	0	0	Mod damage taken of self by -10% for 1 rounds	TRUE	
-46	Shield of Tomorrow	2	1	0	2	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds	TRUE	To-do: test target="*-hard" behaviour
-47	Protective Aura	0	0	0	32	0	14	-0.2	6	0	0	Mod damage taken of all allies by -20% indefinitely		
-48	Shadow Walk	4	1	0	32	0	10	0	1	1	0	Detaunt self for 1 rounds		
-48	Shadow Walk	4	1	0	32	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
-49	Exsanguination	4	4	0	32	0	14	0.33	17	0	0	Mod damage taken of backmost row of enemies by 33% for 4 rounds		
+45	Siphon Soul	2	0	0	1000000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+45	Siphon Soul	2	0	0	1000000	1	4	0.25	1	1	0	Heal self for (0.25*attack) 	TRUE	
+46	Shield of Tomorrow	2	1	0	10	0	14	-0.1	1	0	0	Mod damage taken of self by -10% for 1 rounds	TRUE	
+46	Shield of Tomorrow	2	1	0	10	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds	TRUE	To-do: test target="*-hard" behaviour
+47	Protective Aura	0	0	0	100000	0	14	-0.2	6	0	0	Mod damage taken of all allies by -20% indefinitely		
+48	Shadow Walk	4	1	0	100000	0	10	0	1	1	0	Detaunt self for 1 rounds		
+48	Shadow Walk	4	1	0	100000	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
+49	Exsanguination	4	4	0	100000	0	14	0.33	17	0	0	Mod damage taken of backmost row of enemies by 33% for 4 rounds		
 50	Halberd Strike	3	0	0	1	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
-51	Bonestorm	5	0	0	32	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 		
-52	Plague Song	5	4	0	8	0	3	0.3	17	1	0	Damage backmost row of enemies for (0.3*attack) 	#N/A	"Unused
+51	Bonestorm	5	0	0	100000	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 		
+52	Plague Song	5	4	0	1000	0	3	0.3	17	1	0	Damage backmost row of enemies for (0.3*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type"
-53	Bramble Trap	6	6	0	8	0	7	0.1	7	1	2	Damage (tick) all enemies for (0.1*attack) each subsequent 2nd round for 6 rounds	#N/A	Unused
-53	Bramble Trap	6	6	0	8	1	12	-0.2	7	1	2	Mod damage done of all enemies by -20% for 6 rounds	#N/A	"Unused
+53	Bramble Trap	6	6	0	1000	0	7	0.1	7	1	2	Damage (tick) all enemies for (0.1*attack) each subsequent 2nd round for 6 rounds	#N/A	Unused
+53	Bramble Trap	6	6	0	1000	1	12	-0.2	7	1	2	Mod damage done of all enemies by -20% for 6 rounds	#N/A	"Unused
 Ignored: ineffective Effect.Period"
-54	Slicing Shadows	3	0	0	32	0	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 		
-54	Slicing Shadows	3	0	0	32	1	3	0.9	5	1	0	Damage furthest enemy for (0.9*attack) 		
+54	Slicing Shadows	3	0	0	100000	0	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 		
+54	Slicing Shadows	3	0	0	100000	1	3	0.9	5	1	0	Damage furthest enemy for (0.9*attack) 		
 55	Polite Greeting	4	0	0	1	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
-56	Mirror of Torment	1	0	0	64	0	3	1.25	5	1	0	Damage furthest enemy for (1.25*attack) 		
-57	Etiquette Lesson	5	3	0	32	0	7	1	3	1	0	Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds		
+56	Mirror of Torment	1	0	0	1000000	0	3	1.25	5	1	0	Damage furthest enemy for (1.25*attack) 		
+57	Etiquette Lesson	5	3	0	100000	0	7	1	3	1	0	Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds		
 58	Headcrack	2	0	0	1	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 	TRUE	
-59	Mirrors of Regret	3	0	0	64	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 		
-60	Acid Spit	2	0	0	8	0	3	0.4	5	1	0	Damage furthest enemy for (0.4*attack) 	TRUE	
-61	Mandible Smash	4	0	0	8	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
-62	Gore	3	0	0	8	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
-63	Sonic Shriek	5	2	0	8	0	3	0.6	7	1	0	Damage all enemies for (0.6*attack) 	TRUE	
-63	Sonic Shriek	5	2	0	8	1	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
-64	Massive Rumble	2	0	0	8	0	3	1.5	7	1	0	Damage all enemies for (1.5*attack) 	TRUE	
-65	Nagging Doubt	2	0	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	#N/A	Unused
-66	Goliath Slam	1	0	0	32	0	3	1.5	13	1	0	Damage closest column of enemies for (1.5*attack) 	TRUE	Ignored: ineffective Effect.Target
-67	Vault Strike	3	0	0	32	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	#N/A	Unused
-68	Glowhoof Trample	3	1	1	2	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 	#N/A	Unused
-68	Glowhoof Trample	3	1	1	2	1	12	-0.8	15	0	0	Mod damage done of frontmost row of enemies by -80% for 1 rounds	#N/A	"Unused
+59	Mirrors of Regret	3	0	0	1000000	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 		
+60	Acid Spit	2	0	0	1000	0	3	0.4	5	1	0	Damage furthest enemy for (0.4*attack) 	TRUE	
+61	Mandible Smash	4	0	0	1000	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
+62	Gore	3	0	0	1000	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
+63	Sonic Shriek	5	2	0	1000	0	3	0.6	7	1	0	Damage all enemies for (0.6*attack) 	TRUE	
+63	Sonic Shriek	5	2	0	1000	1	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
+64	Massive Rumble	2	0	0	1000	0	3	1.5	7	1	0	Damage all enemies for (1.5*attack) 	TRUE	
+65	Nagging Doubt	2	0	0	100000	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	#N/A	Unused
+66	Goliath Slam	1	0	0	100000	0	3	1.5	13	1	0	Damage closest column of enemies for (1.5*attack) 	TRUE	Ignored: ineffective Effect.Target
+67	Vault Strike	3	0	0	100000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	#N/A	Unused
+68	Glowhoof Trample	3	1	1	10	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 	#N/A	Unused
+68	Glowhoof Trample	3	1	1	10	1	12	-0.8	15	0	0	Mod damage done of frontmost row of enemies by -80% for 1 rounds	#N/A	"Unused
 Ignored: incorrect Effect.Flags"
 69	DNT JasonTest Ability Spell2	3	2	0	0	0	1	50	1	1	2	Damage self for (1*attack) 	#N/A	"Unused
 Ignored: incorrect Effect.Type, and ineffective Effect.Period"
@@ -1505,358 +1506,359 @@ Ignored: incorrect Effect.Type, and ineffective Effect.Period"
 69	DNT JasonTest Ability Spell2	3	2	0	0	2	1	50	1	0	0	Damage self for 50 	#N/A	Unused
 69	DNT JasonTest Ability Spell2	3	2	0	0	3	3	0.2	0	0	0	Damage nothing for 20% 	#N/A	"Unused
 Ignored: ineffective Effect.Target"
-70	DNT JasonTest Spell Tooltip	0	0	0	0								#N/A	Unused
-71	Revitalizing Vines	2	0	0	8	0	2	0.3	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
-72	Resonating Strike	4	0	0	2	0	3	2	3	1	0	Damage closest enemy for (2*attack) 	TRUE	
-72	Resonating Strike	4	0	0	2	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
-73	Purification Ray	2	0	0	2	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	
-74	Reconfiguration: Defense	5	3	0	2	0	14	-0.4	1	0	0	Mod damage taken of self by -40% for 3 rounds	TRUE	
-74	Reconfiguration: Defense	5	3	0	2	1	12	-0.4	1	0	0	Mod damage done of self by -40% for 3 rounds	TRUE	
+70	DNT JasonTest Spell Tooltip	0	0	0	0	0	0	0	0	0	0	Do nothing to nothing for 0 	#N/A	Unused
+71	Revitalizing Vines	2	0	0	1000	0	2	0.3	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
+72	Resonating Strike	4	0	0	10	0	3	2	3	1	0	Damage closest enemy for (2*attack) 	TRUE	
+72	Resonating Strike	4	0	0	10	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
+73	Purification Ray	2	0	0	10	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	
+74	Reconfiguration: Defense	5	3	0	10	0	14	-0.4	1	0	0	Mod damage taken of self by -40% for 3 rounds	TRUE	
+74	Reconfiguration: Defense	5	3	0	10	1	12	-0.4	1	0	0	Mod damage done of self by -40% for 3 rounds	TRUE	
 75	Larion Leap	2	0	0	1	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-76	Phalynx Flash	3	0	0	2	0	3	2.25	5	1	0	Damage furthest enemy for (2.25*attack) 		
-77	Potions of Penultimate Power	5	3	0	2	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 3 rounds	TRUE	
-78	Cleave	1	0	0	2	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
-79	Holy Nova	2	0	0	2	0	3	0.2	7	1	0	Damage all enemies for (0.2*attack) 	TRUE	
-79	Holy Nova	2	0	0	2	1	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
-80	Dawnshock	3	2	0	4	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
-80	Dawnshock	3	2	0	4	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds	TRUE	
-81	Reconfiguration: Reflect	5	3	0	2	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	Ignored: incorrect Effect.Type
+76	Phalynx Flash	3	0	0	10	0	3	2.25	5	1	0	Damage furthest enemy for (2.25*attack) 		
+77	Potions of Penultimate Power	5	3	0	10	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 3 rounds	TRUE	
+78	Cleave	1	0	0	10	0	3	0.3	15	1	0	Damage frontmost row of enemies for (0.3*attack) 	TRUE	
+79	Holy Nova	2	0	0	10	0	3	0.2	7	1	0	Damage all enemies for (0.2*attack) 	TRUE	
+79	Holy Nova	2	0	0	10	1	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
+80	Dawnshock	3	2	0	100	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
+80	Dawnshock	3	2	0	100	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds	TRUE	
+81	Reconfiguration: Reflect	5	3	0	10	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	Ignored: incorrect Effect.Type
 82	Mace to Hand	0	0	0	1	0	16	0.25	1	1	0	Damage attacker of self for (0.25*attack) indefinitely	TRUE	
 83	Lead the Charge	3	0	0	1	0	3	1.2	9	1	0	Damage closest enemies for (1.2*attack) 	TRUE	
-84	Sparkling Driftglobe Core	4	2	1	64	0	12	-1	7	0	0	Mod damage done of all enemies by -100% for 2 rounds	TRUE	
-85	Resilient Plumage	3	2	1	2	0	14	-50	2	0	0	Mod damage taken of closest ally by -5000% for 2 rounds	TRUE	Ignored: incorrect Effect.Points
+84	Sparkling Driftglobe Core	4	2	1	1000000	0	12	-1	7	0	0	Mod damage done of all enemies by -100% for 2 rounds	TRUE	
+85	Resilient Plumage	3	2	1	10	0	14	-50	2	0	0	Mod damage taken of closest ally by -5000% for 2 rounds	TRUE	Ignored: incorrect Effect.Points
 86	[PH]Placeholder Punch	2	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	#N/A	Unused
-87	Doubt Defied	2	0	0	2	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 	TRUE	
-88	Combat Meditation	3	3	0	2	0	12	0.3	1	0	0	Mod damage done of self by 30% for 3 rounds	TRUE	
-88	Combat Meditation	3	3	0	2	1	3	0.4	7	1	0	Damage all enemies for (0.4*attack) 	TRUE	
-89	Spiked Burr Trap	4	2	0	8	0	7	0.4	5	11	1	Damage (tick) furthest enemy for (0.4*attack) immediately and each subsequent round for 2 rounds	TRUE	
-90	Invigorating Herbs	0	0	0	8	0	12	0.2	8	0	0	Mod damage done of closest allies by 20% indefinitely	TRUE	
-91	Dazzledust	4	3	0	8	0	19	-0.6	5	1	0	Mod damage done of furthest enemy by (-0.6*attack) for 3 rounds	TRUE	
-92	Trickster's Torment	2	2	0	32	0	7	0.5	17	11	1	Damage (tick) backmost row of enemies for (0.5*attack) immediately and each subsequent round for 2 rounds	TRUE	
-93	Leeching Seed	3	0	0	8	0	3	0.2	3	1	0	Damage closest enemy for (0.2*attack) 	TRUE	
-93	Leeching Seed	3	0	0	8	1	4	0.8	1	1	0	Heal self for (0.8*attack) 	TRUE	
-94	Icespore Spear	4	3	0	16	0	7	0.3	15	1	1	Damage (tick) frontmost row of enemies for (0.3*attack) each subsequent round for 3 rounds	TRUE	
-95	Starlight Strike	3	0	0	64	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-95	Starlight Strike	3	0	0	64	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
-96	Insect Swarm	4	2	0	8	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	TRUE	
-96	Insect Swarm	4	2	0	8	1	12	-0.3	5	0	0	Mod damage done of furthest enemy by -30% for 2 rounds	TRUE	
+87	Doubt Defied	2	0	0	10	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 	TRUE	
+88	Combat Meditation	3	3	0	10	0	12	0.3	1	0	0	Mod damage done of self by 30% for 3 rounds	TRUE	
+88	Combat Meditation	3	3	0	10	1	3	0.4	7	1	0	Damage all enemies for (0.4*attack) 	TRUE	
+89	Spiked Burr Trap	4	2	0	1000	0	7	0.4	5	11	1	Damage (tick) furthest enemy for (0.4*attack) immediately and each subsequent round for 2 rounds	TRUE	
+90	Invigorating Herbs	0	0	0	1000	0	12	0.2	8	0	0	Mod damage done of closest allies by 20% indefinitely	TRUE	
+91	Dazzledust	4	3	0	1000	0	19	-0.6	5	1	0	Mod damage done of furthest enemy by (-0.6*attack) for 3 rounds	TRUE	
+92	Trickster's Torment	2	2	0	100000	0	7	0.5	17	11	1	Damage (tick) backmost row of enemies for (0.5*attack) immediately and each subsequent round for 2 rounds	TRUE	
+93	Leeching Seed	3	0	0	1000	0	3	0.2	3	1	0	Damage closest enemy for (0.2*attack) 	TRUE	
+93	Leeching Seed	3	0	0	1000	1	4	0.8	1	1	0	Heal self for (0.8*attack) 	TRUE	
+94	Icespore Spear	4	3	0	10000	0	7	0.3	15	1	1	Damage (tick) frontmost row of enemies for (0.3*attack) each subsequent round for 3 rounds	TRUE	
+95	Starlight Strike	3	0	0	1000000	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+95	Starlight Strike	3	0	0	1000000	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
+96	Insect Swarm	4	2	0	1000	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	TRUE	
+96	Insect Swarm	4	2	0	1000	1	12	-0.3	5	0	0	Mod damage done of furthest enemy by -30% for 2 rounds	TRUE	
 97	Flashing Arrows	2	1	0	1	0	3	0.9	11	1	0	Damage closest cone of enemies for (0.9*attack) 	TRUE	
-98	Anima Bolt	1	0	0	64	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
-99	Onslaught	3	1	0	9	0	3	1.4	15	1	0	Damage frontmost row of enemies for (1.4*attack) 	TRUE	
+98	Anima Bolt	1	0	0	1000000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
+99	Onslaught	3	1	0	1001	0	3	1.4	15	1	0	Damage frontmost row of enemies for (1.4*attack) 	TRUE	
 100	Heart of the Forest	1	0	0	0	0	4	0.6	1	1	0	Heal self for (0.6*attack) 	TRUE	
-101	Strangleheart Seed	4	3	0	16	0	3	0.6	3	1	0	Damage closest enemy for (0.6*attack) 	TRUE	
-101	Strangleheart Seed	4	3	0	16	1	14	0.2	3	0	0	Mod damage taken of closest enemy by 20% for 3 rounds	TRUE	
-102	Forest's Touch	2	0	0	8	0	3	0.3	13	1	0	Damage closest column of enemies for (0.3*attack) 	TRUE	
-103	Social Butterfly	4	2	0	8	0	12	1	22	0	0	Mod damage done of all-other allies by 100% for 2 rounds	TRUE	
-104	Podtender	1	1	0	8	0	2	0.9	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
-104	Podtender	1	1	0	8	1	12	-0.1	2	0	0	Mod damage done of closest ally by -10% for 1 rounds	TRUE	
+101	Strangleheart Seed	4	3	0	10000	0	3	0.6	3	1	0	Damage closest enemy for (0.6*attack) 	TRUE	
+101	Strangleheart Seed	4	3	0	10000	1	14	0.2	3	0	0	Mod damage taken of closest enemy by 20% for 3 rounds	TRUE	
+102	Forest's Touch	2	0	0	1000	0	3	0.3	13	1	0	Damage closest column of enemies for (0.3*attack) 	TRUE	
+103	Social Butterfly	4	2	0	1000	0	12	1	22	0	0	Mod damage done of all-other allies by 100% for 2 rounds	TRUE	
+104	Podtender	1	1	0	1000	0	2	0.9	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
+104	Podtender	1	1	0	1000	1	12	-0.1	2	0	0	Mod damage done of closest ally by -10% for 1 rounds	TRUE	
 105	Hold the Line	0	0	0	1	0	14	-0.1	6	0	0	Mod damage taken of all allies by -10% indefinitely	TRUE	
 106	Face Your Foes	2	0	0	1	0	3	0.4	9	1	0	Damage closest enemies for (0.4*attack) 	TRUE	
-107	Volatile Solvent	5	3	0	32	0	7	1.5	3	11	0	Damage (tick) closest enemy for (1.5*attack) immediately and each subsequent round for 3 rounds	TRUE	
-107	Volatile Solvent	5	3	0	32	1	20	0.5	3	11	0	Mod damage taken of closest enemy by (0.5*attack) for 3 rounds	TRUE	Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
-108	Ooz's Frictionless Coating	4	2	0	32	0	4	0.4	2	1	0	Heal closest ally for (0.4*attack) 	TRUE	
-108	Ooz's Frictionless Coating	4	2	0	32	1	18	0.1	2	10	0	Mod max health of closest ally by 10% for 2 rounds	TRUE	Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
+107	Volatile Solvent	5	3	0	100000	0	7	1.5	3	11	0	Damage (tick) closest enemy for (1.5*attack) immediately and each subsequent round for 3 rounds	TRUE	
+107	Volatile Solvent	5	3	0	100000	1	20	0.5	3	11	0	Mod damage taken of closest enemy by (0.5*attack) for 3 rounds	TRUE	Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
+108	Ooz's Frictionless Coating	4	2	0	100000	0	4	0.4	2	1	0	Heal closest ally for (0.4*attack) 	TRUE	
+108	Ooz's Frictionless Coating	4	2	0	100000	1	18	0.1	2	10	0	Mod max health of closest ally by 10% for 2 rounds	TRUE	Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
 109	Serrated Shoulder Blades	0	0	0	1	0	16	0.6	1	1	0	Damage attacker of self for (0.6*attack) indefinitely		
-110	Ravenous Brooch	1	0	0	32	0	4	0.4	1	1	0	Heal self for (0.4*attack) 		
-111	Sulfuric Emission	3	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 		
-112	Gnashing Chompers	5	3	0	32	0	19	0.3	8	11	0	Mod damage done of closest allies by (0.3*attack) for 3 rounds		Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
-113	Secutor's Judgment	4	0	0	48	0	3	1.2	11	1	0	Damage closest cone of enemies for (1.2*attack) 		
-114	Reconstruction	1	0	0	32	0	2	0.6	1	1	0	Heal self for (1*attack) 		Ignored: incorrect Effect.Type
-115	Dynamic Fist	2	0	0	32	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 		
-116	Dreaming Charge	3	0	0	8	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
-117	Swift Slash	2	0	0	8	0	3	0.4	15	1	0	Damage frontmost row of enemies for (0.4*attack) 	TRUE	
-118	Mischievous Blast	4	0	1	8	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 	TRUE	
-119	Corrosive Thrust	2	0	0	8	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
-120	Goading Motivation	2	2	0	8	0	12	0.5	20	1	0	Mod damage done of random follower by 50% for 2 rounds	TRUE	
-121	Mesmeric Dust	3	1	0	64	0	12	-0.5	7	1	0	Mod damage done of all enemies by -50% for 1 rounds	TRUE	
-122	Humorous Flame	2	0	0	4	0	7	0.3	21	1	3	Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds	TRUE	Ignored: ineffective Spell.Duration and Effect.Period
-123	Healing Winds	4	0	0	8	0	4	0.3	14	1	0	Heal frontmost row of allies for (0.3*attack) 	TRUE	
-124	Kick	3	0	0	8	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	8	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	8	1	12	-0.5	0	0	1	Mod damage done of nothing by -50% for 1 rounds	TRUE	Ignored: ineffective Effect.Target and Effect.Period
-126	Possessive Healing	3	1	0	8	0	4	0.2	14	1	0	Heal frontmost row of allies for (0.2*attack) 	TRUE	
-127	Nibble	4	1	0	8	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
-128	Regurgitate	5	1	0	8	0	3	0.75	17	1	0	Damage backmost row of enemies for (0.75*attack) 	TRUE	
-129	Queen's Command	5	1	0	8	0	4	0.3	6	1	0	Heal all allies for (0.3*attack) 	#N/A	Unused
-129	Queen's Command	5	1	0	8	1	12	0.5	6	0	1	Mod damage done of all allies by 50% for 1 rounds	#N/A	"Unused
+110	Ravenous Brooch	1	0	0	100000	0	4	0.4	1	1	0	Heal self for (0.4*attack) 		
+111	Sulfuric Emission	3	0	0	1000	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 		
+112	Gnashing Chompers	5	3	0	100000	0	19	0.3	8	11	0	Mod damage done of closest allies by (0.3*attack) for 3 rounds		Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
+113	Secutor's Judgment	4	0	0	110000	0	3	1.2	11	1	0	Damage closest cone of enemies for (1.2*attack) 		
+114	Reconstruction	1	0	0	100000	0	2	0.6	1	1	0	Heal self for (1*attack) 		Ignored: incorrect Effect.Type
+115	Dynamic Fist	2	0	0	100000	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 		
+116	Dreaming Charge	3	0	0	1000	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
+117	Swift Slash	2	0	0	1000	0	3	0.4	15	1	0	Damage frontmost row of enemies for (0.4*attack) 	TRUE	
+118	Mischievous Blast	4	0	1	1000	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 	TRUE	
+119	Corrosive Thrust	2	0	0	1000	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
+120	Goading Motivation	2	2	0	1000	0	12	0.5	20	1	0	Mod damage done of random follower by 50% for 2 rounds	TRUE	
+121	Mesmeric Dust	3	1	0	1000000	0	12	-0.5	7	1	0	Mod damage done of all enemies by -50% for 1 rounds	TRUE	
+122	Humorous Flame	2	0	0	100	0	7	0.3	21	1	3	Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds	TRUE	Ignored: ineffective Spell.Duration and Effect.Period
+123	Healing Winds	4	0	0	1000	0	4	0.3	14	1	0	Heal frontmost row of allies for (0.3*attack) 	TRUE	
+124	Kick	3	0	0	1000	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
+125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 		
+125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds		Ignored: ineffective Effect.Target and Effect.Period
+126	Possessive Healing	3	1	0	1000	0	4	0.2	14	1	0	Heal frontmost row of allies for (0.2*attack) 	TRUE	
+127	Nibble	4	1	0	1000	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
+128	Regurgitate	5	1	0	1000	0	3	0.75	17	1	0	Damage backmost row of enemies for (0.75*attack) 	TRUE	
+129	Queen's Command	5	1	0	1000	0	4	0.3	6	1	0	Heal all allies for (0.3*attack) 	#N/A	Unused
+129	Queen's Command	5	1	0	1000	1	12	0.5	6	0	1	Mod damage done of all allies by 50% for 1 rounds	#N/A	"Unused
 Ignored: ineffective Effect.Period"
-130	Carapace Thorns	4	3	0	8	0	16	1	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	
-131	Arcane Antlers	3	0	0	64	0	3	1.5	17	1	0	Damage backmost row of enemies for (1.5*attack) 	TRUE	
-132	Arbor Eruption	4	1	0	8	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
-132	Arbor Eruption	4	1	0	8	1	12	-0.25	15	0	1	Mod damage done of frontmost row of enemies by -25% for 1 rounds	TRUE	Ignored: ineffective Effect.Period
-133	Hidden Power	4	0	0	64	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 	TRUE	
-133	Hidden Power	4	0	0	64	1	4	0.75	1	1	0	Heal self for (0.75*attack) 	TRUE	
-134	Curse of the Dark Forest	4	2	0	32	0	14	0.25	7	1	0	Mod damage taken of all enemies by 25% for 2 rounds	TRUE	
-135	Fires of Domination	3	0	0	4	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 	TRUE	
-136	Searing Jaws	4	3	0	4	0	7	1.5	3	1	3	Damage (tick) closest enemy for (1.5*attack) each subsequent 3rd round for 3 rounds		
-137	Hearty Shout	4	2	0	8	0	12	0.25	1	0	0	Mod damage done of self by 25% for 2 rounds		
-138	Tail lash	2	0	0	64	0	3	0.3	9	1	0	Damage closest enemies for (0.3*attack) 	TRUE	
-139	Hunger Frenzy	6	0	1	64	0	3	4	17	1	0	Damage backmost row of enemies for (4*attack) 	TRUE	
-140	Fan of Knives	4	2	0	32	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
-140	Fan of Knives	4	2	0	32	1	12	-0.1	17	0	0	Mod damage done of backmost row of enemies by -10% for 2 rounds		
-141	Herd Immunity	4	2	0	64	0	14	-0.5	6	0	0	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
-142	Arcane Restoration	3	0	0	64	0	4	0.7	10	1	0	Heal closest cone of allies for (0.7*attack) 	#N/A	Unused
-143	Arrogant Boast	4	2	0	32	0	12	0.25	1	0	2	Mod damage done of self by 25% for 2 rounds	TRUE	Ignored: ineffective Effect.Period
-144	Ardent Defense	4	2	1	32	0	14	-0.75	22	0	0	Mod damage taken of all-other allies by -75% for 2 rounds	TRUE	
-145	Shield Bash	4	0	0	32	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
-146	Dark Javelin	4	0	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
-147	Close Ranks	5	2	0	32	0	14	-0.5	22	0	0	Mod damage taken of all-other allies by -50% for 2 rounds	TRUE	
-148	Divine Maintenance	4	1	0	32	0	4	1.25	14	1	0	Heal frontmost row of allies for (1.25*attack) 	TRUE	
-149	Phalynx Slash	3	0	0	32	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 	TRUE	
-150	Crashing Claws	3	0	0	32	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
-151	Dive Bomb	2	1	0	32	0	3	0.2	3	1	0	Damage closest enemy for (0.2*attack) 	TRUE	
-152	Anima Wave	5	1	1	8	0	4	2	22	1	0	Heal all-other allies for (2*attack) 	TRUE	
-152	Anima Wave	5	1	1	8	1	12	0.5	22	0	1	Mod damage done of all-other allies by 50% for 1 rounds	TRUE	
-153	Forbidden Research	4	0	0	32	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
-154	Stolen Wards	5	3	0	32	0	16	1	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	
-155	Concussive Roar	4	1	0	32	0	12	-0.75	7	0	0	Mod damage done of all enemies by -75% for 1 rounds	TRUE	
-156	Cursed Knowledge	5	2	0	32	0	14	0.4	7	0	0	Mod damage taken of all enemies by 40% for 2 rounds	TRUE	
+130	Carapace Thorns	4	3	0	1000	0	16	1	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	
+131	Arcane Antlers	3	0	0	1000000	0	3	1.5	17	1	0	Damage backmost row of enemies for (1.5*attack) 	TRUE	
+132	Arbor Eruption	4	1	0	1000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+132	Arbor Eruption	4	1	0	1000	1	12	-0.25	15	0	1	Mod damage done of frontmost row of enemies by -25% for 1 rounds	TRUE	Ignored: ineffective Effect.Period
+133	Hidden Power	4	0	0	1000000	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 	TRUE	
+133	Hidden Power	4	0	0	1000000	1	4	0.75	1	1	0	Heal self for (0.75*attack) 	TRUE	
+134	Curse of the Dark Forest	4	2	0	100000	0	14	0.25	7	1	0	Mod damage taken of all enemies by 25% for 2 rounds	TRUE	
+135	Fires of Domination	3	0	0	100	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 	TRUE	
+136	Searing Jaws	4	3	0	100	0	7	1.5	3	1	3	Damage (tick) closest enemy for (1.5*attack) each subsequent 3rd round for 3 rounds		
+137	Hearty Shout	4	2	0	1000	0	12	0.25	1	0	0	Mod damage done of self by 25% for 2 rounds		
+138	Tail lash	2	0	0	1000000	0	3	0.3	9	1	0	Damage closest enemies for (0.3*attack) 	TRUE	
+139	Hunger Frenzy	6	0	1	1000000	0	3	4	17	1	0	Damage backmost row of enemies for (4*attack) 	TRUE	
+140	Fan of Knives	4	2	0	100000	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
+140	Fan of Knives	4	2	0	100000	1	12	-0.1	17	0	0	Mod damage done of backmost row of enemies by -10% for 2 rounds		
+141	Herd Immunity	4	2	0	1000000	0	14	-0.5	6	0	0	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
+142	Arcane Restoration	3	0	0	1000000	0	4	0.7	10	1	0	Heal closest cone of allies for (0.7*attack) 	#N/A	Unused
+143	Arrogant Boast	4	2	0	100000	0	12	0.25	1	0	2	Mod damage done of self by 25% for 2 rounds	TRUE	Ignored: ineffective Effect.Period
+144	Ardent Defense	4	2	1	100000	0	14	-0.75	22	0	0	Mod damage taken of all-other allies by -75% for 2 rounds	TRUE	
+145	Shield Bash	4	0	0	100000	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
+146	Dark Javelin	4	0	0	100000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+147	Close Ranks	5	2	0	100000	0	14	-0.5	22	0	0	Mod damage taken of all-other allies by -50% for 2 rounds	TRUE	
+148	Divine Maintenance	4	1	0	100000	0	4	1.25	14	1	0	Heal frontmost row of allies for (1.25*attack) 	TRUE	
+149	Phalynx Slash	3	0	0	100000	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 	TRUE	
+150	Crashing Claws	3	0	0	100000	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
+151	Dive Bomb	2	1	0	100000	0	3	0.2	3	1	0	Damage closest enemy for (0.2*attack) 	TRUE	
+152	Anima Wave	5	1	1	1000	0	4	2	22	1	0	Heal all-other allies for (2*attack) 	TRUE	
+152	Anima Wave	5	1	1	1000	1	12	0.5	22	0	1	Mod damage done of all-other allies by 50% for 1 rounds	TRUE	
+153	Forbidden Research	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
+154	Stolen Wards	5	3	0	100000	0	16	1	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	
+155	Concussive Roar	4	1	0	100000	0	12	-0.75	7	0	0	Mod damage done of all enemies by -75% for 1 rounds	TRUE	
+156	Cursed Knowledge	5	2	0	100000	0	14	0.4	7	0	0	Mod damage taken of all enemies by 40% for 2 rounds	TRUE	
 157	Frantic Flap	4	0	0	1	0	3	0.8	9	1	0	Damage closest enemies for (0.8*attack) 	TRUE	
-158	Explosion of Dark Knowledge	3	0	1	32	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 	TRUE	
-159	Proclamation of Doubt	4	2	0	32	0	12	-0.25	7	0	2	Mod damage done of all enemies by -25% for 2 rounds	TRUE	
-160	Seismic Slam	3	0	0	8	0	3	2	7	1	0	Damage all enemies for (2*attack) 		
-161	Dark Command	4	1	0	8	0	4	1	6	1	0	Heal all allies for (1*attack) 		
-161	Dark Command	4	1	0	8	1	12	0.25	6	0	0	Mod damage done of all allies by 25% for 1 rounds		
-162	Curse of Darkness	5	2	0	32	0	12	-0.5	7	0	0	Mod damage done of all enemies by -50% for 2 rounds		
-163	Wave of Conviction	6	0	1	32	0	3	4	7	1	0	Damage all enemies for (4*attack) 		
-164	Dark Flame	6	3	0	32	0	7	2	11	11	3	Damage (tick) closest cone of enemies for (2*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	
-165	Winged Assault	4	0	0	32	0	3	3	3	1	0	Damage closest enemy for (3*attack) 	TRUE	
-166	Leeching Bite	2	0	0	32	0	3	1	21	1	0	Damage random encounter for (1*attack) 	TRUE	
-166	Leeching Bite	2	0	0	32	1	4	0.5	1	1	0	Heal self for (0.5*attack) 	TRUE	
-167	Razor Shards	4	0	0	8	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-168	Howl from Beyond	4	2	0	32	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
-169	Consuming Strike	5	3	0	32	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	TRUE	
-169	Consuming Strike	5	3	0	32	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	To-do: test nore=true
-170	Stone Bash	4	1	0	8	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
-171	Pitched Boulder	3	1	0	8	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
-172	Viscous Slash	3	1	1	32	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 	TRUE	
-172	Viscous Slash	3	1	1	32	1	12	-0.5	15	0	0	Mod damage done of frontmost row of enemies by -50% for 1 rounds	TRUE	
-173	Icy Blast	4	2	0	16	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
-173	Icy Blast	4	2	0	16	1	12	-0.25	5	0	0	Mod damage done of furthest enemy by -25% for 2 rounds	TRUE	
-174	Polished Ice Barrier	4	3	0	16	0	16	0.4	1	1	0	Damage attacker of self for (0.4*attack) for 3 rounds	TRUE	
-175	Lash Out	3	0	0	32	0	3	1.2	19	1	0	Damage random target for (1.2*attack) 	TRUE	
-176	Arrogant Denial	3	1	0	32	0	14	0.25	7	0	0	Mod damage taken of all enemies by 25% for 1 rounds	TRUE	
+158	Explosion of Dark Knowledge	3	0	1	100000	0	3	3	17	1	0	Damage backmost row of enemies for (3*attack) 	TRUE	
+159	Proclamation of Doubt	4	2	0	100000	0	12	-0.25	7	0	2	Mod damage done of all enemies by -25% for 2 rounds	TRUE	
+160	Seismic Slam	3	0	0	1000	0	3	2	7	1	0	Damage all enemies for (2*attack) 		
+161	Dark Command	4	1	0	1000	0	4	1	6	1	0	Heal all allies for (1*attack) 		
+161	Dark Command	4	1	0	1000	1	12	0.25	6	0	0	Mod damage done of all allies by 25% for 1 rounds		
+162	Curse of Darkness	5	2	0	100000	0	12	-0.5	7	0	0	Mod damage done of all enemies by -50% for 2 rounds		
+163	Wave of Conviction	6	0	1	100000	0	3	4	7	1	0	Damage all enemies for (4*attack) 		
+164	Dark Flame	6	3	0	100000	0	7	2	11	11	3	Damage (tick) closest cone of enemies for (2*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	
+165	Winged Assault	4	0	0	100000	0	3	3	3	1	0	Damage closest enemy for (3*attack) 	TRUE	
+166	Leeching Bite	2	0	0	100000	0	3	1	21	1	0	Damage random encounter for (1*attack) 	TRUE	
+166	Leeching Bite	2	0	0	100000	1	4	0.5	1	1	0	Heal self for (0.5*attack) 	TRUE	
+167	Razor Shards	4	0	0	1000	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+168	Howl from Beyond	4	2	0	100000	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
+169	Consuming Strike	5	3	0	100000	0	3	0.65	3	1	0	Damage closest enemy for (0.65*attack) 	TRUE	
+169	Consuming Strike	5	3	0	100000	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	To-do: test nore=true
+170	Stone Bash	4	1	0	1000	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
+171	Pitched Boulder	3	1	0	1000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
+172	Viscous Slash	3	1	1	100000	0	3	0.2	15	1	0	Damage frontmost row of enemies for (0.2*attack) 	TRUE	
+172	Viscous Slash	3	1	1	100000	1	12	-0.5	15	0	0	Mod damage done of frontmost row of enemies by -50% for 1 rounds	TRUE	
+173	Icy Blast	4	2	0	10000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+173	Icy Blast	4	2	0	10000	1	12	-0.25	5	0	0	Mod damage done of furthest enemy by -25% for 2 rounds	TRUE	
+174	Polished Ice Barrier	4	3	0	10000	0	16	0.4	1	1	0	Damage attacker of self for (0.4*attack) for 3 rounds	TRUE	
+175	Lash Out	3	0	0	100000	0	3	1.2	19	1	0	Damage random target for (1.2*attack) 	TRUE	
+176	Arrogant Denial	3	1	0	100000	0	14	0.25	7	0	0	Mod damage taken of all enemies by 25% for 1 rounds	TRUE	
 177	Shoulder Charge	3	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
-178	Draw Anima	4	0	0	32	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
-178	Draw Anima	4	0	0	32	1	4	0.5	1	1	0	Heal self for (0.5*attack) 	TRUE	
-179	Medical Advice	6	2	0	2	0	4	1	6	1	0	Heal all allies for (1*attack) 	TRUE	
-179	Medical Advice	6	2	0	2	1	12	0.5	6	0	0	Mod damage done of all allies by 50% for 2 rounds	TRUE	
-180	Mental Assault	3	0	0	32	0	3	0.75	20	1	0	Damage random follower for (0.75*attack) 	TRUE	
-181	Anima Blast	6	0	1	32	0	3	1.5	17	1	0	Damage backmost row of enemies for (1.5*attack) 	TRUE	
-182	Deceptive Practice	5	2	0	32	0	12	-0.5	7	0	0	Mod damage done of all enemies by -50% for 2 rounds	TRUE	
-183	Shadow Swipe	3	0	0	32	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
-184	Anima Lash	4	0	0	32	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
-185	Temper Tantrum	4	0	0	32	0	3	1	7	1	0	Damage all enemies for (1*attack) 		
-186	Feral Rage	5	0	1	32	0	3	2	15	1	0	Damage frontmost row of enemies for (2*attack) 	TRUE	
-187	Toxic Miasma	5	2	0	32	0	7	0.5	7	11	2	Damage (tick) all enemies for (0.5*attack) immediately and each subsequent 2nd round for 2 rounds		
+178	Draw Anima	4	0	0	100000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
+178	Draw Anima	4	0	0	100000	1	4	0.5	1	1	0	Heal self for (0.5*attack) 	TRUE	
+179	Medical Advice	6	2	0	10	0	4	1	6	1	0	Heal all allies for (1*attack) 	TRUE	
+179	Medical Advice	6	2	0	10	1	12	0.5	6	0	0	Mod damage done of all allies by 50% for 2 rounds	TRUE	
+180	Mental Assault	3	0	0	100000	0	3	0.75	20	1	0	Damage random follower for (0.75*attack) 	TRUE	
+181	Anima Blast	6	0	1	100000	0	3	1.5	17	1	0	Damage backmost row of enemies for (1.5*attack) 	TRUE	
+182	Deceptive Practice	5	2	0	100000	0	12	-0.5	7	0	0	Mod damage done of all enemies by -50% for 2 rounds	TRUE	
+183	Shadow Swipe	3	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+184	Anima Lash	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
+185	Temper Tantrum	4	0	0	100000	0	3	1	7	1	0	Damage all enemies for (1*attack) 		
+186	Feral Rage	5	0	1	100000	0	3	2	15	1	0	Damage frontmost row of enemies for (2*attack) 	TRUE	
+187	Toxic Miasma	5	2	0	100000	0	7	0.5	7	11	2	Damage (tick) all enemies for (0.5*attack) immediately and each subsequent 2nd round for 2 rounds		
 188	Angry Smash	3	1	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 		
 188	Angry Smash	3	1	0	1	1	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds		
 189	Angry Bash	3	0	0	1	0	3	2	3	1	0	Damage closest enemy for (2*attack) 		
-190	Anima Wave	3	0	0	32	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
-191	Toxic Dispersal	1	0	0	8	0	1	0.2	7	1	0	Damage all enemies for (1*attack) 		Ignored: incorrect Effect.Type
-191	Toxic Dispersal	1	0	0	8	1	2	0.1	6	1	0	Heal all allies for (1*attack) 		Ignored: incorrect Effect.Type
-192	Shadow Bolt	2	0	0	32	0	3	1.6	5	1	0	Damage furthest enemy for (1.6*attack) 		
-193	Flesh Eruption	2	0	0	32	0	3	3	15	1	0	Damage frontmost row of enemies for (3*attack) 		
-193	Flesh Eruption	2	0	0	32	1	3	0.5	1	1	0	Damage self for (0.5*attack) 		
-194	Potentiated Power	3	2	0	32	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 2 rounds		
-194	Potentiated Power	3	2	0	32	1	14	-0.2	2	1	0	Mod damage taken of closest ally by -20% for 2 rounds		
-194	Potentiated Power	3	2	0	32	2	3	0.2	1	1	0	Damage self for (0.2*attack) 		
-195	Creeping Chill	4	2	0	16	0	7	0.8	11	11	1	Damage (tick) closest cone of enemies for (0.8*attack) immediately and each subsequent round for 2 rounds		
+190	Anima Wave	3	0	0	100000	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
+191	Toxic Dispersal	1	0	0	1000	0	1	0.2	7	1	0	Damage all enemies for (1*attack) 		Ignored: incorrect Effect.Type
+191	Toxic Dispersal	1	0	0	1000	1	2	0.1	6	1	0	Heal all allies for (1*attack) 		Ignored: incorrect Effect.Type
+192	Shadow Bolt	2	0	0	100000	0	3	1.6	5	1	0	Damage furthest enemy for (1.6*attack) 		
+193	Flesh Eruption	2	0	0	100000	0	3	3	15	1	0	Damage frontmost row of enemies for (3*attack) 		
+193	Flesh Eruption	2	0	0	100000	1	3	0.5	1	1	0	Damage self for (0.5*attack) 		
+194	Potentiated Power	3	2	0	100000	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 2 rounds		
+194	Potentiated Power	3	2	0	100000	1	14	-0.2	2	1	0	Mod damage taken of closest ally by -20% for 2 rounds		
+194	Potentiated Power	3	2	0	100000	2	3	0.2	1	1	0	Damage self for (0.2*attack) 		
+195	Creeping Chill	4	2	0	10000	0	7	0.8	11	11	1	Damage (tick) closest cone of enemies for (0.8*attack) immediately and each subsequent round for 2 rounds		
 196	Hail of Blades	5	0	0	1	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 		
 196	Hail of Blades	5	0	0	1	1	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 		
 196	Hail of Blades	5	0	0	1	2	3	0.6	3	1	0	Damage closest enemy for (0.6*attack) 		
 196	Hail of Blades	5	0	0	1	3	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 		
-197	Reassembly	2	0	0	32	0	4	0.55	8	1	0	Heal closest allies for (0.55*attack) 		
-198	Bone Shield	3	2	0	32	0	20	-0.6	1	11	0	Mod damage taken of self by (-0.6*attack) for 2 rounds		
-198	Bone Shield	3	2	0	32	1	16	0.6	1	1	0	Damage attacker of self for (0.6*attack) for 2 rounds		
+197	Reassembly	2	0	0	100000	0	4	0.55	8	1	0	Heal closest allies for (0.55*attack) 		
+198	Bone Shield	3	2	0	100000	0	20	-0.6	1	11	0	Mod damage taken of self by (-0.6*attack) for 2 rounds		
+198	Bone Shield	3	2	0	100000	1	16	0.6	1	1	0	Damage attacker of self for (0.6*attack) for 2 rounds		
 199	Lumbering swing	3	0	0	1	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
-200	Stunning Swipe	4	1	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
-200	Stunning Swipe	4	1	0	8	1	12	-0.5	15	0	1	Mod damage done of frontmost row of enemies by -50% for 1 rounds	TRUE	
-201	Monstrous Rage	4	0	0	8	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 	TRUE	
-202	Whirling Wall	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	
-203	Bitting Winds	4	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
-204	Death Blast	5	2	0	32	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
-204	Death Blast	5	2	0	32	1	12	-0.5	3	0	2	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
-205	Bone Dust	3	0	0	8	0	4	0.75	14	1	0	Heal frontmost row of allies for (0.75*attack) 	TRUE	
+200	Stunning Swipe	4	1	0	1000	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
+200	Stunning Swipe	4	1	0	1000	1	12	-0.5	15	0	1	Mod damage done of frontmost row of enemies by -50% for 1 rounds	TRUE	
+201	Monstrous Rage	4	0	0	1000	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 	TRUE	
+202	Whirling Wall	4	2	0	1000	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	
+203	Bitting Winds	4	0	0	1000	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
+204	Death Blast	5	2	0	100000	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
+204	Death Blast	5	2	0	100000	1	12	-0.5	3	0	2	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
+205	Bone Dust	3	0	0	1000	0	4	0.75	14	1	0	Heal frontmost row of allies for (0.75*attack) 	TRUE	
 206	Abominable Kick	3	0	0	1	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
 207	Feral Lunge	2	0	0	1	0	3	0.3	13	1	0	Damage closest column of enemies for (0.3*attack) 	TRUE	Ignored: ineffective Effect.Target
-208	Intimidating Roar	4	2	0	8	0	9	2	21	1	0	Taunt random encounter for 2 rounds	TRUE	Ignored: ineffective Effect.Type and Effect.Target
-209	Ritual Fervor	2	1	0	32	0	12	0.5	21	0	0	Mod damage done of random encounter by 50% for 1 rounds	TRUE	
-210	Waves of Death	3	0	0	32	0	3	2	7	1	0	Damage all enemies for (2*attack) 	TRUE	
-211	Acidic Ejection	4	0	0	8	0	3	1.5	11	1	0	Damage closest cone of enemies for (1.5*attack) 	TRUE	
+208	Intimidating Roar	4	2	0	1000	0	9	2	21	1	0	Taunt random encounter for 2 rounds	TRUE	Ignored: ineffective Effect.Type and Effect.Target
+209	Ritual Fervor	2	1	0	100000	0	12	0.5	21	0	0	Mod damage done of random encounter by 50% for 1 rounds	TRUE	
+210	Waves of Death	3	0	0	100000	0	3	2	7	1	0	Damage all enemies for (2*attack) 	TRUE	
+211	Acidic Ejection	4	0	0	1000	0	3	1.5	11	1	0	Damage closest cone of enemies for (1.5*attack) 	TRUE	
 212	Panic Attack	4	0	0	1	0	3	2	19	1	0	Damage random target for (2*attack) 	TRUE	
-213	Heal the Flock	3	0	0	8	0	4	1	10	1	0	Heal closest cone of allies for (1*attack) 	TRUE	Ignored: ineffective Effect.Target
-214	Necrotic Lash	2	0	0	32	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
-215	Slime Fist	5	0	0	8	0	3	3	3	1	0	Damage closest enemy for (3*attack) 	TRUE	
-216	Threatening Hiss	5	2	0	32	0	10	3	1	1	0	Detaunt self for 2 rounds	TRUE	
-217	Massacre	4	0	0	32	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 	TRUE	
-218	Ritual of Bone	5	2	0	32	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds		
-219	Necrotic Healing	6	2	0	32	0	4	2	2	1	0	Heal closest ally for (2*attack) 		
-219	Necrotic Healing	6	2	0	32	1	14	-0.5	2	0	0	Mod damage taken of closest ally by -50% for 2 rounds		
+213	Heal the Flock	3	0	0	1000	0	4	1	10	1	0	Heal closest cone of allies for (1*attack) 	TRUE	Ignored: ineffective Effect.Target
+214	Necrotic Lash	2	0	0	100000	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
+215	Slime Fist	5	0	0	1000	0	3	3	3	1	0	Damage closest enemy for (3*attack) 	TRUE	
+216	Threatening Hiss	5	2	0	100000	0	10	3	1	1	0	Detaunt self for 2 rounds	TRUE	
+217	Massacre	4	0	0	100000	0	3	2	17	1	0	Damage backmost row of enemies for (2*attack) 	TRUE	
+218	Ritual of Bone	5	2	0	100000	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds		
+219	Necrotic Healing	6	2	0	100000	0	4	2	2	1	0	Heal closest ally for (2*attack) 		
+219	Necrotic Healing	6	2	0	100000	1	14	-0.5	2	0	0	Mod damage taken of closest ally by -50% for 2 rounds		
 220	Wild Slice	3	0	0	1	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 		
-221	Burrow	5	2	0	8	0	10	1.5	1	1	0	Detaunt self for 2 rounds		
-222	Poisonous Bite	4	2	0	8	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 		
-222	Poisonous Bite	4	2	0	8	1	7	0.3	3	11	2	Damage (tick) closest enemy for (0.3*attack) immediately and each subsequent 2nd round for 2 rounds		
-223	Wave of Eternal Death	1	10	0	32	0	7	0.1	23	1	1	Damage (tick) all followers for (0.1*attack) each subsequent round for 10 rounds	TRUE	
+221	Burrow	5	2	0	1000	0	10	1.5	1	1	0	Detaunt self for 2 rounds		
+222	Poisonous Bite	4	2	0	1000	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 		
+222	Poisonous Bite	4	2	0	1000	1	7	0.3	3	11	2	Damage (tick) closest enemy for (0.3*attack) immediately and each subsequent 2nd round for 2 rounds		
+223	Wave of Eternal Death	1	10	0	100000	0	7	0.1	23	1	1	Damage (tick) all followers for (0.1*attack) each subsequent round for 10 rounds	TRUE	
 224	Maw Wrought Slash	3	0	0	1	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
-225	Stream of Anguish	2	0	0	32	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
-226	Thrust of the Maw	3	0	0	32	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
-227	Bombardment of Dread	1	0	0	32	0	3	0.3	20	0	0	Damage random follower for 30% 	TRUE	
-228	Destruction	10	0	1	32	0	3	10	23	1	0	Damage all followers for (10*attack) 	TRUE	
-229	Mawsworn Ritual	4	2	0	32	0	14	-0.5	21	0	0	Mod damage taken of random encounter by -50% for 2 rounds	TRUE	
-230	Faith in Domination	3	1	0	32	0	4	0.5	24	1	0	Heal all encounters for (0.5*attack) 	TRUE	
-231	Mawsworn Strength	4	2	0	32	0	14	1	20	0	0	Mod damage taken of random follower by 100% for 2 rounds	TRUE	
-232	Aura of Death	4	3	0	32	0	12	-0.5	20	0	3	Mod damage done of random follower by -50% for 3 rounds	TRUE	
-233	Teeth of the Maw	3	0	0	32	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
-234	Power of Anguish	4	2	0	32	0	12	0.5	21	0	0	Mod damage done of random encounter by 50% for 2 rounds	TRUE	
-235	Vengence of the Mawsworn	3	0	0	32	0	3	0.5	5	1	0	Damage furthest enemy for (0.5*attack) 	TRUE	
-236	Empowered Minions	4	2	0	32	0	14	-0.5	6	0	2	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
-237	Maw Swoop	4	0	0	32	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
-238	Death Shield	4	2	0	8	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	Ignored: ineffective Effect.Points and Effect.Flags
-239	Beam of Doom	5	0	0	32	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
-240	Spear of Dread	3	0	0	32	0	3	0.25	13	1	0	Damage closest column of enemies for (0.25*attack) 	TRUE	Ignored: ineffective Effect.Target
-241	Pain Spike	4	2	0	32	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
-241	Pain Spike	4	2	0	32	1	12	-0.5	5	0	0	Mod damage done of furthest enemy by -50% for 2 rounds	TRUE	
-242	Dark Healing	4	2	0	32	0	4	0.5	2	1	0	Heal closest ally for (0.5*attack) 	TRUE	
-242	Dark Healing	4	2	0	32	1	14	0.75	2	0	0	Mod damage taken of closest ally by 75% for 2 rounds	TRUE	
-243	Baleful Stare	5	2	0	32	0	9	0	7	1	0	Taunt all enemies for 2 rounds	TRUE	
-243	Baleful Stare	5	2	0	32	1	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds	TRUE	
+225	Stream of Anguish	2	0	0	100000	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
+226	Thrust of the Maw	3	0	0	100000	0	3	0.5	11	1	0	Damage closest cone of enemies for (0.5*attack) 	TRUE	
+227	Bombardment of Dread	1	0	0	100000	0	3	0.3	20	0	0	Damage random follower for 30% 	TRUE	
+228	Destruction	10	0	1	100000	0	3	10	23	1	0	Damage all followers for (10*attack) 	TRUE	
+229	Mawsworn Ritual	4	2	0	100000	0	14	-0.5	21	0	0	Mod damage taken of random encounter by -50% for 2 rounds	TRUE	
+230	Faith in Domination	3	1	0	100000	0	4	0.5	24	1	0	Heal all encounters for (0.5*attack) 	TRUE	
+231	Mawsworn Strength	4	2	0	100000	0	14	1	20	0	0	Mod damage taken of random follower by 100% for 2 rounds	TRUE	
+232	Aura of Death	4	3	0	100000	0	12	-0.5	20	0	3	Mod damage done of random follower by -50% for 3 rounds	TRUE	
+233	Teeth of the Maw	3	0	0	100000	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
+234	Power of Anguish	4	2	0	100000	0	12	0.5	21	0	0	Mod damage done of random encounter by 50% for 2 rounds	TRUE	
+235	Vengence of the Mawsworn	3	0	0	100000	0	3	0.5	5	1	0	Damage furthest enemy for (0.5*attack) 	TRUE	
+236	Empowered Minions	4	2	0	100000	0	14	-0.5	6	0	2	Mod damage taken of all allies by -50% for 2 rounds	TRUE	
+237	Maw Swoop	4	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+238	Death Shield	4	2	0	1000	0	9	2	7	1	0	Taunt all enemies for 2 rounds	TRUE	Ignored: ineffective Effect.Points and Effect.Flags
+239	Beam of Doom	5	0	0	100000	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
+240	Spear of Dread	3	0	0	100000	0	3	0.25	13	1	0	Damage closest column of enemies for (0.25*attack) 	TRUE	Ignored: ineffective Effect.Target
+241	Pain Spike	4	2	0	100000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+241	Pain Spike	4	2	0	100000	1	12	-0.5	5	0	0	Mod damage done of furthest enemy by -50% for 2 rounds	TRUE	
+242	Dark Healing	4	2	0	100000	0	4	0.5	2	1	0	Heal closest ally for (0.5*attack) 	TRUE	
+242	Dark Healing	4	2	0	100000	1	14	0.75	2	0	0	Mod damage taken of closest ally by 75% for 2 rounds	TRUE	
+243	Baleful Stare	5	2	0	100000	0	9	0	7	1	0	Taunt all enemies for 2 rounds	TRUE	
+243	Baleful Stare	5	2	0	100000	1	14	-0.5	1	0	0	Mod damage taken of self by -50% for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	0	19	2	1	1	0	Mod damage done of self by (2*attack) for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	1	20	0.3	1	1	0	Mod damage taken of self by (0.3*attack) for 2 rounds	TRUE	
 244	Meatball Mad!	2	2	1	1	2	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
-245	Crusader Strike	3	0	0	2	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
+245	Crusader Strike	3	0	0	10	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
 246	Snarling Bite	2	0	0	1	0	3	1.5	3	1	0	Damage closest enemy for (1.5*attack) 	TRUE	
-247	Skymane Strike	4	1	1	2	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
-247	Skymane Strike	4	1	1	2	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
-248	Infectious Soulbite	5	4	0	32	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
-248	Infectious Soulbite	5	4	0	32	1	7	0.15	3	1	1	Damage (tick) closest enemy for (0.15*attack) each subsequent round for 4 rounds	TRUE	
+247	Skymane Strike	4	1	1	10	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
+247	Skymane Strike	4	1	1	10	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
+248	Infectious Soulbite	5	4	0	100000	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
+248	Infectious Soulbite	5	4	0	100000	1	7	0.15	3	1	1	Damage (tick) closest enemy for (0.15*attack) each subsequent round for 4 rounds	TRUE	
 249	Shield Bash	3	1	0	1	0	3	0.6	3	1	0	Damage closest enemy for (0.6*attack) 	TRUE	
 249	Shield Bash	3	1	0	1	1	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds	TRUE	
-250	Thorned Slingshot	4	0	1	8	0	3	0.8	5	1	0	Damage furthest enemy for (0.8*attack) 	TRUE	
-251	Doom of the Drust	5	2	0	32	0	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
-252	Viscous Sweep	4	2	0	32	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
-252	Viscous Sweep	4	2	0	32	1	14	0.25	9	0	0	Mod damage taken of closest enemies by 25% for 2 rounds	TRUE	
-253	Drust Claws	3	0	0	32	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 	TRUE	
-254	Drust Thorns	3	3	1	8	0	16	1	22	1	0	Damage attacker of all-other allies for (1*attack) for 3 rounds	TRUE	
-255	Defense of the Drust	3	1	0	32	0	14	-0.5	2	0	0	Mod damage taken of closest ally by -50% for 1 rounds	TRUE	
-256	Drust Blast	2	0	0	32	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
-257	Dread Roar	4	2	0	32	0	10	1	1	1	0	Detaunt self for 2 rounds	TRUE	
-258	Dark Gouge	5	3	0	32	0	3	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
-258	Dark Gouge	5	3	0	32	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	To-do: test nore=true
-259	Anima Flame	2	3	0	64	0	7	0.3	3	1	3	Damage (tick) closest enemy for (0.3*attack) each subsequent 3rd round for 3 rounds	TRUE	
-260	Anima Burst	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
-261	Surgical Advances	4	2	0	32	0	12	0.5	2	0	0	Mod damage done of closest ally by 50% for 2 rounds	TRUE	
-262	Putrid Stomp	3	0	0	8	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
-263	Acidic Vomit	4	0	0	8	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
+250	Thorned Slingshot	4	0	1	1000	0	3	0.8	5	1	0	Damage furthest enemy for (0.8*attack) 	TRUE	
+251	Doom of the Drust	5	2	0	100000	0	12	-0.2	7	0	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
+252	Viscous Sweep	4	2	0	100000	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
+252	Viscous Sweep	4	2	0	100000	1	14	0.25	9	0	0	Mod damage taken of closest enemies by 25% for 2 rounds	TRUE	
+253	Drust Claws	3	0	0	100000	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 	TRUE	
+254	Drust Thorns	3	3	1	1000	0	16	1	22	1	0	Damage attacker of all-other allies for (1*attack) for 3 rounds	TRUE	
+255	Defense of the Drust	3	1	0	100000	0	14	-0.5	2	0	0	Mod damage taken of closest ally by -50% for 1 rounds	TRUE	
+256	Drust Blast	2	0	0	100000	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
+257	Dread Roar	4	2	0	100000	0	10	1	1	1	0	Detaunt self for 2 rounds	TRUE	
+258	Dark Gouge	5	3	0	100000	0	3	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
+258	Dark Gouge	5	3	0	100000	1	7	0.5	3	11	3	Damage (tick) closest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	To-do: test nore=true
+259	Anima Flame	2	3	0	1000000	0	7	0.3	3	1	3	Damage (tick) closest enemy for (0.3*attack) each subsequent 3rd round for 3 rounds	TRUE	
+260	Anima Burst	3	0	0	1000000	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
+261	Surgical Advances	4	2	0	100000	0	12	0.5	2	0	0	Mod damage done of closest ally by 50% for 2 rounds	TRUE	
+262	Putrid Stomp	3	0	0	1000	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 	TRUE	
+263	Acidic Vomit	4	0	0	1000	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
 264	Meat Hook	4	0	0	1	0	3	3	5	1	0	Damage furthest enemy for (3*attack) 	TRUE	
-265	Toxic Claws	4	0	0	8	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	Ignored: ineffective Effect.Target
+265	Toxic Claws	4	0	0	1000	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	Ignored: ineffective Effect.Target
 266	Colossal Strike	3	0	0	1	0	3	10	3	1	0	Damage closest enemy for (10*attack) 	TRUE	
-267	Acidic Volley	3	0	0	8	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-268	Acidic Spray	4	3	0	8	0	12	-0.3	15	0	0	Mod damage done of frontmost row of enemies by -30% for 3 rounds	TRUE	
-269	Acidic Stomp	4	0	0	8	0	3	1.2	15	1	0	Damage frontmost row of enemies for (1.2*attack) 	TRUE	
+267	Acidic Volley	3	0	0	1000	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+268	Acidic Spray	4	3	0	1000	0	12	-0.3	15	0	0	Mod damage done of frontmost row of enemies by -30% for 3 rounds	TRUE	
+269	Acidic Stomp	4	0	0	1000	0	3	1.2	15	1	0	Damage frontmost row of enemies for (1.2*attack) 	TRUE	
 270	Spidersong Webbing	4	2	0	1	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 2 rounds	TRUE	
-271	Ambush	4	3	0	8	0	7	1	5	1	0	Damage (tick) furthest enemy for (1*attack) each subsequent round for 3 rounds	TRUE	
-272	Soulfrost Shard	3	0	0	8	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-273	Ritual Curse	2	1	0	32	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds	#N/A	Unused
-274	Stomp Flesh	4	0	0	8	0	3	1.2	15	1	0	Damage frontmost row of enemies for (1.2*attack) 	TRUE	
-275	Necromantic Infusion	4	2	0	32	0	12	0.75	2	0	0	Mod damage done of closest ally by 75% for 2 rounds	TRUE	
-276	Rot Volley	3	3	0	32	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 	TRUE	
-276	Rot Volley	3	3	0	32	1	7	0.5	5	11	3	Damage (tick) furthest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	"To-do: test nore=true
+271	Ambush	4	3	0	1000	0	7	1	5	1	0	Damage (tick) furthest enemy for (1*attack) each subsequent round for 3 rounds	TRUE	
+272	Soulfrost Shard	3	0	0	1000	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+273	Ritual Curse	2	1	0	100000	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds	#N/A	Unused
+274	Stomp Flesh	4	0	0	1000	0	3	1.2	15	1	0	Damage frontmost row of enemies for (1.2*attack) 	TRUE	
+275	Necromantic Infusion	4	2	0	100000	0	12	0.75	2	0	0	Mod damage done of closest ally by 75% for 2 rounds	TRUE	
+276	Rot Volley	3	3	0	100000	0	3	0.25	5	1	0	Damage furthest enemy for (0.25*attack) 	TRUE	
+276	Rot Volley	3	3	0	100000	1	7	0.5	5	11	3	Damage (tick) furthest enemy for (0.5*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	"To-do: test nore=true
 "
-277	Seething Rage	4	2	0	8	0	12	1	1	0	0	Mod damage done of self by 100% for 2 rounds	TRUE	
-278	Memory Displacement	3	2	0	64	0	14	0.5	5	0	0	Mod damage taken of furthest enemy by 50% for 2 rounds	TRUE	
-279	Painful Recollection	4	0	0	64	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
+277	Seething Rage	4	2	0	1000	0	12	1	1	0	0	Mod damage done of self by 100% for 2 rounds	TRUE	
+278	Memory Displacement	3	2	0	1000000	0	14	0.5	5	0	0	Mod damage taken of furthest enemy by 50% for 2 rounds	TRUE	
+279	Painful Recollection	4	0	0	1000000	0	3	0.5	17	1	0	Damage backmost row of enemies for (0.5*attack) 	TRUE	
 280	Quills	6	0	0	1	0	3	2.5	15	1	0	Damage frontmost row of enemies for (2.5*attack) 	TRUE	
-281	Anima Spit	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
+281	Anima Spit	3	0	0	1000000	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
 282	Charged Javelin	5	0	1	1	0	3	10	3	1	0	Damage closest enemy for (10*attack) 	TRUE	
-283	Anima Claws	4	0	0	64	0	3	0.75	13	1	0	Damage closest column of enemies for (0.75*attack) 	TRUE	Ignored: ineffective Effect.Target
-284	Empyreal Reflexes	4	1	0	64	0	14	-0.5	22	0	0	Mod damage taken of all-other allies by -50% for 1 rounds	TRUE	
-285	Forsworn's Wrath	4	2	1	32	0	14	0.5	7	0	0	Mod damage taken of all enemies by 50% for 2 rounds	TRUE	
+283	Anima Claws	4	0	0	1000000	0	3	0.75	13	1	0	Damage closest column of enemies for (0.75*attack) 	TRUE	Ignored: ineffective Effect.Target
+284	Empyreal Reflexes	4	1	0	1000000	0	14	-0.5	22	0	0	Mod damage taken of all-other allies by -50% for 1 rounds	TRUE	
+285	Forsworn's Wrath	4	2	1	100000	0	14	0.5	7	0	0	Mod damage taken of all enemies by 50% for 2 rounds	TRUE	
 286	CHARGE!	3	2	0	1	0	12	0.5	2	0	0	Mod damage done of closest ally by 50% for 2 rounds	TRUE	
 287	Elusive Duelist	3	1	0	1	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 1 rounds	TRUE	
 288	Stone Swipe	4	0	0	1	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 	TRUE	
-289	Toxic Bolt	2	3	0	32	0	7	1	5	11	3	Damage (tick) furthest enemy for (1*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	
-290	Ashen Bolt	3	0	0	64	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
-291	Ashen Blast	3	0	0	64	0	3	1	15	1	3	Damage frontmost row of enemies for (1*attack) 	TRUE	
+289	Toxic Bolt	2	3	0	100000	0	7	1	5	11	3	Damage (tick) furthest enemy for (1*attack) immediately and each subsequent 3rd round for 3 rounds	TRUE	
+290	Ashen Bolt	3	0	0	1000000	0	3	1.5	5	1	3	Damage furthest enemy for (1.5*attack) 	TRUE	
+291	Ashen Blast	3	0	0	1000000	0	3	1	15	1	3	Damage frontmost row of enemies for (1*attack) 	TRUE	
 292	Master's Surprise	2	2	0	1	0	14	0.5	3	0	0	Mod damage taken of closest enemy by 50% for 2 rounds	TRUE	
 292	Master's Surprise	2	2	0	1	1	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
 293	Stone Crush	3	0	0	1	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	#N/A	Unused
 294	Stone Bash	3	0	0	1	0	3	2	3	1	0	Damage closest enemy for (2*attack) 	TRUE	
-295	Dreadful Exhaust	2	2	0	32	0	14	0.5	3	0	2	Mod damage taken of closest enemy by 50% for 2 rounds	TRUE	
-296	Death Bolt	3	0	1	32	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 	TRUE	
-297	Anima Thirst	4	0	0	32	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
-297	Anima Thirst	4	0	0	32	1	4	0.3	1	1	0	Heal self for (0.3*attack) 	TRUE	
-298	Anima Leech	4	0	0	32	0	3	1	21	1	0	Damage random encounter for (1*attack) 	TRUE	
-298	Anima Leech	4	0	0	32	1	4	0.3	1	1	0	Heal self for (0.3*attack) 	TRUE	
-299	Plague Blast	2	0	0	32	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 		
-300	Wave of Eternal Death	1	3	0	32	0	7	0.05	23	1	1	Damage (tick) all followers for (0.05*attack) each subsequent round for 3 rounds	TRUE	To-do: test stacking ticks from the same spell behaviour
-301	Bombardment of Dread	1	0	0	32	0	3	0.1	20	0	0	Damage random follower for 10% 	TRUE	
-302	Bramble Trap	1	1	0	8	0	3	0.2	7	1	2	Damage all enemies for (0.2*attack) 	TRUE	
-302	Bramble Trap	1	1	0	8	1	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 1 rounds	TRUE	
-303	Plague Song	0	0	0	8	0	3	0.25	17	1	0	Damage backmost row of enemies for (0.25*attack) 		
-305	Roots of Submission	1	0	0	8	0	3	1.2	17	1	0	Damage backmost row of enemies for (1.2*attack) 	TRUE	
-306	Arcane Empowerment	3	3	0	64	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 3 rounds	TRUE	
-306	Arcane Empowerment	3	3	0	64	1	18	0.6	2	1	0	Mod max health of closest ally by (0.6*attack) for 3 rounds	TRUE	
-307	Fist of Nature	3	0	0	8	0	3	1.6	11	1	0	Damage closest cone of enemies for (1.6*attack) 		
-308	Spore of Doom	3	0	1	8	0	3	3.5	5	1	0	Damage furthest enemy for (3.5*attack) 	TRUE	
-309	Threads of Fate	4	1	0	8	0	4	2	6	1	0	Heal all allies for (2*attack) 	TRUE	
-309	Threads of Fate	4	1	0	8	1	12	0.3	6	0	0	Mod damage done of all allies by 30% for 1 rounds	TRUE	
-310	Axe of Determination	2	1	0	2	0	3	1.4	3	1	0	Damage closest enemy for (1.4*attack) 		
-310	Axe of Determination	2	1	0	2	1	12	0.2	1	0	0	Mod damage done of self by 20% for 1 rounds		
-311	Wings of Mending	2	2	0	2	0	4	1.2	2	1	0	Heal closest ally for (1.2*attack) 		
-311	Wings of Mending	2	2	0	2	1	18	0.4	2	1	0	Mod max health of closest ally by (0.4*attack) for 2 rounds		
-312	Panoptic Beam	3	0	0	2	0	3	1.8	11	1	0	Damage closest cone of enemies for (1.8*attack) 		
-313	Spirit's Guidance	0	0	0	2	0	4	0.7	6	1	0	Heal all allies for (0.7*attack) 		
-314	Purifying Light	3	2	0	2	0	4	1.3	2	1	0	Heal closest ally for (1.3*attack) 	TRUE	
-314	Purifying Light	3	2	0	2	1	19	0.5	2	1	0	Mod damage done of closest ally by (0.5*attack) for 2 rounds	TRUE	
-315	Resounding Message	3	2	0	4	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-315	Resounding Message	3	2	0	4	1	12	-0.3	5	1	0	Mod damage done of furthest enemy by -30% for 2 rounds	TRUE	
-316	Self Replication	1	0	0	32	0	3	1	3	1	0	Damage closest enemy for (1*attack) 		
-316	Self Replication	1	0	0	32	1	4	0.3	1	1	0	Heal self for (0.3*attack) 		
-317	Shocking Fist	3	1	0	32	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
-317	Shocking Fist	3	1	0	32	1	20	0.3	15	1	0	Mod damage taken of frontmost row of enemies by (0.3*attack) for 1 rounds		
+295	Dreadful Exhaust	2	2	0	100000	0	14	0.5	3	0	2	Mod damage taken of closest enemy by 50% for 2 rounds	TRUE	
+296	Death Bolt	3	0	1	100000	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 	TRUE	
+297	Anima Thirst	4	0	0	100000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
+297	Anima Thirst	4	0	0	100000	1	4	0.3	1	1	0	Heal self for (0.3*attack) 	TRUE	
+298	Anima Leech	4	0	0	100000	0	3	1	21	1	0	Damage random encounter for (1*attack) 	TRUE	
+298	Anima Leech	4	0	0	100000	1	4	0.3	1	1	0	Heal self for (0.3*attack) 	TRUE	
+299	Plague Blast	2	0	0	100000	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 		
+300	Wave of Eternal Death	1	3	0	100000	0	7	0.05	23	1	1	Damage (tick) all followers for (0.05*attack) each subsequent round for 3 rounds	TRUE	To-do: test stacking ticks from the same spell behaviour
+301	Bombardment of Dread	1	0	0	100000	0	3	0.1	20	0	0	Damage random follower for 10% 	TRUE	
+302	Bramble Trap	1	1	0	1000	0	3	0.2	7	1	2	Damage all enemies for (0.2*attack) 	TRUE	
+302	Bramble Trap	1	1	0	1000	1	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 1 rounds	TRUE	
+303	Plague Song	0	0	0	1000	0	3	0.25	17	1	0	Damage backmost row of enemies for (0.25*attack) 		
+305	Roots of Submission	1	0	0	1000	0	3	1.2	17	1	0	Damage backmost row of enemies for (1.2*attack) 	TRUE	
+306	Arcane Empowerment	3	3	0	1000000	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 3 rounds	TRUE	
+306	Arcane Empowerment	3	3	0	1000000	1	18	0.6	2	1	0	Mod max health of closest ally by (0.6*attack) for 3 rounds	TRUE	
+307	Fist of Nature	3	0	0	1000	0	3	1.6	11	1	0	Damage closest cone of enemies for (1.6*attack) 		
+308	Spore of Doom	3	0	1	1000	0	3	3.5	5	1	0	Damage furthest enemy for (3.5*attack) 	TRUE	
+309	Threads of Fate	4	1	0	1000	0	4	2	6	1	0	Heal all allies for (2*attack) 	TRUE	
+309	Threads of Fate	4	1	0	1000	1	12	0.3	6	0	0	Mod damage done of all allies by 30% for 1 rounds	TRUE	
+310	Axe of Determination	2	2	0	10	0	3	1.4	3	1	0	Damage closest enemy for (1.4*attack) 		
+310	Axe of Determination	2	2	0	10	1	12	0.2	1	0	0	Mod damage done of self by 20% for 2 rounds		
+311	Wings of Mending	2	2	0	10	0	4	1.2	2	1	0	Heal closest ally for (1.2*attack) 		
+311	Wings of Mending	2	2	0	10	1	18	0.4	2	1	0	Mod max health of closest ally by (0.4*attack) for 2 rounds		
+312	Panoptic Beam	3	0	0	10	0	3	1.8	11	1	0	Damage closest cone of enemies for (1.8*attack) 		
+313	Spirit's Guidance	0	0	0	10	0	4	0.7	6	1	0	Heal all allies for (0.7*attack) 		
+314	Purifying Light	3	2	0	10	0	4	1.3	2	1	0	Heal closest ally for (1.3*attack) 	TRUE	
+314	Purifying Light	3	2	0	10	1	19	0.5	2	1	0	Mod damage done of closest ally by (0.5*attack) for 2 rounds	TRUE	
+315	Resounding Message	3	2	0	100	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+315	Resounding Message	3	2	0	100	1	12	-0.3	5	1	0	Mod damage done of furthest enemy by -30% for 2 rounds	TRUE	
+316	Self Replication	1	0	0	100000	0	3	1	3	1	0	Damage closest enemy for (1*attack) 		
+316	Self Replication	1	0	0	100000	1	4	0.3	1	1	0	Heal self for (0.3*attack) 		
+317	Shocking Fist	3	1	0	100000	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
+317	Shocking Fist	3	1	0	100000	1	20	0.3	15	1	0	Mod damage taken of frontmost row of enemies by (0.3*attack) for 1 rounds		
 318	Inspiring Howl	3	3	0	1	0	19	0.5	6	1	0	Mod damage done of all allies by (0.5*attack) for 3 rounds		
-319	Shattering Blows	4	3	0	32	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 		
-319	Shattering Blows	4	3	0	32	1	7	0.5	15	1	0	Damage (tick) frontmost row of enemies for (0.5*attack) each subsequent round for 3 rounds		
-320	Hailstorm	0	0	0	16	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 		
-321	Adjustment	1	0	0	16	0	4	2	2	1	0	Heal closest ally for (2*attack) 	TRUE	
-322	Balance In All Things	2	1	0	16	0	3	0.8	3	1	0	Damage closest enemy for (0.8*attack) 		
-322	Balance In All Things	2	1	0	16	1	4	0.8	1	1	0	Heal self for (0.8*attack) 		
-322	Balance In All Things	2	1	0	16	2	18	0.8	1	1	0	Mod max health of self by (0.8*attack) for 1 rounds		
+319	Shattering Blows	4	3	0	100000	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 		
+319	Shattering Blows	4	3	0	100000	1	7	0.5	15	1	0	Damage (tick) frontmost row of enemies for (0.5*attack) each subsequent round for 3 rounds		
+320	Hailstorm	0	0	0	10000	0	3	1	17	1	0	Damage backmost row of enemies for (1*attack) 		
+321	Adjustment	1	0	0	10000	0	4	2	2	1	0	Heal closest ally for (2*attack) 	TRUE	
+322	Balance In All Things	2	1	0	10000	0	3	0.8	3	1	0	Damage closest enemy for (0.8*attack) 		
+322	Balance In All Things	2	1	0	10000	1	4	0.8	1	1	0	Heal self for (0.8*attack) 		
+322	Balance In All Things	2	1	0	10000	2	18	0.8	1	1	0	Mod max health of self by (0.8*attack) for 1 rounds		
 323	Anima Shatter	3	2	0	0	0	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 		
 323	Anima Shatter	3	2	0	0	1	12	-0.1	17	0	0	Mod damage done of backmost row of enemies by -10% for 2 rounds		
-324	Protective Parasol	1	0	0	32	0	4	1.2	8	1	0	Heal closest allies for (1.2*attack) 		
-325	Vision of Beauty	3	2	0	32	0	12	0.6	8	0	0	Mod damage done of closest allies by 60% for 2 rounds		
-326	Shiftless Smash	4	0	0	16	0	3	0.25	9	1	0	Damage closest enemies for (0.25*attack) 	TRUE	
-327	Inspirational Teachings	5	3	0	32	0	19	0.2	22	1	0	Mod damage done of all-other allies by (0.2*attack) for 3 rounds	TRUE	
-328	Applied Lesson	2	0	0	33	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
-329	Muscle Up	5	3	0	4	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 3 rounds	TRUE	
-330	Oversight	5	2	0	4	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 2 rounds	TRUE	
-331	Supporting Fire	3	3	0	4	0	19	0.2	22	1	0	Mod damage done of all-other allies by (0.2*attack) for 3 rounds	TRUE	
-332	Emptied Mug	2	0	0	32	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
-333	Overload	5	3	0	64	0	19	0.4	1	1	0	Mod damage done of self by (0.4*attack) for 3 rounds	TRUE	
-334	Hefty Package	2	0	0	32	0	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 	TRUE	
-335	Errant Package	2	0	0	64	0	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
-336	Evidence of Wrongdoing	3	0	0	4	0	4	0.8	2	1	0	Heal closest ally for (0.8*attack) 	TRUE	
-337	Wavebender's Tide	4	3	0	16	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 	TRUE	
-337	Wavebender's Tide	4	3	0	16	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 3 rounds	TRUE	
+324	Protective Parasol	1	0	0	100000	0	4	1.2	8	1	0	Heal closest allies for (1.2*attack) 		
+325	Vision of Beauty	3	2	0	100000	0	12	0.6	8	0	0	Mod damage done of closest allies by 60% for 2 rounds		
+326	Shiftless Smash	4	0	0	10000	0	3	0.25	9	1	0	Damage closest enemies for (0.25*attack) 	TRUE	
+327	Inspirational Teachings	5	3	0	100000	0	19	0.2	22	1	0	Mod damage done of all-other allies by (0.2*attack) for 3 rounds	TRUE	
+328	Applied Lesson	2	0	0	100001	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
+329	Muscle Up	5	3	0	100	0	14	-0.5	1	0	0	Mod damage taken of self by -50% for 3 rounds	TRUE	
+330	Oversight	5	2	0	100	0	19	0.2	6	1	0	Mod damage done of all allies by (0.2*attack) for 2 rounds	TRUE	
+331	Supporting Fire	3	3	0	100	0	19	0.2	22	1	0	Mod damage done of all-other allies by (0.2*attack) for 3 rounds	TRUE	
+332	Emptied Mug	2	0	0	100000	0	3	1.5	5	1	0	Damage furthest enemy for (1.5*attack) 	TRUE	
+333	Overload	5	3	0	1000000	0	19	0.4	1	1	0	Mod damage done of self by (0.4*attack) for 3 rounds	TRUE	
+334	Hefty Package	2	0	0	100000	0	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 	TRUE	
+335	Errant Package	2	0	0	1000000	0	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
+336	Evidence of Wrongdoing	3	0	0	100	0	4	0.8	2	1	0	Heal closest ally for (0.8*attack) 	TRUE	
+337	Wavebender's Tide	4	3	0	10000	0	3	2	5	1	0	Damage furthest enemy for (2*attack) 	TRUE	
+337	Wavebender's Tide	4	3	0	10000	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 3 rounds	TRUE	
 338	Scallywag Slash	2	0	0	1	0	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
-339	Cannon Barrage	3	0	1	4	0	3	1.2	7	1	0	Damage all enemies for (1.2*attack) 	TRUE	
-340	Tainted Bite	3	0	0	4	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	#N/A	Unused
-341	Tainted Bite	5	3	0	32	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
-341	Tainted Bite	5	3	0	32	1	20	0.2	5	1	0	Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds	TRUE	
-342	Regurgitated Meal	1	1	0	8	0	3	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
-342	Regurgitated Meal	1	1	0	8	1	19	-0.7	3	1	0	Mod damage done of closest enemy by (-0.7*attack) for 1 rounds	TRUE	
-343	Sharptooth Snarl	3	1	0	64	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 	TRUE	
-343	Sharptooth Snarl	3	1	0	64	1	12	0.2	1	0	0	Mod damage done of self by 20% for 1 rounds	TRUE	
-344	Razorwing Buffet	1	0	0	4	0	3	0.3	7	1	0	Damage all enemies for (0.3*attack) 	TRUE	
-345	Protective Wings	4	3	0	64	0	20	-0.3	6	1	0	Mod damage taken of all allies by (-0.3*attack) for 3 rounds	TRUE	
-346	Heel Bite	4	2	0	8	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
-346	Heel Bite	4	2	0	8	1	19	0.01	3	1	0	Mod damage done of closest enemy by (0.01*attack) for 2 rounds	TRUE	Ignored: incorrect Effect.Points
-347	Darkness from Above	2	0	0	32	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
-348	Tainted Bite	5	3	0	32	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
-348	Tainted Bite	5	3	0	32	1	20	0.2	5	1	0	Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds	TRUE	
-349	Anima Swell	4	0	0	64	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
+339	Cannon Barrage	3	0	1	100	0	3	1.2	7	1	0	Damage all enemies for (1.2*attack) 	TRUE	
+340	Tainted Bite	3	0	0	100	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	#N/A	Unused
+341	Tainted Bite	5	3	0	100000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
+341	Tainted Bite	5	3	0	100000	1	20	0.2	5	1	0	Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds	TRUE	
+342	Regurgitated Meal	1	1	0	1000	0	3	1	3	1	0	Damage closest enemy for (1*attack) 	TRUE	
+342	Regurgitated Meal	1	1	0	1000	1	19	-0.7	3	1	0	Mod damage done of closest enemy by (-0.7*attack) for 1 rounds	TRUE	
+343	Sharptooth Snarl	3	1	0	1000000	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 	TRUE	
+343	Sharptooth Snarl	3	1	0	1000000	1	12	0.2	1	0	0	Mod damage done of self by 20% for 1 rounds	TRUE	
+344	Razorwing Buffet	1	0	0	100	0	3	0.3	7	1	0	Damage all enemies for (0.3*attack) 	TRUE	
+345	Protective Wings	4	3	0	1000000	0	20	-0.3	6	1	0	Mod damage taken of all allies by (-0.3*attack) for 3 rounds	TRUE	
+346	Heel Bite	4	2	0	1000	0	3	0.3	3	1	0	Damage closest enemy for (0.3*attack) 	TRUE	
+346	Heel Bite	4	2	0	1000	1	19	0.01	3	1	0	Mod damage done of closest enemy by (0.01*attack) for 2 rounds	TRUE	Ignored: incorrect Effect.Points
+347	Darkness from Above	2	0	0	100000	0	3	1	11	1	0	Damage closest cone of enemies for (1*attack) 	TRUE	
+348	Tainted Bite	5	3	0	100000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
+348	Tainted Bite	5	3	0	100000	1	20	0.2	5	1	0	Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds	TRUE	
+349	Anima Swell	4	0	0	1000000	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
+356	Bone Ambush	2	0	0	1	0	1	2	5	1	3	Damage furthest enemy for (1*attack) 		Ignored: incorrect Effect.Target
 ]]
 
 -- [ Process ]
