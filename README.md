@@ -29,7 +29,7 @@ The data initially exists in the Google Sheet [SimData: Spells](https://docs.goo
 
 | Build | Accuracy | Correct | Incorrect | Unverified | N/A | Total |
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: |
-| 9.1.0.39335 | 88.50% ± 11.50% | 308 | 0 | 92 | 45 | 445 |
+| 9.1.5.40622 | 88.15% ± 11.85% | 306 | 0 | 95 | 45 | 446 |
 
 ## Contributing
 The best way you can contribute is through issues if you spot any mistakes or have suggestions for improvements. Where applicable, it would be helpful for you to provide logs of missions with issues, especially if you have any that are for unverified spells.
