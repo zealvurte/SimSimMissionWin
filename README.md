@@ -18,7 +18,7 @@ Development will be broken down into the following stages (some concurrent and p
 **Please note:** No code for Sim Sim Mission Win itself will appear in this repository until the first version of the addon is ready to be tested, so until then, only [documentation](https://github.com/zealvurte/SimSimMissionWin/issues?q=label:documentation) will exist. Additionally, **no code from Venture Plan will appear in this repository**, except for necessary reference point snippets in issues during development, so **don't expect this work to help you get a version of Venture Plan that simulates correctly** without a lot of discovery and editing yourself.
 
 ## Simulation data
-The data initially exists in the Google Sheet [SimData: Spells](https://docs.google.com/spreadsheets/d/1sDbpMaQUaHaJ-daScq4Qi1AQDoFnnYw_pU5G6qrkBKU), which also serves as the primary location for marking verification status and comments for each effect. From here, it is processed through [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), with each output handled as follows:
+The data initially exists in the Google Sheet [SimData: Spells (PTR)](https://docs.google.com/spreadsheets/d/179dnOgIB-Qbwlmy0Sv2OWHZmkoSq3iGngGxVStGLjU4), which also serves as the primary location for marking verification status and comments for each effect. From here, it is processed through [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua), with each output handled as follows:
 - First table: Saved to [SimSimMissionWin/SimData.lua](SimData.lua) (for future addon use)
 - Second table: Saved to VenturePlan/vs-spells.lua (for verification), and as `vpData` in [SimData-Spells_tsv-to-lua.lua](SimData-Spells_tsv-to-lua.lua) (for future comparison)
 - Comparison lines: Checked for unexpected results when compared with previous versions
@@ -29,7 +29,7 @@ The data initially exists in the Google Sheet [SimData: Spells](https://docs.goo
 
 | Build | Accuracy | Correct | Incorrect | Unverified | N/A | Total |
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: |
-| 9.1.5.40622 | 88.15% ± 11.85% | 306 | 0 | 95 | 45 | 446 |
+| 9.2.0.41089 | 85.75% ± 14.25% | 306 | 0 | 122 | 45 | 473 |
 
 ## Contributing
 The best way you can contribute is through issues if you spot any mistakes or have suggestions for improvements. Where applicable, it would be helpful for you to provide logs of missions with issues, especially if you have any that are for unverified spells.
