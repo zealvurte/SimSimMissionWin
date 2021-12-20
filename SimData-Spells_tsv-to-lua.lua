@@ -643,8 +643,8 @@ local vpData = {
 	[123]={type="heal", healATK=30, target="friend-front-soft"},	-- Healing Winds: Heal frontmost row of allies for (0.3*attack) [VERIFIED]
 	[124]={type="nuke", damageATK=60, target="cleave"},	-- Kick: Damage closest enemies for (0.6*attack) [VERIFIED]
 	[125]={
-		[1]={type="nuke", damageATK=60, target="random-enemy"},	-- Deranged Gouge: Damage random follower for (0.6*attack) [UNVERFIED]
-		[2]={type="aura", modDamageDealt=-50, target="random-enemy", duration=1},	-- Deranged Gouge: Mod damage done of random follower by -50% for 1 rounds [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.Target and Effect.Period
+		[1]={type="nuke", damageATK=60, target="random-enemy"},	-- Deranged Gouge: Damage random follower for (0.6*attack) [VERIFIED]
+		[2]={type="aura", modDamageDealt=-50, target="random-enemy", duration=1},	-- Deranged Gouge: Mod damage done of random follower by -50% for 1 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target and Effect.Period
 	},
 	[126]={type="heal", healATK=20, target="friend-front-soft"},	-- Possessive Healing: Heal frontmost row of allies for (0.2*attack) [VERIFIED]
 	[127]={type="nuke", damageATK=60, target="enemy-front"},	-- Nibble: Damage frontmost row of enemies for (0.6*attack) [VERIFIED]
@@ -941,7 +941,7 @@ local vpData = {
 		[1]={type="aura", plusDamageDealtATK=40, target=3, duration=3},	-- Arcane Empowerment: Mod damage done of closest ally by (0.4*attack) for 3 rounds [VERIFIED]
 		[2]={type="aura", modMaxHPATK=60, target=3, duration=3},	-- Arcane Empowerment: Mod max health of closest ally by (0.6*attack) for 3 rounds [VERIFIED]
 	},
-	[307]={type="nuke", damageATK=160, target="cone"},	-- Fist of Nature: Damage closest cone of enemies for (1.6*attack) [UNVERFIED]
+	[307]={type="nuke", damageATK=160, target="cone"},	-- Fist of Nature: Damage closest cone of enemies for (1.6*attack) [VERIFIED]
 	[308]={type="nuke", damageATK=350, target=1, firstTurn=3},	-- Spore of Doom: Damage furthest enemy for (3.5*attack) [VERIFIED]
 	[309]={
 		[1]={type="heal", healATK=200, target="all-allies"},	-- Threads of Fate: Heal all allies for (2*attack) [VERIFIED]
@@ -1573,8 +1573,8 @@ Ignored: ineffective Effect.Target"
 122	Humorous Flame	2	0	0	100	0	7	0.3	21	1	3	Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds	TRUE	Ignored: ineffective Spell.Duration and Effect.Period
 123	Healing Winds	4	0	0	1000	0	4	0.3	14	1	0	Heal frontmost row of allies for (0.3*attack) 	TRUE	
 124	Kick	3	0	0	1000	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 		
-125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds		Ignored: ineffective Effect.Target and Effect.Period
+125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 	TRUE	
+125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds	TRUE	Ignored: ineffective Effect.Target and Effect.Period
 126	Possessive Healing	3	1	0	1000	0	4	0.2	14	1	0	Heal frontmost row of allies for (0.2*attack) 	TRUE	
 127	Nibble	4	1	0	1000	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
 128	Regurgitate	5	1	0	1000	0	3	0.75	17	1	0	Damage backmost row of enemies for (0.75*attack) 	TRUE	
@@ -1798,7 +1798,7 @@ Ignored: ineffective Effect.Period"
 305	Roots of Submission	1	0	0	1000	0	3	1.2	17	1	0	Damage backmost row of enemies for (1.2*attack) 	TRUE	
 306	Arcane Empowerment	3	3	0	1000000	0	19	0.4	2	1	0	Mod damage done of closest ally by (0.4*attack) for 3 rounds	TRUE	
 306	Arcane Empowerment	3	3	0	1000000	1	18	0.6	2	1	0	Mod max health of closest ally by (0.6*attack) for 3 rounds	TRUE	
-307	Fist of Nature	3	0	0	1000	0	3	1.6	11	1	0	Damage closest cone of enemies for (1.6*attack) 		
+307	Fist of Nature	3	0	0	1000	0	3	1.6	11	1	0	Damage closest cone of enemies for (1.6*attack) 	TRUE	
 308	Spore of Doom	3	0	1	1000	0	3	3.5	5	1	0	Damage furthest enemy for (3.5*attack) 	TRUE	
 309	Threads of Fate	4	1	0	1000	0	4	2	6	1	0	Heal all allies for (2*attack) 	TRUE	
 309	Threads of Fate	4	1	0	1000	1	12	0.3	6	0	0	Mod damage done of all allies by 30% for 1 rounds	TRUE	
