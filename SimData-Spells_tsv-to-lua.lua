@@ -1040,8 +1040,8 @@ local vpData = {
 	[354]={type="nuke", damageATK=400, target="enemy-front", firstTurn=5},	-- Energy Blast: Damage frontmost row of enemies for (4*attack) [UNVERFIED]
 	[355]={type="passive", modDamageDealt=-25, target=1},	-- Mitigation Aura: Mod damage done of furthest enemy by -25% indefinitely [UNVERFIED]
 	[356]={type="nuke", damageATK=100, target=1},	-- Bone Ambush: Damage furthest enemy for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Target
-	[357]={type="passive", modDamageDealt=-50, target=0},	-- Mitigation Aura: Mod damage done of closest enemy by -50% indefinitely [UNVERFIED]
-	[358]={type="nuke", damageATK=400, target="enemy-front", firstTurn=5},	-- Deconstructive Slam: Damage frontmost row of enemies for (4*attack) [UNVERFIED]
+	[357]={type="passive", modDamageDealt=-50, target=0},	-- Mitigation Aura: Mod damage done of closest enemy by -50% indefinitely [VERIFIED]
+	[358]={type="nuke", damageATK=400, target="enemy-front", firstTurn=5},	-- Deconstructive Slam: Damage frontmost row of enemies for (4*attack) [VERIFIED]
 	[359]={type="aura", damageATK=50, target=1, duration=4, period=3, noFirstTick=true},	-- Pain Projection: Damage (tick) furthest enemy for (0.5*attack) each subsequent 3rd round for 3 rounds [UNVERFIED]
 	[360]={type="nuke", damageATK=50, target="enemy-front"},	-- Anima Draw: Damage frontmost row of enemies for (0.5*attack) [UNVERFIED]
 	[361]={type="nuke", damageATK=75, target="enemy-front"},	-- Geostorm: Damage frontmost row of enemies for (0.75*attack) [UNVERFIED]
@@ -1050,21 +1050,21 @@ local vpData = {
 	[364]={type="taunt", target="all-enemies", duration=2},	-- Intimidating Presence: Taunt all enemies for 2 rounds [UNVERFIED]
 	[365]={type="aura", modDamageTaken=50, target=0, duration=1},	-- Mawsworn Strength: Mod damage taken of closest enemy by 50% for 1 rounds [UNVERFIED]
 	[366]={type="nuke", damageATK=50, target="enemy-front"},	-- Domination Lash: Damage frontmost row of enemies for (0.5*attack) [UNVERFIED]
-	[367]={type="nuke", damageATK=75, target="cone"},	-- Domination Thrust: Damage closest cone of enemies for (0.75*attack) [UNVERFIED]
-	[368]={type="nuke", damageATK=60, target=1},	-- Domination Bombardment: Damage furthest enemy for (0.6*attack) [UNVERFIED]
-	[369]={type="aura", damagePerc=100, target="all-enemies", duration=3, period=2, nore=true},	-- Power of Domination: Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type or Effect.Flags
-	[370]={type="aura", modDamageDealt=-50, target="all-enemies", duration=2},	-- Dominating Presence: Mod damage done of all enemies by -50% for 2 rounds [UNVERFIED]
-	[371]={type="aura", modDamageTaken=-25, target="all-other-allies", duration=2},	-- Acceleration Field: Mod damage taken of all-other allies by -25% for 2 rounds [UNVERFIED]
+	[367]={type="nuke", damageATK=75, target="cone"},	-- Domination Thrust: Damage closest cone of enemies for (0.75*attack) [VERIFIED]
+	[368]={type="nuke", damageATK=60, target=1},	-- Domination Bombardment: Damage furthest enemy for (0.6*attack) [VERIFIED]
+	[369]={type="aura", damagePerc=100, target="all-enemies", duration=3, period=2, nore=true},	-- Power of Domination: Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type or Effect.Flags
+	[370]={type="aura", modDamageDealt=-50, target="all-enemies", duration=2},	-- Dominating Presence: Mod damage done of all enemies by -50% for 2 rounds [VERIFIED]
+	[371]={type="aura", modDamageTaken=-25, target="all-other-allies", duration=2},	-- Acceleration Field: Mod damage taken of all-other allies by -25% for 2 rounds [VERIFIED]
 	[372]={type="nuke", damageATK=80, target="enemy-front"},	-- Mace Smash: Damage frontmost row of enemies for (0.8*attack) [UNVERFIED]
 	[373]={
 		[1]={type="nuke", damageATK=100, target=1},	-- Repurpose Anima Flow: Damage furthest enemy for (1*attack) [UNVERFIED]
 		[2]={type="heal", healATK=100, target=4},	-- Repurpose Anima Flow: Heal self for (1*attack) [UNVERFIED]
 	},
 	[374]={
-		[1]={type="nuke", damageATK=100, target=1},	-- Anima Thirst: Damage furthest enemy for (1*attack) [UNVERFIED]
-		[2]={type="heal", healATK=40, target=4},	-- Anima Thirst: Heal self for (0.4*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=100, target=1},	-- Anima Thirst: Damage furthest enemy for (1*attack) [VERIFIED]
+		[2]={type="heal", healATK=40, target=4},	-- Anima Thirst: Heal self for (0.4*attack) [VERIFIED]
 	},
-	[375]={type="aura", modDamageDealt=-20, target="all-enemies", duration=2},	-- Tangling Roots: Mod damage done of all enemies by -20% for 2 rounds [UNVERFIED]
+	[375]={type="aura", modDamageDealt=-20, target="all-enemies", duration=2},	-- Tangling Roots: Mod damage done of all enemies by -20% for 2 rounds [VERIFIED]
 }
 local function checkForMultiKeys(e,nk)
 	for k in pairs(e) do
@@ -1896,8 +1896,8 @@ Ignored: ineffective Effect.Period"
 354	Energy Blast	5	0	1	1000000	0	3	4	15	1	0	Damage frontmost row of enemies for (4*attack) 		
 355	Mitigation Aura	0	0	0	1000000	0	12	-0.25	5	0	0	Mod damage done of furthest enemy by -25% indefinitely		
 356	Bone Ambush	2	0	0	1	0	1	2	5	1	3	Damage furthest enemy for (1*attack) 		Ignored: incorrect Effect.Target
-357	Mitigation Aura	0	0	0	1000000	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% indefinitely		
-358	Deconstructive Slam	5	0	1	1	0	3	4	15	1	0	Damage frontmost row of enemies for (4*attack) 		
+357	Mitigation Aura	0	0	0	1000000	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% indefinitely	TRUE	
+358	Deconstructive Slam	5	0	1	1	0	3	4	15	1	0	Damage frontmost row of enemies for (4*attack) 	TRUE	
 359	Pain Projection	5	3	0	100000	0	7	0.5	5	1	3	Damage (tick) furthest enemy for (0.5*attack) each subsequent 3rd round for 3 rounds		
 360	Anima Draw	3	0	0	1000000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
 361	Geostorm	4	0	0	1	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 		
@@ -1906,17 +1906,17 @@ Ignored: ineffective Effect.Period"
 364	Intimidating Presence	6	2	0	1	0	9	0	7	0	0	Taunt all enemies for 2 rounds		
 365	Mawsworn Strength	3	1	0	100000	0	14	0.5	3	0	0	Mod damage taken of closest enemy by 50% for 1 rounds		
 366	Domination Lash	4	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
-367	Domination Thrust	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 		
-368	Domination Bombardment	3	0	0	100000	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 		
-369	Power of Domination	4	2	0	1	0	7	1	7	10	2	Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds		Ignored: incorrect Effect.Type or Effect.Flags
-370	Dominating Presence	5	2	0	1	0	12	-0.5	7	0	2	Mod damage done of all enemies by -50% for 2 rounds		
-371	Acceleration Field	5	2	0	1000	0	14	-0.25	22	0	0	Mod damage taken of all-other allies by -25% for 2 rounds		
+367	Domination Thrust	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
+368	Domination Bombardment	3	0	0	100000	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	TRUE	
+369	Power of Domination	4	2	0	1	0	7	1	7	10	2	Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds	TRUE	Ignored: incorrect Effect.Type or Effect.Flags
+370	Dominating Presence	5	2	0	1	0	12	-0.5	7	0	2	Mod damage done of all enemies by -50% for 2 rounds	TRUE	
+371	Acceleration Field	5	2	0	1000	0	14	-0.25	22	0	0	Mod damage taken of all-other allies by -25% for 2 rounds	TRUE	
 372	Mace Smash	4	0	0	1	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 		
 373	Repurpose Anima Flow	5	0	0	1000000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 		
 373	Repurpose Anima Flow	5	0	0	1000000	1	4	1	1	1	0	Heal self for (1*attack) 		
-374	Anima Thirst	5	0	0	100000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 		
-374	Anima Thirst	5	0	0	100000	1	4	0.4	1	1	0	Heal self for (0.4*attack) 		
-375	Tangling Roots	4	2	0	1000	0	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 2 rounds		
+374	Anima Thirst	5	0	0	100000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
+374	Anima Thirst	5	0	0	100000	1	4	0.4	1	1	0	Heal self for (0.4*attack) 	TRUE	
+375	Tangling Roots	4	2	0	1000	0	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
 ]]
 
 -- [ Process ]
