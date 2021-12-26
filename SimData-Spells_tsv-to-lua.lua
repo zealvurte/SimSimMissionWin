@@ -344,13 +344,13 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 		if id == 73 or id == 102 then effect.target="col"	-- Followers using col
 		else effect.target=0 end	-- Always closest enemy for encounters because it doesn't work on followers
 	elseif effect.target == 14 then
-		if effect.type == "heal" then effect.target="friend-front-soft"	-- Target self too if in the same row
-		elseif previousEffect and previousEffect.target == 4 and t > 8 and ((effect.plusDamageDealt and effect.plusDamageDealt == previousEffect.plusDamageDealt) or (effect.plusDamageDealtATK and effect.plusDamageDealtATK == previousEffect.plusDamageDealtATK) or (effect.modDamageDealt and effect.modDamageDealt == previousEffect.modDamageDealt) or (effect.plusDamageTaken and effect.plusDamageTaken == previousEffect.plusDamageTaken) or (effect.plusDamageTakenATK and effect.plusDamageTakenATK == previousEffect.plusDamageTakenATK) or (effect.modDamageTaken and effect.modDamageTaken == previousEffect.modDamageTaken) or ((t == 9 or t == 10) and effect.type == previousEffect.type and ((effect.shroudTurns and effect.shroudTurns == previousEffect.shroudTurns) or (effect.duration and effect.duration == previousEffect.duration)))) then effect.target="friend-front-hard"	-- Exclude self from duplicate effect of previous effect
+		if effect.type == "heal" then effect.target="friend-front-soft"	-- Include self in the same row for heals
+		elseif effect.type == "aura" then effect.target="friend-front-hard"	-- Exclude self in the same row for auras
 		else effect.target="friend-front" end
 	elseif effect.target == 15 then effect.target="enemy-front"
 	elseif effect.target == 16 then
-		if effect.type == "heal" then effect.target="friend-back-soft"	-- Target self too if in the same row
-		elseif previousEffect and previousEffect.target == 4 and t > 8 and ((effect.plusDamageDealt and effect.plusDamageDealt == previousEffect.plusDamageDealt) or (effect.plusDamageDealtATK and effect.plusDamageDealtATK == previousEffect.plusDamageDealtATK) or (effect.modDamageDealt and effect.modDamageDealt == previousEffect.modDamageDealt) or (effect.plusDamageTaken and effect.plusDamageTaken == previousEffect.plusDamageTaken) or (effect.plusDamageTakenATK and effect.plusDamageTakenATK == previousEffect.plusDamageTakenATK) or (effect.modDamageTaken and effect.modDamageTaken == previousEffect.modDamageTaken) or ((t == 9 or t == 10) and effect.type == previousEffect.type and ((effect.shroudTurns and effect.shroudTurns == previousEffect.shroudTurns) or (effect.duration and effect.duration == previousEffect.duration)))) then effect.target="friend-back-hard"	-- Exclude self from duplicate effect of previous effect
+		if effect.type == "heal" then effect.target="friend-back-soft"	-- Include self in the same row for heals
+		elseif effect.type == "aura" then effect.target="friend-back-hard"	-- Exclude self in the same row for auras
 		else effect.target="friend-back" end
 	elseif effect.target == 17 then effect.target="enemy-back"
 	elseif effect.target == 18 then effect.target="all"
