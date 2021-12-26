@@ -1046,7 +1046,7 @@ local vpData = {
 	[360]={type="nuke", damageATK=50, target="enemy-front"},	-- Anima Draw: Damage frontmost row of enemies for (0.5*attack) [UNVERFIED]
 	[361]={type="nuke", damageATK=75, target="enemy-front"},	-- Geostorm: Damage frontmost row of enemies for (0.75*attack) [UNVERFIED]
 	[362]={type="nuke", damageATK=120, target=1},	-- Anima Stinger: Damage furthest enemy for (1.2*attack) [UNVERFIED]
-	[363]={type="aura", modDamageDealt=10, target="friend-front", duration=2},	-- Pack Instincts: Mod damage done of frontmost row of allies by 10% for 2 rounds [UNVERFIED]
+	[363]={type="aura", modDamageDealt=10, target="friend-front-hard", duration=2},	-- Pack Instincts: Mod damage done of frontmost row of allies by 10% for 2 rounds [UNVERFIED]
 	[364]={type="taunt", target="all-enemies", duration=2},	-- Intimidating Presence: Taunt all enemies for 2 rounds [UNVERFIED]
 	[365]={type="aura", modDamageTaken=50, target=0, duration=1},	-- Mawsworn Strength: Mod damage taken of closest enemy by 50% for 1 rounds [UNVERFIED]
 	[366]={type="nuke", damageATK=50, target="enemy-front"},	-- Domination Lash: Damage frontmost row of enemies for (0.5*attack) [UNVERFIED]
@@ -1433,8 +1433,7 @@ local function compareToVP(b,useOriginalVP)
 end
 
 -- [ Data ]
-local data = [[
-1	DNT JasonTest Envirospell	2	1	0	0	0	1	350	24	1	0	Damage all encounters for (1*attack) 	#N/A	Unused
+local data = [[1	DNT JasonTest Envirospell	2	1	0	0	0	1	350	24	1	0	Damage all encounters for (1*attack) 	#N/A	Unused
 2	DNT JasonTest Ability Spell	4	2	1	0	0	19	0.2	22	1	2	Mod damage done of all-other allies by (0.2*attack) for 2 rounds	#N/A	"Unused
 Ignored: ineffective Effect.Period"
 2	DNT JasonTest Ability Spell	4	2	1	0	1	4	1	1	0	0	Heal self for 100% 	#N/A	Unused
@@ -1902,10 +1901,10 @@ Ignored: ineffective Effect.Period"
 360	Anima Draw	3	0	0	1000000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
 361	Geostorm	4	0	0	1	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 		
 362	Anima Stinger	4	0	0	1000000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 		
-363	Pack Instincts	5	2	0	1000	0	12	0.1	14	0	0	Mod damage done of frontmost row of allies by 10% for 2 rounds		
-364	Intimidating Presence	6	2	0	1	0	9	0	7	0	0	Taunt all enemies for 2 rounds		
-365	Mawsworn Strength	3	1	0	100000	0	14	0.5	3	0	0	Mod damage taken of closest enemy by 50% for 1 rounds		
-366	Domination Lash	4	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 		
+363	Pack Instincts	5	2	0	1000	0	12	0.1	14	0	0	Mod damage done of frontmost row of allies by 10% for 2 rounds	TRUE	
+364	Intimidating Presence	6	2	0	1	0	9	0	7	0	0	Taunt all enemies for 2 rounds	TRUE	
+365	Mawsworn Strength	3	1	0	100000	0	14	0.5	3	0	0	Mod damage taken of closest enemy by 50% for 1 rounds	TRUE	
+366	Domination Lash	4	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
 367	Domination Thrust	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
 368	Domination Bombardment	3	0	0	100000	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	TRUE	
 369	Power of Domination	4	2	0	1	0	7	1	7	10	2	Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds	TRUE	Ignored: incorrect Effect.Type or Effect.Flags
