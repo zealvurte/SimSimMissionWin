@@ -2,7 +2,7 @@
 ## Introduction
 This an attempt to create a new replacement for the World of Warcraft addon [Venture Plan](https://www.townlong-yak.com/addons/venture-plan), without reuse and distribution of its ARR code.
 
-While the addon has proved invaluable and helpful to so many, the author's licensing choice, and subsequent hiatus has left many in a difficult situation. The rights to continue it have since been granted to a new author, so we should see a new version in time, but this doesn't solve the immediate need, and I wish to avoid a repeat of the situation, while creating a addon that does some things differently to Venture Plan and can be continued without me.
+While the addon has proved invaluable and helpful to so many, the author's licensing choice, and subsequent hiatus has left many in a difficult situation. The rights to continue it with a new author are available under specific terms, so we may see a new version in time, but this doesn't solve the immediate need, and I wish to avoid a repeat of the situation, while creating a addon that does some things differently to Venture Plan and can be continued without me.
 
 ## Development
 Development will be broken down into the following stages (some concurrent and part of an ongoing iterative cycle):
