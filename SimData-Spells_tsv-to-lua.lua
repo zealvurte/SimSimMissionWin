@@ -1605,8 +1605,8 @@ Ignored: ineffective Effect.Target"
 122	Humorous Flame	2	0	0	100	0	7	0.3	21	1	3	Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds	TRUE	Ignored: ineffective Spell.Duration and Effect.Period
 123	Healing Winds	4	0	0	1000	0	4	0.3	14	1	0	Heal frontmost row of allies for (0.3*attack) 	TRUE	
 124	Kick	3	0	0	1000	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds	TRUE	
+125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 	TRUE
+125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds	TRUE
 126	Possessive Healing	3	1	0	1000	0	4	0.2	14	1	0	Heal frontmost row of allies for (0.2*attack) 	TRUE	
 127	Nibble	4	1	0	1000	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
 128	Regurgitate	5	1	0	1000	0	3	0.75	17	1	0	Damage backmost row of enemies for (0.75*attack) 	TRUE	
