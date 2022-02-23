@@ -280,6 +280,24 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 	elseif t == 9 then effect.type="taunt"
 	elseif useOriginalVP and t == 10 then effect.type="heal" -- Detaunt used to be marked as a type=heal
 	elseif t == 10 then effect.type="shroud" end	-- Mark detaunts as type="shroud"
+	if useOriginalVP and t == 10 and duration then	-- Detaunts used to use duration as a separate shroudTurns value because they were reusing type=heal
+		effect.duration=nil
+		effect.shroudTurns=duration
+	elseif duration and effect.type == "aura" or effect.type == "taunt" or effect.type == "shroud" then effect.duration=duration end
+	if t > 4 and t < 9 then
+		if duration then effect.duration=duration+1
+		elseif not duration then effect.duration=1 end
+		effect.period=effect.period and effect.period > 1 and effect.period or nil
+		if not effect.flags or effect.flags&2^1 == 0 then effect.noFirstTick=true end
+		if not effect.noFirstTick then effect.nore=true end
+		if useOriginalVP and effect.period and effect.period > 1 and effect.duration and effect.period <= effect.duration and effect.duration/effect.period < 2 then	-- Periodic ticks greater than 2 that won't repeat within the duration used to use echo instead
+			effect.type=effect.noFirstTick and "aura" or "nuke"
+			effect.echo=effect.period
+			effect.period=nil
+			effect.duration=effect.noFirstTick and 0 or (effect.type == "aura" and 1 or nil)
+		end
+	else effect.period=nil end
+	if effect.type == "aura" and useOriginalVP and not effect.duration then return {type="nop"} end	-- Auras with no duration are unhandled by VP, and never cast
 	if t ~= 12 and t ~= 14 and effect.flags and effect.flags&2^0 ~= 0 then
 		if t == 1 or t == 2 or t == 11 or t == 13 or t == 15 then p=100	-- Always 100% of source.attack
 		else p=p and tonumber((tostring(p*100):gsub("%.0+",""))) or 0 end
@@ -305,23 +323,6 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 		elseif t == 17 then effect.modMaxHPFlat=p	-- VP has not implemented it
 		elseif t == 18 then effect.modMaxHP=p end
 	end
-	if useOriginalVP and t == 10 and duration then	-- Detaunts used to use duration as a separate shroudTurns value because they were reusing type=heal
-		effect.duration=nil
-		effect.shroudTurns=duration
-	elseif duration and effect.type == "aura" or effect.type == "taunt" or effect.type == "shroud" then effect.duration=duration end
-	if t > 4 and t < 9 then
-		if duration then effect.duration=duration+1
-		elseif not duration then effect.duration=1 end
-		effect.period=effect.period and effect.period > 1 and effect.period or nil
-		if not effect.flags or effect.flags&2^1 == 0 then effect.noFirstTick=true end
-		if not effect.noFirstTick then effect.nore=true end
-		if useOriginalVP and effect.period and effect.period > 1 and effect.duration and effect.period <= effect.duration and effect.duration/effect.period < 2 then	-- Periodic ticks greater than 2 that won't repeat within the duration used to use echo instead
-			effect.type=effect.noFirstTick and "aura" or "nuke"
-			effect.echo=effect.period
-			effect.period=nil
-			effect.duration=effect.noFirstTick and 0 or (effect.type == "aura" and 1 or nil)
-		end
-	else effect.period=nil end
 	if effect.target == 1 then effect.target=4
 	elseif effect.target == 2 then effect.target=3
 	elseif effect.target == 3 then effect.target=0
