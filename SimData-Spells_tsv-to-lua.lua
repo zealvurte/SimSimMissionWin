@@ -280,6 +280,24 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 	elseif t == 9 then effect.type="taunt"
 	elseif useOriginalVP and t == 10 then effect.type="heal" -- Detaunt used to be marked as a type=heal
 	elseif t == 10 then effect.type="shroud" end	-- Mark detaunts as type="shroud"
+	if useOriginalVP and t == 10 and duration then	-- Detaunts used to use duration as a separate shroudTurns value because they were reusing type=heal
+		effect.duration=nil
+		effect.shroudTurns=duration
+	elseif duration and effect.type == "aura" or effect.type == "taunt" or effect.type == "shroud" then effect.duration=duration end
+	if t > 4 and t < 9 then
+		if duration then effect.duration=duration+1
+		elseif not duration then effect.duration=1 end
+		effect.period=effect.period and effect.period > 1 and effect.period or nil
+		if not effect.flags or effect.flags&2^1 == 0 then effect.noFirstTick=true end
+		if not effect.noFirstTick then effect.nore=true end
+		if useOriginalVP and effect.period and effect.period > 1 and effect.duration and effect.period <= effect.duration and effect.duration/effect.period < 2 then	-- Periodic ticks greater than 2 that won't repeat within the duration used to use echo instead
+			effect.type=effect.noFirstTick and "aura" or "nuke"
+			effect.echo=effect.period
+			effect.period=nil
+			effect.duration=effect.noFirstTick and 0 or (effect.type == "aura" and 1 or nil)
+		end
+	else effect.period=nil end
+	if effect.type == "aura" and useOriginalVP and not effect.duration then return {type="nop"} end	-- Auras with no duration are unhandled by VP, and never cast
 	if t ~= 12 and t ~= 14 and effect.flags and effect.flags&2^0 ~= 0 then
 		if t == 1 or t == 2 or t == 11 or t == 13 or t == 15 then p=100	-- Always 100% of source.attack
 		else p=p and tonumber((tostring(p*100):gsub("%.0+",""))) or 0 end
@@ -305,23 +323,6 @@ local function convertToVPSpellEffect(effect,id,name,duration,cooldown,flags,env
 		elseif t == 17 then effect.modMaxHPFlat=p	-- VP has not implemented it
 		elseif t == 18 then effect.modMaxHP=p end
 	end
-	if useOriginalVP and t == 10 and duration then	-- Detaunts used to use duration as a separate shroudTurns value because they were reusing type=heal
-		effect.duration=nil
-		effect.shroudTurns=duration
-	elseif duration and effect.type == "aura" or effect.type == "taunt" or effect.type == "shroud" then effect.duration=duration end
-	if t > 4 and t < 9 then
-		if duration then effect.duration=duration+1
-		elseif not duration then effect.duration=1 end
-		effect.period=effect.period and effect.period > 1 and effect.period or nil
-		if not effect.flags or effect.flags&2^1 == 0 then effect.noFirstTick=true end
-		if not effect.noFirstTick then effect.nore=true end
-		if useOriginalVP and effect.period and effect.period > 1 and effect.duration and effect.period <= effect.duration and effect.duration/effect.period < 2 then	-- Periodic ticks greater than 2 that won't repeat within the duration used to use echo instead
-			effect.type=effect.noFirstTick and "aura" or "nuke"
-			effect.echo=effect.period
-			effect.period=nil
-			effect.duration=effect.noFirstTick and 0 or (effect.type == "aura" and 1 or nil)
-		end
-	else effect.period=nil end
 	if effect.target == 1 then effect.target=4
 	elseif effect.target == 2 then effect.target=3
 	elseif effect.target == 3 then effect.target=0
@@ -424,8 +425,8 @@ local vpData = {
 		[2]={type="nuke", damage=90.4, target=0},	-- DNT Owen Test Double Effect: Damage closest enemy for 90.4 [UNUSED]
 	},
 	[4]={
-		[1]={type="nuke", damageATK=75, target=0},	-- Double Strike: Damage closest enemy for (0.75*attack) [UNVERFIED]
-		[2]={type="nuke", damageATK=50, target=0},	-- Double Strike: Damage closest enemy for (0.5*attack) [UNVERFIED]
+		[1]={type="nuke", damageATK=75, target=0},	-- Double Strike: Damage closest enemy for (0.75*attack) [VERIFIED]
+		[2]={type="nuke", damageATK=50, target=0},	-- Double Strike: Damage closest enemy for (0.5*attack) [VERIFIED]
 	},
 	[5]={type="nuke", damageATK=10, target="all-enemies"},	-- Wing Sweep: Damage all enemies for (0.1*attack) [UNVERFIED]
 	[6]={type="nuke", damageATK=60, target="enemy-back"},	-- Blood Explosion: Damage backmost row of enemies for (0.6*attack) [UNVERFIED]
@@ -441,7 +442,7 @@ local vpData = {
 	[12]={type="heal", healATK=20, target="all-allies"},	-- Bone Reconstruction: Heal all allies for (0.2*attack) [VERIFIED]
 	[13]={type="heal", heal=10, target=3},	-- Gentle Caress: Heal closest ally for 10 [UNUSED]
 	[14]={type="heal", healATK=10, target="all-allies"},	-- Spirit's Caress: Heal all allies for (0.1*attack) [UNUSED]
-	[15]={type="nuke", damageATK=100, target=1},	-- Auto Attack: Damage furthest enemy for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+	[15]={type="nuke", damageATK=100, target=1},	-- Auto Attack: Damage furthest enemy for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[16]={type="nuke", damageATK=75, target=1},	-- Soulshatter: Damage furthest enemy for (0.75*attack) [UNVERFIED]
 	[17]={
 		[1]={type="nuke", damageATK=10, target="all-enemies"},	-- Gravedirt Special: Damage all enemies for (0.1*attack) [VERIFIED]
@@ -506,17 +507,17 @@ local vpData = {
 	},
 	[46]={
 		[1]={type="aura", modDamageTaken=-10, target=4, duration=1},	-- Shield of Tomorrow: Mod damage taken of self by -10% for 1 rounds [VERIFIED]
-		[2]={type="aura", modDamageTaken=-10, target="friend-back-hard", duration=1},	-- Shield of Tomorrow: Mod damage taken of backmost row of allies by -10% for 1 rounds [VERIFIED] To-do: test target=\"*-hard\" behaviour
+		[2]={type="aura", modDamageTaken=-10, target="friend-back-hard", duration=1},	-- Shield of Tomorrow: Mod damage taken of backmost row of allies by -10% for 1 rounds [VERIFIED]
 	},
 	[47]={type="passive", modDamageTaken=-20, target="all-allies"},	-- Protective Aura: Mod damage taken of all allies by -20% indefinitely [UNVERFIED]
 	[48]={
-		[1]={type="shroud", target=4, duration=1},	-- Shadow Walk: Detaunt self for 1 rounds [UNVERFIED]
-		[2]={type="heal", healATK=20, target=4},	-- Shadow Walk: Heal self for (0.2*attack) [UNVERFIED]
+		[1]={type="shroud", target=4, duration=1},	-- Shadow Walk: Detaunt self for 1 rounds [VERIFIED]
+		[2]={type="heal", healATK=20, target=4},	-- Shadow Walk: Heal self for (0.2*attack) [VERIFIED]
 	},
 	[49]={type="aura", modDamageTaken=33, target="enemy-back", duration=4},	-- Exsanguination: Mod damage taken of backmost row of enemies by 33% for 4 rounds [UNVERFIED]
 	[50]={type="nuke", damageATK=120, target=1},	-- Halberd Strike: Damage furthest enemy for (1.2*attack) [VERIFIED]
 	[51]={type="nuke", damageATK=75, target="enemy-front"},	-- Bonestorm: Damage frontmost row of enemies for (0.75*attack) [UNVERFIED]
-	[52]={type="nuke", damageATK=30, target="enemy-back"},	-- Plague Song: Damage backmost row of enemies for (0.3*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type
+	[52]={type="nuke", damageATK=30, target="enemy-back"},	-- Plague Song: Damage backmost row of enemies for (0.3*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[53]={
 		[1]={type="aura", damageATK=10, target="all-enemies", duration=7, period=2, noFirstTick=true},	-- Bramble Trap: Damage (tick) all enemies for (0.1*attack) each subsequent 2nd round for 6 rounds [UNUSED]
 		[2]={type="aura", modDamageDealt=-20, target="all-enemies", duration=6},	-- Bramble Trap: Mod damage done of all enemies by -20% for 6 rounds [UNUSED] #Bug/#Workaround: ignored ineffective Effect.Period
@@ -525,7 +526,7 @@ local vpData = {
 		[1]={type="nuke", damageATK=90, target=0},	-- Slicing Shadows: Damage closest enemy for (0.9*attack) [UNVERFIED]
 		[2]={type="nuke", damageATK=90, target=1},	-- Slicing Shadows: Damage furthest enemy for (0.9*attack) [UNVERFIED]
 	},
-	[55]={type="nuke", damageATK=150, target="enemy-front"},	-- Polite Greeting: Damage frontmost row of enemies for (1.5*attack) [UNVERFIED]
+	[55]={type="nuke", damageATK=150, target="enemy-front"},	-- Polite Greeting: Damage frontmost row of enemies for (1.5*attack) [VERIFIED]
 	[56]={type="nuke", damageATK=125, target=1},	-- Mirror of Torment: Damage furthest enemy for (1.25*attack) [UNVERFIED]
 	[57]={type="aura", damageATK=100, target=0, duration=4, noFirstTick=true},	-- Etiquette Lesson: Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds [UNVERFIED]
 	[58]={type="nuke", damageATK=70, target="cleave"},	-- Headcrack: Damage closest enemies for (0.7*attack) [VERIFIED]
@@ -546,13 +547,13 @@ local vpData = {
 		[2]={type="aura", modDamageDealt=-80, target="enemy-front", duration=1},	-- Glowhoof Trample: Mod damage done of frontmost row of enemies by -80% for 1 rounds [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Flags
 	},
 	[69]={
-		[1]={type="nuke", damageATK=100, target=4},	-- DNT JasonTest Ability Spell2: Damage self for (1*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type, and ineffective Effect.Period
+		[1]={type="nuke", damageATK=100, target=4},	-- DNT JasonTest Ability Spell2: Damage self for (1*attack) [UNUSED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points, and ineffective Effect.Period
 		[2]={type="nuke", damageATK=20, target=4},	-- DNT JasonTest Ability Spell2: Damage self for (0.2*attack) [UNUSED]
 		[3]={type="nuke", damage=50, target=4},	-- DNT JasonTest Ability Spell2: Damage self for 50 [UNUSED]
 		[4]={type="nop"},
 	},
 	[70]={type="nop"},
-	[71]={type="heal", healATK=100, target=3},	-- Revitalizing Vines: Heal closest ally for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+	[71]={type="heal", healATK=100, target=3},	-- Revitalizing Vines: Heal closest ally for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[72]={
 		[1]={type="nuke", damageATK=200, target=0},	-- Resonating Strike: Damage closest enemy for (2*attack) [VERIFIED]
 		[2]={type="nuke", damageATK=40, target="enemy-back"},	-- Resonating Strike: Damage backmost row of enemies for (0.4*attack) [VERIFIED]
@@ -574,7 +575,7 @@ local vpData = {
 		[1]={type="nuke", damageATK=120, target=1},	-- Dawnshock: Damage furthest enemy for (1.2*attack) [VERIFIED]
 		[2]={type="aura", damageATK=40, target=1, duration=3, noFirstTick=true},	-- Dawnshock: Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds [VERIFIED]
 	},
-	[81]={type="aura", thornsATK=100, target=4, duration=3},	-- Reconfiguration: Reflect: Damage attacker of self for (1*attack) for 3 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+	[81]={type="aura", thornsATK=100, target=4, duration=3},	-- Reconfiguration: Reflect: Damage attacker of self for (1*attack) for 3 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[82]={type="passive", thornsATK=25, target=4},	-- Mace to Hand: Damage attacker of self for (0.25*attack) indefinitely [VERIFIED]
 	[83]={type="nuke", damageATK=120, target="cleave"},	-- Lead the Charge: Damage closest enemies for (1.2*attack) [VERIFIED]
 	[84]={type="aura", modDamageDealt=-100, target="all-enemies", duration=2, firstTurn=4},	-- Sparkling Driftglobe Core: Mod damage done of all enemies by -100% for 2 rounds [VERIFIED]
@@ -613,7 +614,7 @@ local vpData = {
 	[102]={type="nuke", damageATK=30, target="col"},	-- Forest's Touch: Damage closest column of enemies for (0.3*attack) [VERIFIED]
 	[103]={type="aura", modDamageDealt=100, target="all-other-allies", duration=2},	-- Social Butterfly: Mod damage done of all-other allies by 100% for 2 rounds [VERIFIED]
 	[104]={
-		[1]={type="heal", healATK=100, target=3},	-- Podtender: Heal closest ally for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+		[1]={type="heal", healATK=100, target=3},	-- Podtender: Heal closest ally for (1*attack) [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 		[2]={type="aura", modDamageDealt=-10, target=3, duration=1},	-- Podtender: Mod damage done of closest ally by -10% for 1 rounds [VERIFIED]
 	},
 	[105]={type="passive", modDamageTaken=-10, target="all-allies"},	-- Hold the Line: Mod damage taken of all allies by -10% indefinitely [VERIFIED]
@@ -631,7 +632,7 @@ local vpData = {
 	[111]={type="nuke", damageATK=100, target="enemy-front"},	-- Sulfuric Emission: Damage frontmost row of enemies for (1*attack) [UNVERFIED]
 	[112]={type="aura", plusDamageDealtATK=30, target="friend-surround", duration=3},	-- Gnashing Chompers: Mod damage done of closest allies by (0.3*attack) for 3 rounds [UNVERFIED] #Bug/#Workaround: ignored ineffective Effect.flags EXTRA_INITIAL_PERIOD
 	[113]={type="nuke", damageATK=120, target="cone"},	-- Secutor's Judgment: Damage closest cone of enemies for (1.2*attack) [UNVERFIED]
-	[114]={type="heal", healATK=100, target=4},	-- Reconstruction: Heal self for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+	[114]={type="heal", healATK=100, target=4},	-- Reconstruction: Heal self for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	[115]={type="nuke", damageATK=70, target="cleave"},	-- Dynamic Fist: Damage closest enemies for (0.7*attack) [UNVERFIED]
 	[116]={type="nuke", damageATK=120, target=0},	-- Dreaming Charge: Damage closest enemy for (1.2*attack) [VERIFIED]
 	[117]={type="nuke", damageATK=40, target="enemy-front"},	-- Swift Slash: Damage frontmost row of enemies for (0.4*attack) [VERIFIED]
@@ -644,7 +645,7 @@ local vpData = {
 	[124]={type="nuke", damageATK=60, target="cleave"},	-- Kick: Damage closest enemies for (0.6*attack) [VERIFIED]
 	[125]={
 		[1]={type="nuke", damageATK=60, target="random-enemy"},	-- Deranged Gouge: Damage random follower for (0.6*attack) [VERIFIED]
-		[2]={type="aura", modDamageDealt=-50, target="random-enemy", duration=1},	-- Deranged Gouge: Mod damage done of random follower by -50% for 1 rounds [VERIFIED] #Bug/#Workaround: ignored ineffective Effect.Target and Effect.Period
+		[2]={type="aura", modDamageDealt=-50, target="random-enemy", duration=1},	-- Deranged Gouge: Mod damage done of random follower by -50% for 1 rounds [VERIFIED]
 	},
 	[126]={type="heal", healATK=20, target="friend-front-soft"},	-- Possessive Healing: Heal frontmost row of allies for (0.2*attack) [VERIFIED]
 	[127]={type="nuke", damageATK=60, target="enemy-front"},	-- Nibble: Damage frontmost row of enemies for (0.6*attack) [VERIFIED]
@@ -751,8 +752,8 @@ local vpData = {
 	[189]={type="nuke", damageATK=200, target=0},	-- Angry Bash: Damage closest enemy for (2*attack) [UNVERFIED]
 	[190]={type="nuke", damageATK=150, target="enemy-front"},	-- Anima Wave: Damage frontmost row of enemies for (1.5*attack) [UNVERFIED]
 	[191]={
-		[1]={type="nuke", damageATK=100, target="all-enemies"},	-- Toxic Dispersal: Damage all enemies for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type
-		[2]={type="heal", healATK=100, target="all-allies"},	-- Toxic Dispersal: Heal all allies for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type
+		[1]={type="nuke", damageATK=100, target="all-enemies"},	-- Toxic Dispersal: Damage all enemies for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
+		[2]={type="heal", healATK=100, target="all-allies"},	-- Toxic Dispersal: Heal all allies for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Type, or ineffective Effect.Points
 	},
 	[192]={type="nuke", damageATK=160, target=1},	-- Shadow Bolt: Damage furthest enemy for (1.6*attack) [UNVERFIED]
 	[193]={
@@ -1033,7 +1034,38 @@ local vpData = {
 		[2]={type="aura", plusDamageTakenATK=20, target=1, duration=3},	-- Tainted Bite: Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds [VERIFIED]
 	},
 	[349]={type="nuke", damageATK=10, target="all-enemies"},	-- Anima Swell: Damage all enemies for (0.1*attack) [VERIFIED]
-	[356]={type="nuke", damageATK=100, target=1},	-- Bone Ambush: Damage furthest enemy for (1*attack) [UNVERFIED] #Bug/#Workaround: ignored incorrect Effect.Target
+	[350]={type="nuke", damageATK=25, target="cleave"},	-- Attack Wave: Damage closest enemies for (0.25*attack) [VERIFIED]
+	[351]={type="nuke", damageATK=75, target=1, firstTurn=4},	-- Attack Pulse: Damage furthest enemy for (0.75*attack) [VERIFIED]
+	[352]={type="aura", modDamageTaken=30, target=4},	-- Active Shielding: Mod damage taken of self by 30% for 0 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Spell.Duration
+	[353]={type="aura", modDamageDealt=20, target=1},	-- Disruptive Field: Mod damage done of furthest enemy by 20% for 0 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Spell.Duration
+	[354]={type="nuke", damageATK=400, target="enemy-front", firstTurn=5},	-- Energy Blast: Damage frontmost row of enemies for (4*attack) [VERIFIED]
+	[355]={type="passive", modDamageDealt=-25, target=1},	-- Mitigation Aura: Mod damage done of furthest enemy by -25% indefinitely [VERIFIED]
+	[356]={type="nuke", damageATK=100, target=1},	-- Bone Ambush: Damage furthest enemy for (1*attack) [VERIFIED]
+	[357]={type="passive", modDamageDealt=-50, target=0},	-- Mitigation Aura: Mod damage done of closest enemy by -50% indefinitely [VERIFIED]
+	[358]={type="nuke", damageATK=400, target="enemy-front", firstTurn=5},	-- Deconstructive Slam: Damage frontmost row of enemies for (4*attack) [VERIFIED]
+	[359]={type="aura", damageATK=50, target=1, duration=4, period=3, noFirstTick=true},	-- Pain Projection: Damage (tick) furthest enemy for (0.5*attack) each subsequent 3rd round for 3 rounds [VERIFIED]
+	[360]={type="nuke", damageATK=50, target="enemy-front"},	-- Anima Draw: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
+	[361]={type="nuke", damageATK=75, target="enemy-front"},	-- Geostorm: Damage frontmost row of enemies for (0.75*attack) [VERIFIED]
+	[362]={type="nuke", damageATK=120, target=1},	-- Anima Stinger: Damage furthest enemy for (1.2*attack) [VERIFIED]
+	[363]={type="aura", modDamageDealt=10, target="friend-front-hard", duration=2},	-- Pack Instincts: Mod damage done of frontmost row of allies by 10% for 2 rounds [VERIFIED]
+	[364]={type="taunt", target="all-enemies", duration=2},	-- Intimidating Presence: Taunt all enemies for 2 rounds [VERIFIED]
+	[365]={type="aura", modDamageTaken=50, target=0, duration=1},	-- Mawsworn Strength: Mod damage taken of closest enemy by 50% for 1 rounds [VERIFIED]
+	[366]={type="nuke", damageATK=50, target="enemy-front"},	-- Domination Lash: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
+	[367]={type="nuke", damageATK=75, target="cone"},	-- Domination Thrust: Damage closest cone of enemies for (0.75*attack) [VERIFIED]
+	[368]={type="nuke", damageATK=60, target=1},	-- Domination Bombardment: Damage furthest enemy for (0.6*attack) [VERIFIED]
+	[369]={type="aura", damagePerc=100, target="all-enemies", duration=3, period=2, nore=true},	-- Power of Domination: Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Flags
+	[370]={type="aura", modDamageDealt=-50, target="all-enemies", duration=2},	-- Dominating Presence: Mod damage done of all enemies by -50% for 2 rounds [VERIFIED]
+	[371]={type="aura", modDamageTaken=-25, target="all-other-allies", duration=2},	-- Acceleration Field: Mod damage taken of all-other allies by -25% for 2 rounds [VERIFIED]
+	[372]={type="nuke", damageATK=80, target="enemy-front"},	-- Mace Smash: Damage frontmost row of enemies for (0.8*attack) [VERIFIED]
+	[373]={
+		[1]={type="nuke", damageATK=100, target=1},	-- Repurpose Anima Flow: Damage furthest enemy for (1*attack) [VERIFIED]
+		[2]={type="heal", healATK=100, target=4},	-- Repurpose Anima Flow: Heal self for (1*attack) [VERIFIED]
+	},
+	[374]={
+		[1]={type="nuke", damageATK=100, target=1},	-- Anima Thirst: Damage furthest enemy for (1*attack) [VERIFIED]
+		[2]={type="heal", healATK=40, target=4},	-- Anima Thirst: Heal self for (0.4*attack) [VERIFIED]
+	},
+	[375]={type="aura", modDamageDealt=-20, target="all-enemies", duration=2},	-- Tangling Roots: Mod damage done of all enemies by -20% for 2 rounds [VERIFIED]
 }
 local function checkForMultiKeys(e,nk)
 	for k in pairs(e) do
@@ -1409,8 +1441,8 @@ Ignored: ineffective Effect.Period"
 2	DNT JasonTest Ability Spell	4	2	1	0	1	4	1	1	0	0	Heal self for 100% 	#N/A	Unused
 3	DNT Owen Test Double Effect	3	0	0	0	0	2	45.2	1	0	0	Heal self for 45.2 	#N/A	Unused
 3	DNT Owen Test Double Effect	3	0	0	0	1	1	90.4	3	0	0	Damage closest enemy for 90.4 	#N/A	Unused
-4	Double Strike	3	0	0	1	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 		
-4	Double Strike	3	0	0	1	1	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 		
+4	Double Strike	3	0	0	1	0	3	0.75	3	1	0	Damage closest enemy for (0.75*attack) 	TRUE	
+4	Double Strike	3	0	0	1	1	3	0.5	3	1	0	Damage closest enemy for (0.5*attack) 	TRUE	
 5	Wing Sweep	1	0	0	1	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 		
 6	Blood Explosion	2	0	0	100000	0	3	0.6	17	1	0	Damage backmost row of enemies for (0.6*attack) 		
 7	Skeleton Smash	2	1	0	100000	0	3	0.1	3	1	0	Damage closest enemy for (0.1*attack) 	TRUE	
@@ -1424,7 +1456,7 @@ Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 12	Bone Reconstruction	1	1	0	100000	0	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
 13	Gentle Caress	0	0	0	1000	0	2	10	2	0	0	Heal closest ally for 10 	#N/A	Unused
 14	Spirit's Caress	3	0	0	100000	0	4	0.1	6	1	0	Heal all allies for (0.1*attack) 	#N/A	Unused
-15	Auto Attack	0	0	0	1	0	1	0.5	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
+15	Auto Attack	0	0	0	1	0	1	0.5	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
 16	Soulshatter	1	0	0	100000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
 17	Gravedirt Special	0	0	0	10000	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
 17	Gravedirt Special	0	0	0	10000	1	2	100	1	1	0	Heal self for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
@@ -1469,21 +1501,21 @@ Ignored: ineffective Effect.Points"
 45	Siphon Soul	2	0	0	1000000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
 45	Siphon Soul	2	0	0	1000000	1	4	0.25	1	1	0	Heal self for (0.25*attack) 	TRUE	
 46	Shield of Tomorrow	2	1	0	10	0	14	-0.1	1	0	0	Mod damage taken of self by -10% for 1 rounds	TRUE	
-46	Shield of Tomorrow	2	1	0	10	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds	TRUE	To-do: test target="*-hard" behaviour
+46	Shield of Tomorrow	2	1	0	10	1	14	-0.1	16	0	0	Mod damage taken of backmost row of allies by -10% for 1 rounds	TRUE	
 47	Protective Aura	0	0	0	100000	0	14	-0.2	6	0	0	Mod damage taken of all allies by -20% indefinitely		
-48	Shadow Walk	4	1	0	100000	0	10	0	1	1	0	Detaunt self for 1 rounds		
-48	Shadow Walk	4	1	0	100000	1	4	0.2	1	1	0	Heal self for (0.2*attack) 		
+48	Shadow Walk	4	1	0	100000	0	10	0	1	1	0	Detaunt self for 1 rounds	TRUE	
+48	Shadow Walk	4	1	0	100000	1	4	0.2	1	1	0	Heal self for (0.2*attack) 	TRUE	
 49	Exsanguination	4	4	0	100000	0	14	0.33	17	0	0	Mod damage taken of backmost row of enemies by 33% for 4 rounds		
 50	Halberd Strike	3	0	0	1	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
 51	Bonestorm	5	0	0	100000	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 		
 52	Plague Song	5	4	0	1000	0	3	0.3	17	1	0	Damage backmost row of enemies for (0.3*attack) 	#N/A	"Unused
-Ignored: incorrect Effect.Type"
+Ignored: incorrect Effect.Type, or ineffective Effect.Points"
 53	Bramble Trap	6	6	0	1000	0	7	0.1	7	1	2	Damage (tick) all enemies for (0.1*attack) each subsequent 2nd round for 6 rounds	#N/A	Unused
 53	Bramble Trap	6	6	0	1000	1	12	-0.2	7	1	2	Mod damage done of all enemies by -20% for 6 rounds	#N/A	"Unused
 Ignored: ineffective Effect.Period"
 54	Slicing Shadows	3	0	0	100000	0	3	0.9	3	1	0	Damage closest enemy for (0.9*attack) 		
 54	Slicing Shadows	3	0	0	100000	1	3	0.9	5	1	0	Damage furthest enemy for (0.9*attack) 		
-55	Polite Greeting	4	0	0	1	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
+55	Polite Greeting	4	0	0	1	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 	TRUE	
 56	Mirror of Torment	1	0	0	1000000	0	3	1.25	5	1	0	Damage furthest enemy for (1.25*attack) 		
 57	Etiquette Lesson	5	3	0	100000	0	7	1	3	1	0	Damage (tick) closest enemy for (1*attack) each subsequent round for 3 rounds		
 58	Headcrack	2	0	0	1	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 	TRUE	
@@ -1501,13 +1533,13 @@ Ignored: ineffective Effect.Period"
 68	Glowhoof Trample	3	1	1	10	1	12	-0.8	15	0	0	Mod damage done of frontmost row of enemies by -80% for 1 rounds	#N/A	"Unused
 Ignored: incorrect Effect.Flags"
 69	DNT JasonTest Ability Spell2	3	2	0	0	0	1	50	1	1	2	Damage self for (1*attack) 	#N/A	"Unused
-Ignored: incorrect Effect.Type, and ineffective Effect.Period"
+Ignored: incorrect Effect.Type, or ineffective Effect.Points, and ineffective Effect.Period"
 69	DNT JasonTest Ability Spell2	3	2	0	0	1	3	0.2	1	1	2	Damage self for (0.2*attack) 	#N/A	Unused
 69	DNT JasonTest Ability Spell2	3	2	0	0	2	1	50	1	0	0	Damage self for 50 	#N/A	Unused
 69	DNT JasonTest Ability Spell2	3	2	0	0	3	3	0.2	0	0	0	Damage nothing for 20% 	#N/A	"Unused
 Ignored: ineffective Effect.Target"
 70	DNT JasonTest Spell Tooltip	0	0	0	0	0	0	0	0	0	0	Do nothing to nothing for 0 	#N/A	Unused
-71	Revitalizing Vines	2	0	0	1000	0	2	0.3	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
+71	Revitalizing Vines	2	0	0	1000	0	2	0.3	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
 72	Resonating Strike	4	0	0	10	0	3	2	3	1	0	Damage closest enemy for (2*attack) 	TRUE	
 72	Resonating Strike	4	0	0	10	1	3	0.4	17	1	0	Damage backmost row of enemies for (0.4*attack) 	TRUE	
 73	Purification Ray	2	0	0	10	0	3	1	13	1	0	Damage closest column of enemies for (1*attack) 	TRUE	
@@ -1521,7 +1553,7 @@ Ignored: ineffective Effect.Target"
 79	Holy Nova	2	0	0	10	1	4	0.2	6	1	0	Heal all allies for (0.2*attack) 	TRUE	
 80	Dawnshock	3	2	0	100	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
 80	Dawnshock	3	2	0	100	1	7	0.4	5	1	0	Damage (tick) furthest enemy for (0.4*attack) each subsequent round for 2 rounds	TRUE	
-81	Reconfiguration: Reflect	5	3	0	10	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	Ignored: incorrect Effect.Type
+81	Reconfiguration: Reflect	5	3	0	10	0	15	3	1	1	0	Damage attacker of self for (1*attack) for 3 rounds	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
 82	Mace to Hand	0	0	0	1	0	16	0.25	1	1	0	Damage attacker of self for (0.25*attack) indefinitely	TRUE	
 83	Lead the Charge	3	0	0	1	0	3	1.2	9	1	0	Damage closest enemies for (1.2*attack) 	TRUE	
 84	Sparkling Driftglobe Core	4	2	1	1000000	0	12	-1	7	0	0	Mod damage done of all enemies by -100% for 2 rounds	TRUE	
@@ -1549,7 +1581,7 @@ Ignored: ineffective Effect.Target"
 101	Strangleheart Seed	4	3	0	10000	1	14	0.2	3	0	0	Mod damage taken of closest enemy by 20% for 3 rounds	TRUE	
 102	Forest's Touch	2	0	0	1000	0	3	0.3	13	1	0	Damage closest column of enemies for (0.3*attack) 	TRUE	
 103	Social Butterfly	4	2	0	1000	0	12	1	22	0	0	Mod damage done of all-other allies by 100% for 2 rounds	TRUE	
-104	Podtender	1	1	0	1000	0	2	0.9	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type
+104	Podtender	1	1	0	1000	0	2	0.9	2	1	0	Heal closest ally for (1*attack) 	TRUE	Ignored: incorrect Effect.Type, or ineffective Effect.Points
 104	Podtender	1	1	0	1000	1	12	-0.1	2	0	0	Mod damage done of closest ally by -10% for 1 rounds	TRUE	
 105	Hold the Line	0	0	0	1	0	14	-0.1	6	0	0	Mod damage taken of all allies by -10% indefinitely	TRUE	
 106	Face Your Foes	2	0	0	1	0	3	0.4	9	1	0	Damage closest enemies for (0.4*attack) 	TRUE	
@@ -1562,7 +1594,7 @@ Ignored: ineffective Effect.Target"
 111	Sulfuric Emission	3	0	0	1000	0	3	1	15	1	0	Damage frontmost row of enemies for (1*attack) 		
 112	Gnashing Chompers	5	3	0	100000	0	19	0.3	8	11	0	Mod damage done of closest allies by (0.3*attack) for 3 rounds		Ignored: ineffective Effect.flags EXTRA_INITIAL_PERIOD
 113	Secutor's Judgment	4	0	0	110000	0	3	1.2	11	1	0	Damage closest cone of enemies for (1.2*attack) 		
-114	Reconstruction	1	0	0	100000	0	2	0.6	1	1	0	Heal self for (1*attack) 		Ignored: incorrect Effect.Type
+114	Reconstruction	1	0	0	100000	0	2	0.6	1	1	0	Heal self for (1*attack) 		Ignored: incorrect Effect.Type, or ineffective Effect.Points
 115	Dynamic Fist	2	0	0	100000	0	3	0.7	9	1	0	Damage closest enemies for (0.7*attack) 		
 116	Dreaming Charge	3	0	0	1000	0	3	1.2	3	1	0	Damage closest enemy for (1.2*attack) 	TRUE	
 117	Swift Slash	2	0	0	1000	0	3	0.4	15	1	0	Damage frontmost row of enemies for (0.4*attack) 	TRUE	
@@ -1573,8 +1605,8 @@ Ignored: ineffective Effect.Target"
 122	Humorous Flame	2	0	0	100	0	7	0.3	21	1	3	Damage (tick) random encounter for (0.3*attack) each subsequent 3rd round for 0 rounds	TRUE	Ignored: ineffective Spell.Duration and Effect.Period
 123	Healing Winds	4	0	0	1000	0	4	0.3	14	1	0	Heal frontmost row of allies for (0.3*attack) 	TRUE	
 124	Kick	3	0	0	1000	0	3	0.6	9	1	0	Damage closest enemies for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 	TRUE	
-125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds	TRUE	Ignored: ineffective Effect.Target and Effect.Period
+125	Deranged Gouge	3	1	0	1000	0	3	0.6	20	1	0	Damage random follower for (0.6*attack) 	TRUE
+125	Deranged Gouge	3	1	0	1000	1	12	-0.5	20	0	1	Mod damage done of random follower by -50% for 1 rounds	TRUE
 126	Possessive Healing	3	1	0	1000	0	4	0.2	14	1	0	Heal frontmost row of allies for (0.2*attack) 	TRUE	
 127	Nibble	4	1	0	1000	0	3	0.6	15	1	0	Damage frontmost row of enemies for (0.6*attack) 	TRUE	
 128	Regurgitate	5	1	0	1000	0	3	0.75	17	1	0	Damage backmost row of enemies for (0.75*attack) 	TRUE	
@@ -1654,8 +1686,8 @@ Ignored: ineffective Effect.Period"
 188	Angry Smash	3	1	0	1	1	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% for 1 rounds		
 189	Angry Bash	3	0	0	1	0	3	2	3	1	0	Damage closest enemy for (2*attack) 		
 190	Anima Wave	3	0	0	100000	0	3	1.5	15	1	0	Damage frontmost row of enemies for (1.5*attack) 		
-191	Toxic Dispersal	1	0	0	1000	0	1	0.2	7	1	0	Damage all enemies for (1*attack) 		Ignored: incorrect Effect.Type
-191	Toxic Dispersal	1	0	0	1000	1	2	0.1	6	1	0	Heal all allies for (1*attack) 		Ignored: incorrect Effect.Type
+191	Toxic Dispersal	1	0	0	1000	0	1	0.2	7	1	0	Damage all enemies for (1*attack) 		Ignored: incorrect Effect.Type, or ineffective Effect.Points
+191	Toxic Dispersal	1	0	0	1000	1	2	0.1	6	1	0	Heal all allies for (1*attack) 		Ignored: incorrect Effect.Type, or ineffective Effect.Points
 192	Shadow Bolt	2	0	0	100000	0	3	1.6	5	1	0	Damage furthest enemy for (1.6*attack) 		
 193	Flesh Eruption	2	0	0	100000	0	3	3	15	1	0	Damage frontmost row of enemies for (3*attack) 		
 193	Flesh Eruption	2	0	0	100000	1	3	0.5	1	1	0	Damage self for (0.5*attack) 		
@@ -1858,7 +1890,34 @@ Ignored: ineffective Effect.Period"
 348	Tainted Bite	5	3	0	100000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
 348	Tainted Bite	5	3	0	100000	1	20	0.2	5	1	0	Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds	TRUE	
 349	Anima Swell	4	0	0	1000000	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
-356	Bone Ambush	2	0	0	1	0	1	2	5	1	3	Damage furthest enemy for (1*attack) 		Ignored: incorrect Effect.Target
+350	Attack Wave	4	0	0	1000000	0	3	0.25	9	1	0	Damage closest enemies for (0.25*attack) 	TRUE	
+351	Attack Pulse	4	0	1	1000000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
+352	Active Shielding	4	0	0	1000000	0	14	0.3	1	1	2	Mod damage taken of self by 30% for 0 rounds	TRUE	Ignored: incorrect Spell.Duration
+353	Disruptive Field	4	0	0	1000000	0	12	0.2	5	1	2	Mod damage done of furthest enemy by 20% for 0 rounds	TRUE	Ignored: incorrect Spell.Duration
+354	Energy Blast	5	0	1	1000000	0	3	4	15	1	0	Damage frontmost row of enemies for (4*attack) 	TRUE	
+355	Mitigation Aura	0	0	0	1000000	0	12	-0.25	5	0	0	Mod damage done of furthest enemy by -25% indefinitely	TRUE	
+356	Bone Ambush	2	0	0	1	0	1	2	5	1	3	Damage furthest enemy for (1*attack) 	TRUE	
+357	Mitigation Aura	0	0	0	1000000	0	12	-0.5	3	0	0	Mod damage done of closest enemy by -50% indefinitely	TRUE	
+358	Deconstructive Slam	5	0	1	1	0	3	4	15	1	0	Damage frontmost row of enemies for (4*attack) 	TRUE	
+359	Pain Projection	5	3	0	100000	0	7	0.5	5	1	3	Damage (tick) furthest enemy for (0.5*attack) each subsequent 3rd round for 3 rounds	TRUE	
+360	Anima Draw	3	0	0	1000000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+361	Geostorm	4	0	0	1	0	3	0.75	15	1	0	Damage frontmost row of enemies for (0.75*attack) 	TRUE	
+362	Anima Stinger	4	0	0	1000000	0	3	1.2	5	1	0	Damage furthest enemy for (1.2*attack) 	TRUE	
+363	Pack Instincts	5	2	0	1000	0	12	0.1	14	0	0	Mod damage done of frontmost row of allies by 10% for 2 rounds	TRUE	
+364	Intimidating Presence	6	2	0	1	0	9	0	7	0	0	Taunt all enemies for 2 rounds	TRUE	
+365	Mawsworn Strength	3	1	0	100000	0	14	0.5	3	0	0	Mod damage taken of closest enemy by 50% for 1 rounds	TRUE	
+366	Domination Lash	4	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
+367	Domination Thrust	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
+368	Domination Bombardment	3	0	0	100000	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	TRUE	
+369	Power of Domination	4	2	0	1	0	7	1	7	10	2	Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds	TRUE	Ignored: incorrect Effect.Flags
+370	Dominating Presence	5	2	0	1	0	12	-0.5	7	0	2	Mod damage done of all enemies by -50% for 2 rounds	TRUE	
+371	Acceleration Field	5	2	0	1000	0	14	-0.25	22	0	0	Mod damage taken of all-other allies by -25% for 2 rounds	TRUE	
+372	Mace Smash	4	0	0	1	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 	TRUE	
+373	Repurpose Anima Flow	5	0	0	1000000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
+373	Repurpose Anima Flow	5	0	0	1000000	1	4	1	1	1	0	Heal self for (1*attack) 	TRUE	
+374	Anima Thirst	5	0	0	100000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
+374	Anima Thirst	5	0	0	100000	1	4	0.4	1	1	0	Heal self for (0.4*attack) 	TRUE	
+375	Tangling Roots	4	2	0	1000	0	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
 ]]
 
 -- [ Process ]
