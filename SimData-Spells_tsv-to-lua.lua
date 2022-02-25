@@ -1035,9 +1035,9 @@ local vpData = {
 	},
 	[349]={type="nuke", damageATK=10, target="all-enemies"},	-- Anima Swell: Damage all enemies for (0.1*attack) [VERIFIED]
 	[350]={type="nuke", damageATK=25, target="cleave"},	-- Attack Wave: Damage closest enemies for (0.25*attack) [VERIFIED]
-	[351]={type="nuke", damageATK=75, target=1, firstTurn=4},	-- Attack Pulse: Damage furthest enemy for (0.75*attack) [VERIFIED]
-	[352]={type="aura", modDamageTaken=30, target=4},	-- Active Shielding: Mod damage taken of self by 30% for 0 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Spell.Duration
-	[353]={type="aura", modDamageDealt=20, target=1},	-- Disruptive Field: Mod damage done of furthest enemy by 20% for 0 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Spell.Duration
+	[351]={type="nuke", damageATK=75, target=1, firstTurn=4},	-- Attack Pulse: Damage furthest enemy for (0.75*attack) [UNVERFIED]
+	[352]={type="aura", modDamageTaken=30, target=4},	-- Active Shielding: Mod damage taken of self by 30% for 0 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Spell.Duration
+	[353]={type="aura", modDamageDealt=20, target=1},	-- Disruptive Field: Mod damage done of furthest enemy by 20% for 0 rounds [UNVERFIED] #Bug/#Workaround: ignored incorrect Spell.Duration
 	[354]={type="nuke", damageATK=400, target="enemy-front", firstTurn=5},	-- Energy Blast: Damage frontmost row of enemies for (4*attack) [VERIFIED]
 	[355]={type="passive", modDamageDealt=-25, target=1},	-- Mitigation Aura: Mod damage done of furthest enemy by -25% indefinitely [VERIFIED]
 	[356]={type="nuke", damageATK=100, target=1},	-- Bone Ambush: Damage furthest enemy for (1*attack) [VERIFIED]
@@ -1053,13 +1053,16 @@ local vpData = {
 	[366]={type="nuke", damageATK=50, target="enemy-front"},	-- Domination Lash: Damage frontmost row of enemies for (0.5*attack) [VERIFIED]
 	[367]={type="nuke", damageATK=75, target="cone"},	-- Domination Thrust: Damage closest cone of enemies for (0.75*attack) [VERIFIED]
 	[368]={type="nuke", damageATK=60, target=1},	-- Domination Bombardment: Damage furthest enemy for (0.6*attack) [VERIFIED]
-	[369]={type="aura", damagePerc=100, target="all-enemies", duration=3, period=2, nore=true},	-- Power of Domination: Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds [VERIFIED] #Bug/#Workaround: ignored incorrect Effect.Flags
-	[370]={type="aura", modDamageDealt=-50, target="all-enemies", duration=2},	-- Dominating Presence: Mod damage done of all enemies by -50% for 2 rounds [VERIFIED]
+	[369]={
+		[1]={type="nop"},
+		[2]={type="aura", damageATK=50, target="all-enemies", duration=3, period=2, noFirstTick=true},	-- Power of Domination: Damage (tick) all enemies for (0.5*attack) each subsequent 2nd round for 2 rounds [UNVERFIED]
+	},
+	[370]={type="aura", modDamageDealt=-50, target="all-enemies", duration=2},	-- Dominating Presence: Mod damage done of all enemies by -50% for 2 rounds [UNVERFIED]
 	[371]={type="aura", modDamageTaken=-25, target="all-other-allies", duration=2},	-- Acceleration Field: Mod damage taken of all-other allies by -25% for 2 rounds [VERIFIED]
-	[372]={type="nuke", damageATK=80, target="enemy-front"},	-- Mace Smash: Damage frontmost row of enemies for (0.8*attack) [VERIFIED]
+	[372]={type="nuke", damageATK=40, target="enemy-front"},	-- Mace Smash: Damage frontmost row of enemies for (0.4*attack) [UNVERFIED]
 	[373]={
-		[1]={type="nuke", damageATK=100, target=1},	-- Repurpose Anima Flow: Damage furthest enemy for (1*attack) [VERIFIED]
-		[2]={type="heal", healATK=100, target=4},	-- Repurpose Anima Flow: Heal self for (1*attack) [VERIFIED]
+		[1]={type="nuke", damageATK=100, target=1},	-- Repurpose Anima Flow: Damage furthest enemy for (1*attack) [UNVERFIED]
+		[2]={type="heal", healATK=100, target=4},	-- Repurpose Anima Flow: Heal self for (1*attack) [UNVERFIED]
 	},
 	[374]={
 		[1]={type="nuke", damageATK=100, target=1},	-- Anima Thirst: Damage furthest enemy for (1*attack) [VERIFIED]
@@ -1891,9 +1894,9 @@ Ignored: ineffective Effect.Period"
 348	Tainted Bite	5	3	0	100000	1	20	0.2	5	1	0	Mod damage taken of furthest enemy by (0.2*attack) for 3 rounds	TRUE	
 349	Anima Swell	4	0	0	1000000	0	3	0.1	7	1	0	Damage all enemies for (0.1*attack) 	TRUE	
 350	Attack Wave	4	0	0	1000000	0	3	0.25	9	1	0	Damage closest enemies for (0.25*attack) 	TRUE	
-351	Attack Pulse	4	0	1	1000000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 	TRUE	
-352	Active Shielding	4	0	0	1000000	0	14	0.3	1	1	2	Mod damage taken of self by 30% for 0 rounds	TRUE	Ignored: incorrect Spell.Duration
-353	Disruptive Field	4	0	0	1000000	0	12	0.2	5	1	2	Mod damage done of furthest enemy by 20% for 0 rounds	TRUE	Ignored: incorrect Spell.Duration
+351	Attack Pulse	4	0	1	1000000	0	3	0.75	5	1	0	Damage furthest enemy for (0.75*attack) 		
+352	Active Shielding	4	0	0	1000000	0	14	0.3	1	1	2	Mod damage taken of self by 30% for 0 rounds		Ignored: incorrect Spell.Duration
+353	Disruptive Field	4	0	0	1000000	0	12	0.2	5	1	2	Mod damage done of furthest enemy by 20% for 0 rounds		Ignored: incorrect Spell.Duration
 354	Energy Blast	5	0	1	1000000	0	3	4	15	1	0	Damage frontmost row of enemies for (4*attack) 	TRUE	
 355	Mitigation Aura	0	0	0	1000000	0	12	-0.25	5	0	0	Mod damage done of furthest enemy by -25% indefinitely	TRUE	
 356	Bone Ambush	2	0	0	1	0	1	2	5	1	3	Damage furthest enemy for (1*attack) 	TRUE	
@@ -1909,12 +1912,13 @@ Ignored: ineffective Effect.Period"
 366	Domination Lash	4	0	0	100000	0	3	0.5	15	1	0	Damage frontmost row of enemies for (0.5*attack) 	TRUE	
 367	Domination Thrust	4	0	0	100000	0	3	0.75	11	1	0	Damage closest cone of enemies for (0.75*attack) 	TRUE	
 368	Domination Bombardment	3	0	0	100000	0	3	0.6	5	1	0	Damage furthest enemy for (0.6*attack) 	TRUE	
-369	Power of Domination	4	2	0	1	0	7	1	7	10	2	Damage (tick) all enemies for 100% immediately and each subsequent 2nd round for 2 rounds	TRUE	Ignored: incorrect Effect.Flags
-370	Dominating Presence	5	2	0	1	0	12	-0.5	7	0	2	Mod damage done of all enemies by -50% for 2 rounds	TRUE	
+369	Power of Domination	4	2	0	1	0	0	1	0	1	0	Do nothing to nothing for (1*attack) 		Ignored: missing Effect.Type & Effect.Target
+369	Power of Domination	4	2	0	1	1	7	0.5	7	1	2	Damage (tick) all enemies for (0.5*attack) each subsequent 2nd round for 2 rounds		
+370	Dominating Presence	5	2	0	1	0	12	-0.5	7	0	2	Mod damage done of all enemies by -50% for 2 rounds		
 371	Acceleration Field	5	2	0	1000	0	14	-0.25	22	0	0	Mod damage taken of all-other allies by -25% for 2 rounds	TRUE	
-372	Mace Smash	4	0	0	1	0	3	0.8	15	1	0	Damage frontmost row of enemies for (0.8*attack) 	TRUE	
-373	Repurpose Anima Flow	5	0	0	1000000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
-373	Repurpose Anima Flow	5	0	0	1000000	1	4	1	1	1	0	Heal self for (1*attack) 	TRUE	
+372	Mace Smash	4	0	0	1	0	3	0.4	15	1	0	Damage frontmost row of enemies for (0.4*attack) 		
+373	Repurpose Anima Flow	5	0	0	1000000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 		
+373	Repurpose Anima Flow	5	0	0	1000000	1	4	1	1	1	0	Heal self for (1*attack) 		
 374	Anima Thirst	5	0	0	100000	0	3	1	5	1	0	Damage furthest enemy for (1*attack) 	TRUE	
 374	Anima Thirst	5	0	0	100000	1	4	0.4	1	1	0	Heal self for (0.4*attack) 	TRUE	
 375	Tangling Roots	4	2	0	1000	0	12	-0.2	7	1	0	Mod damage done of all enemies by -20% for 2 rounds	TRUE	
