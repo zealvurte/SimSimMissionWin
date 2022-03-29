@@ -1,4 +1,7 @@
 # Sim Sim Mission Win
+## Status: Dead
+My expected departure from all things WoW has come before I could make further progress on this. I reached the milestone of having verified the spell data for all missions, but not all followers. As such, this project will receive no further development from me and is now dead. Feel free to learn from it or fork it as a basis for your own similar project.
+
 ## Introduction
 This an attempt to create a new replacement for the World of Warcraft addon [Venture Plan](https://www.townlong-yak.com/addons/venture-plan), without reuse and distribution of its ARR code.
 
